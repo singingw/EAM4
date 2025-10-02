@@ -11,8 +11,8 @@ export default function LoginPage() {
 
       <Card className="w-full max-w-4xl shadow-2xl grid md:grid-cols-2 z-10 overflow-hidden">
         <div className="bg-primary text-primary-foreground p-8 md:p-12 flex flex-col justify-center">
-          <h2 className="text-4xl font-bold mb-4 text-center">XXX管理系統</h2>
-          <div className="space-y-4 text-base opacity-90 text-center">
+          <h2 className="text-4xl font-bold text-center mb-8">XXX管理系統</h2>
+          <div className="space-y-4 text-base opacity-90 text-center mb-auto">
             <p>
               本系統為XXX網站之後台管理系統,請輸入管理者帳號、密碼登入本系統。
             </p>
@@ -20,7 +20,7 @@ export default function LoginPage() {
               非本系統管理者,請關閉本頁。
             </p>
           </div>
-          <p className="text-sm opacity-80 mt-auto pt-8 text-center">
+          <p className="text-sm opacity-90 mt-auto pt-8 text-center">
             帳號問題請洽詢系統管理員
           </p>
         </div>

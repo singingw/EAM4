@@ -20,7 +20,7 @@ export default function ForgotPasswordPage() {
               非本系統管理者,請關閉本頁。
             </p>
           </div>
-          <p className="text-sm opacity-80 mt-auto pt-8 text-center">
+          <p className="text-sm opacity-90 mt-auto pt-8 text-center">
             帳號問題請洽詢系統管理員
           </p>
         </div>
