@@ -5,8 +5,8 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuSub,
-  SidebarMenuSubButton,
   SidebarMenuButton,
+  SidebarMenuSubButton,
   SidebarMenuSubItem
 } from "@/components/ui/sidebar";
 import {
@@ -14,6 +14,7 @@ import {
   Share2,
   MessageSquare,
   LayoutGrid,
+  ChevronUp
 } from "lucide-react";
 import {
   Collapsible,
@@ -48,19 +49,20 @@ const menuItems = [
 
 export function ManagerSidebar() {
   return (
-    <div className="flex flex-col h-full bg-sidebar-background">
+    <div className="flex flex-col h-full bg-sidebar-background pt-16">
       <SidebarContent className="flex-1 p-4">
         <SidebarMenu>
           {menuItems.map((item) => (
-            <Collapsible key={item.label}>
+            <Collapsible key={item.label} className="w-full">
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton 
-                    className="flex items-center gap-2 w-full justify-start text-base font-semibold text-sidebar-foreground hover:bg-sidebar-accent"
+                    className="flex items-center gap-2 w-full justify-start text-base font-semibold text-sidebar-foreground/80 hover:text-sidebar-accent-foreground group"
                     tooltip={item.label}
                   >
                     <item.icon className="h-5 w-5" />
-                    <span>{item.label}</span>
+                    <span className="flex-1 text-left">{item.label}</span>
+                    <ChevronUp className="h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=closed]:rotate-180" />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
