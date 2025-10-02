@@ -24,15 +24,17 @@ export default function ManagerLayout({ children }: ManagerLayoutProps) {
 
   return (
     <SidebarProvider>
-      <Sidebar>
-        <ManagerSidebar />
-      </Sidebar>
-      <SidebarInset>
+      <div className="flex h-screen w-full flex-col">
         <ManagerHeader />
-        <main className="flex-1 p-4 lg:p-6 bg-gray-100/30">
-          {children}
-        </main>
-      </SidebarInset>
+        <div className="flex flex-1 overflow-hidden">
+          <Sidebar>
+            <ManagerSidebar />
+          </Sidebar>
+          <main className="flex-1 p-4 lg:p-6 bg-gray-100/30 overflow-y-auto">
+            {children}
+          </main>
+        </div>
+      </div>
     </SidebarProvider>
   );
 }
