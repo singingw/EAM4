@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
-  SidebarInset,
 } from "@/components/ui/sidebar";
 import { ManagerSidebar } from "@/components/manager/manager-sidebar";
 import { ManagerHeader } from "@/components/manager/manager-header";
