@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
+  SidebarInset,
 } from "@/components/ui/sidebar";
 import { ManagerSidebar } from "@/components/manager/manager-sidebar";
 import { ManagerHeader } from "@/components/manager/manager-header";
@@ -26,12 +27,12 @@ export default function ManagerLayout({ children }: ManagerLayoutProps) {
       <Sidebar>
         <ManagerSidebar />
       </Sidebar>
-      <div className="flex flex-1 flex-col">
+      <SidebarInset>
         <ManagerHeader />
         <main className="flex-1 p-4 lg:p-6 bg-gray-100/30">
           {children}
         </main>
-      </div>
+      </SidebarInset>
     </SidebarProvider>
   );
 }
