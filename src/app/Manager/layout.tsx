@@ -25,7 +25,7 @@ export default function ManagerLayout({ children }: ManagerLayoutProps) {
     <SidebarProvider>
       <div className="flex h-screen w-full flex-col">
         <ManagerHeader />
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 overflow-hidden pt-16">
           <Sidebar>
             <ManagerSidebar />
           </Sidebar>

@@ -28,7 +28,7 @@ export function ManagerHeader() {
   });
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between border-b bg-white px-4 lg:px-6">
+    <header className="flex h-16 shrink-0 items-center justify-between border-b bg-white px-4 lg:px-6 z-30 fixed top-0 w-full">
       <div className="flex items-center gap-4">
         <SidebarTrigger />
         <div className="flex items-center gap-2">
