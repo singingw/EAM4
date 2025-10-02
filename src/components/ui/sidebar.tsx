@@ -241,12 +241,12 @@ const Sidebar = React.forwardRef<
             // Adjust the padding for floating and inset variants.
             variant === "inset"
               ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
+              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]",
             className
           )}
           {...props}
         >
-          <div className="flex h-full w-full flex-col bg-background group-data-[variant=inset]:rounded-lg group-data-[variant=inset]:border group-data-[variant=inset]:border-sidebar-border group-data-[variant=inset]:shadow">
+          <div className="flex h-full w-full flex-col bg-background group-data-[variant=inset]:rounded-lg group-data-[variant=inset]:border group-data-[variant=inset]:shadow">
             {children}
           </div>
         </div>
@@ -687,7 +687,7 @@ const SidebarMenuSub = React.forwardRef<
     ref={ref}
     data-sidebar="menu-sub"
     className={cn(
-      "mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-sidebar-border px-2.5 py-0.5",
+      "mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 px-2.5 py-0.5",
       "group-data-[collapsible=icon]:hidden",
       className
     )}
