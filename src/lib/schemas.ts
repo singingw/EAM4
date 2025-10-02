@@ -28,7 +28,10 @@ export const SignUpSchema = z
   });
 
 export const ForgotPasswordSchema = z.object({
-  email: z.string().email({
-    message: 'Please enter a valid email address.',
-  }),
+  email: z
+    .string()
+    .min(1, '帳號為必填項。')
+    .email({
+      message: '請輸入有效的電子郵件地址。',
+    }),
 });
