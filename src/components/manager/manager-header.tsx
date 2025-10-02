@@ -4,6 +4,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Settings, Moon, User } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Logo } from "@/components/logo";
 
 export function ManagerHeader() {
   const [dateTime, setDateTime] = useState(new Date());
@@ -28,8 +29,12 @@ export function ManagerHeader() {
 
   return (
     <header className="flex h-16 items-center justify-between border-b bg-white px-4 lg:px-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         <SidebarTrigger />
+        <div className="flex items-center gap-2">
+            <Logo />
+            <h2 className="text-lg font-semibold text-primary">[系統名稱]-管理系統</h2>
+        </div>
       </div>
       <div className="flex items-center gap-4">
         <span className="text-sm text-gray-600 hidden md:inline-block">

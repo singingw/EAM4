@@ -62,7 +62,6 @@ export function ManagerSidebar() {
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-2">
             <Logo />
-            <h2 className="text-lg font-semibold text-primary">[系統名稱]-管理系統</h2>
         </div>
       </SidebarHeader>
       <SidebarContent className="p-4 flex-1">
