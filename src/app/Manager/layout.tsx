@@ -28,7 +28,7 @@ export default function ManagerLayout({ children }: ManagerLayoutProps) {
           <Sidebar>
             <ManagerSidebar />
           </Sidebar>
-          <main className="flex-1 p-4 lg:p-6 bg-gray-100/30 overflow-y-auto">
+          <main className="flex-1 p-4 lg:p-6 overflow-y-auto">
             {children}
           </main>
         </div>
