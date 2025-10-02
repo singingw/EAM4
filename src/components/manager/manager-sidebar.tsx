@@ -60,9 +60,7 @@ export function ManagerSidebar() {
   return (
     <div className="flex flex-col h-full">
       <SidebarHeader className="p-4">
-        <div className="flex items-center gap-2">
-            <Logo />
-        </div>
+        
       </SidebarHeader>
       <SidebarContent className="p-4 flex-1">
         <SidebarMenu>

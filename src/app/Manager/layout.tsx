@@ -17,7 +17,6 @@ type ManagerLayoutProps = {
 export default function ManagerLayout({ children }: ManagerLayoutProps) {
   const pathname = usePathname();
 
-  // Don't show the sidebar on the forgot password page.
   if (pathname === "/Manager/ForgotPassword" || pathname === "/Manager/Login") {
     return <>{children}</>;
   }
