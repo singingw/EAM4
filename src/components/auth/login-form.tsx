@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -23,6 +24,7 @@ import { Label } from "@/components/ui/label";
 export function LoginForm() {
   const [isPending, setIsPending] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -30,6 +32,8 @@ export function LoginForm() {
       email: "",
       password: "",
     },
+    mode: "onBlur",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
@@ -42,7 +46,8 @@ export function LoginForm() {
         description: "Welcome back!",
       });
       setIsPending(false);
-    }, 2000);
+      router.push('/Manager');
+    }, 1000);
   };
 
   return (
