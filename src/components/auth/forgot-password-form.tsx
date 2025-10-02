@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Mail, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -53,36 +53,35 @@ export function ForgotPasswordForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>帳號 / 電子郵件</FormLabel>
                 <FormControl>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="name@example.com"
-                      type="email"
-                      className="pl-10"
-                    />
-                  </div>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder=""
+                    type="email"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
+        <div className="flex items-center justify-between">
+           <Button
+              size="sm"
+              variant="link"
+              asChild
+              className="px-0 font-normal text-primary"
+            >
+              <Link href="/login">返回登入</Link>
+            </Button>
+        </div>
         <Button disabled={isPending} type="submit" className="w-full">
           {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Send Reset Link
+          送出
         </Button>
       </form>
-
-      <div className="mt-4 text-center text-sm">
-        Remembered your password?{" "}
-        <Link href="/login" className="underline text-accent">
-          Back to Login
-        </Link>
-      </div>
     </Form>
   );
 }

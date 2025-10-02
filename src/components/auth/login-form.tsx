@@ -93,7 +93,7 @@ export function LoginForm() {
               asChild
               className="px-0 font-normal text-primary"
             >
-              <Link href="/forgot-password">忘記密碼?</Link>
+              <Link href="/Manager/ForgotPassword">忘記密碼?</Link>
             </Button>
         </div>
         <Button disabled={isPending} type="submit" className="w-full">
