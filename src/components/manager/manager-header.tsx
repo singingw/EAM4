@@ -27,24 +27,24 @@ export function ManagerHeader() {
   });
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between bg-sidebar-background px-4 lg:px-6 z-30 fixed top-0 w-full shadow-md">
+    <header className="flex h-16 shrink-0 items-center justify-between bg-primary px-4 lg:px-6 z-30 fixed top-0 w-full shadow-md">
       <div className="flex items-center gap-4">
-        <SidebarTrigger />
-        <h2 className="text-xl font-semibold text-foreground">[系統名稱]-管理系統</h2>
+        <SidebarTrigger className="text-primary-foreground" />
+        <h2 className="text-xl font-bold text-primary-foreground">[系統名稱]-管理系統</h2>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-sm text-foreground/80 hidden md:inline-block">
+        <span className="text-sm text-primary-foreground/80 hidden md:inline-block">
           {formattedDate} {formattedTime}
         </span>
-        <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10">
+        <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary/90">
           <Settings className="h-5 w-5" />
         </Button>
-        <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10">
+        <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary/90">
           <Moon className="h-5 w-5" />
         </Button>
-        <Button variant="ghost" size="icon" className="hover:bg-primary/10">
-          <div className="bg-muted rounded-full p-1">
-            <User className="h-5 w-5 text-muted-foreground" />
+        <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary/90">
+          <div className="bg-primary-foreground/20 rounded-full p-1">
+            <User className="h-5 w-5 text-primary-foreground" />
           </div>
         </Button>
       </div>
