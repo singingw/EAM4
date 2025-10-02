@@ -13,12 +13,12 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ForgotPasswordSchema } from "@/lib/schemas";
 import { useToast } from "@/hooks/use-toast";
+import { Label } from "@/components/ui/label";
 
 export function ForgotPasswordForm() {
   const [isPending, setIsPending] = useState(false);
@@ -55,7 +55,7 @@ export function ForgotPasswordForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>帳號 / 電子郵件</FormLabel>
+                <Label>帳號 / 電子郵件</Label>
                 <FormControl>
                   <Input
                     {...field}
