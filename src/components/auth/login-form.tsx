@@ -13,12 +13,12 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoginSchema } from "@/lib/schemas";
 import { useToast } from "@/hooks/use-toast";
+import { Label } from "@/components/ui/label";
 
 export function LoginForm() {
   const [isPending, setIsPending] = useState(false);
@@ -54,7 +54,7 @@ export function LoginForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>帳號</FormLabel>
+                <Label>帳號</Label>
                 <FormControl>
                   <Input
                     {...field}
@@ -72,7 +72,7 @@ export function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>密碼</FormLabel>
+                <Label>密碼</Label>
                 <FormControl>
                   <Input
                     {...field}
