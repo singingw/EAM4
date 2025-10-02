@@ -10,17 +10,19 @@ export default function LoginPage() {
       <div className="absolute bottom-24 left-10 w-16 h-16 rounded-full border-2 border-blue-300"></div>
 
       <Card className="w-full max-w-4xl shadow-2xl grid md:grid-cols-2 z-10 overflow-hidden">
-        <div className="bg-primary text-primary-foreground p-8 md:p-12 flex flex-col justify-between">
-          <div>
-            <h2 className="text-3xl font-bold mb-4">XXX管理系統</h2>
-            <p className="text-sm opacity-90">
-              本系統為XXX網站之後台管理系統,請輸入管理者帳號、密碼登入本系統。
-            </p>
-            <p className="text-sm opacity-90 mt-2">
-              非本系統管理者,請關閉本頁。
-            </p>
+        <div className="bg-primary text-primary-foreground p-8 md:p-12 flex flex-col justify-center text-center">
+          <div className="flex-grow flex flex-col justify-center">
+            <h2 className="text-4xl font-bold mb-8">XXX管理系統</h2>
+            <div className="space-y-4 text-base opacity-90">
+              <p>
+                本系統為XXX網站之後台管理系統,請輸入管理者帳號、密碼登入本系統。
+              </p>
+              <p>
+                非本系統管理者,請關閉本頁。
+              </p>
+            </div>
           </div>
-          <p className="text-xs opacity-80 mt-8">
+          <p className="text-sm opacity-80 mt-12">
             帳號問題請洽詢系統管理員
           </p>
         </div>
