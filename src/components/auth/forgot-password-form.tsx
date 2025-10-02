@@ -29,6 +29,8 @@ export function ForgotPasswordForm() {
     defaultValues: {
       email: "",
     },
+    mode: "onSubmit",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = (values: z.infer<typeof ForgotPasswordSchema>) => {
