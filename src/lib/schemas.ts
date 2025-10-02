@@ -2,7 +2,7 @@ import * as z from 'zod';
 
 export const LoginSchema = z.object({
   email: z.string().min(1, {
-    message: '帳號為必填項。',
+    message: '帳號 / 電子郵件 為必填欄位',
   }),
   password: z.string().min(1, {
     message: '密碼為必填項。',
@@ -30,7 +30,7 @@ export const SignUpSchema = z
 export const ForgotPasswordSchema = z.object({
   email: z
     .string()
-    .min(1, '帳號為必填項。')
+    .min(1, '帳號 / 電子郵件 為必填欄位')
     .email({
       message: '請輸入有效的電子郵件地址。',
     }),
