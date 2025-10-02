@@ -42,8 +42,8 @@ const menuItems = [
 
 export function ManagerSidebar() {
   return (
-    <div className="flex flex-col h-full bg-sidebar-background pt-16">
-      <SidebarContent className="flex-1 p-4">
+    <div className="flex flex-col h-full bg-sidebar-background">
+      <SidebarContent className="flex-1 p-4 pt-16">
         <SidebarMenu>
           {menuItems.map((item) => (
             <SidebarMenuItem key={item.label}>
