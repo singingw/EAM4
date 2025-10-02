@@ -27,12 +27,12 @@ export function ManagerHeader() {
   });
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between bg-background px-4 lg:px-6 z-30 fixed top-0 w-full">
+    <header className="flex h-16 shrink-0 items-center justify-between bg-sidebar-background px-4 lg:px-6 z-30 fixed top-0 w-full shadow-md">
       <div className="flex items-center gap-4">
         <SidebarTrigger />
-        <h2 className="text-xl font-semibold text-primary">[系統名稱]-管理系統</h2>
+        <h2 className="text-xl font-semibold text-foreground">[系統名稱]-管理系統</h2>
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
         <span className="text-sm text-foreground/80 hidden md:inline-block">
           {formattedDate} {formattedTime}
         </span>
