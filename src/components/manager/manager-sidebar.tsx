@@ -6,9 +6,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarGroupContent,
   SidebarMenuSub,
   SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
@@ -20,7 +17,6 @@ import {
   ChevronUp,
   ChevronDown
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
 import { Logo } from "@/components/logo";
@@ -62,14 +58,14 @@ export function ManagerSidebar() {
     };
 
   return (
-    <>
+    <div className="flex flex-col h-full">
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-2">
             <Logo />
             <h2 className="text-lg font-semibold text-primary">[系統名稱]-管理系統</h2>
         </div>
       </SidebarHeader>
-      <SidebarContent className="p-4">
+      <SidebarContent className="p-4 flex-1">
         <SidebarMenu>
             {menuItems.map((item) => (
                 <Collapsible key={item.label} open={openSections[item.label]} onOpenChange={() => toggleSection(item.label)} className="w-full">
@@ -95,6 +91,6 @@ export function ManagerSidebar() {
           ))}
         </SidebarMenu>
       </SidebarContent>
-    </>
+    </div>
   );
 }
