@@ -63,7 +63,7 @@ export function ManagerSidebar() {
         
       </SidebarHeader>
       <SidebarContent className="p-4 flex-1">
-        <SidebarMenu>
+        <SidebarMenu className="mt-16">
             {menuItems.map((item) => (
                 <Collapsible key={item.label} open={openSections[item.label]} onOpenChange={() => toggleSection(item.label)} className="w-full">
                     <CollapsibleTrigger asChild>
