@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Mail, Lock, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -54,18 +54,14 @@ export function LoginForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>帳號</FormLabel>
                 <FormControl>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="name@example.com"
-                      type="email"
-                      className="pl-10"
-                    />
-                  </div>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder=""
+                    type="email"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -76,44 +72,35 @@ export function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>密碼</FormLabel>
                 <FormControl>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="••••••••"
-                      type="password"
-                      className="pl-10"
-                    />
-                  </div>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder=""
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage />
-                <Button
-                  size="sm"
-                  variant="link"
-                  asChild
-                  className="px-0 font-normal"
-                >
-                  <Link href="/forgot-password">Forgot password?</Link>
-                </Button>
               </FormItem>
             )}
           />
         </div>
+        <div className="flex items-center justify-between">
+           <Button
+              size="sm"
+              variant="link"
+              asChild
+              className="px-0 font-normal text-primary"
+            >
+              <Link href="/forgot-password">忘記密碼?</Link>
+            </Button>
+        </div>
         <Button disabled={isPending} type="submit" className="w-full">
           {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Login
+          登入
         </Button>
       </form>
-
-      <div className="mt-4 text-center text-sm">
-        Don&apos;t have an account?{" "}
-        <Link href="/signup" className="underline text-accent">
-          Sign up
-        </Link>
-      </div>
     </Form>
   );
 }
