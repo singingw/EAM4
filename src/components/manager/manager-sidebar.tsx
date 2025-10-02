@@ -1,13 +1,12 @@
 "use client";
 
 import {
-  SidebarHeader,
   SidebarContent,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton,
   SidebarMenuSub,
   SidebarMenuSubButton,
+  SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import {
   Settings,
@@ -19,7 +18,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
-import { Logo } from "@/components/logo";
 
 const menuItems = [
     {
@@ -58,28 +56,25 @@ export function ManagerSidebar() {
     };
 
   return (
-    <div className="flex flex-col h-full">
-      <SidebarHeader className="p-4">
-        
-      </SidebarHeader>
-      <SidebarContent className="p-4 flex-1">
-        <SidebarMenu className="mt-16">
+    <div className="flex flex-col h-full bg-sidebar-background pt-4">
+      <SidebarContent className="flex-1 p-4">
+        <SidebarMenu>
             {menuItems.map((item) => (
                 <Collapsible key={item.label} open={openSections[item.label]} onOpenChange={() => toggleSection(item.label)} className="w-full">
                     <CollapsibleTrigger asChild>
-                        <div className="flex items-center justify-between w-full cursor-pointer">
-                             <SidebarMenuButton className="flex items-center gap-2 w-full justify-start text-base font-semibold text-gray-700">
+                        <div className="flex items-center justify-between w-full cursor-pointer py-2">
+                             <SidebarMenuButton className="flex items-center gap-2 w-full justify-start text-base font-semibold text-sidebar-foreground hover:bg-sidebar-accent">
                                 <item.icon className="h-5 w-5" />
                                 <span>{item.label}</span>
                             </SidebarMenuButton>
-                            {openSections[item.label] ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                            {openSections[item.label] ? <ChevronUp className="h-4 w-4 text-sidebar-foreground" /> : <ChevronDown className="h-4 w-4 text-sidebar-foreground" />}
                         </div>
                     </CollapsibleTrigger>
                     <CollapsibleContent>
-                        <SidebarMenuSub className="ml-4 mt-2">
+                        <SidebarMenuSub className="mt-2 space-y-2">
                         {item.subItems.map((subItem) => (
                             <SidebarMenuItem key={subItem}>
-                            <SidebarMenuSubButton>{subItem}</SidebarMenuSubButton>
+                            <SidebarMenuSubButton className="text-sidebar-foreground/80 hover:text-sidebar-accent-foreground">{subItem}</SidebarMenuSubButton>
                             </SidebarMenuItem>
                         ))}
                         </SidebarMenuSub>
