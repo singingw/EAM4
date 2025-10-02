@@ -74,7 +74,7 @@ export function ForgotPasswordForm() {
               asChild
               className="px-0 font-normal text-primary"
             >
-              <Link href="/login">返回登入</Link>
+              <Link href="/Manager/Login">返回登入</Link>
             </Button>
         </div>
         <Button disabled={isPending} type="submit" className="w-full">
