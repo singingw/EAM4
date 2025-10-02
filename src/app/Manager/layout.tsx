@@ -1,11 +1,10 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { usePathname } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
-  SidebarHeader,
-  SidebarContent,
-  SidebarTrigger,
-  SidebarInset,
 } from "@/components/ui/sidebar";
 import { ManagerSidebar } from "@/components/manager/manager-sidebar";
 import { ManagerHeader } from "@/components/manager/manager-header";
@@ -15,6 +14,13 @@ type ManagerLayoutProps = {
 };
 
 export default function ManagerLayout({ children }: ManagerLayoutProps) {
+  const pathname = usePathname();
+
+  // Don't show the sidebar on the forgot password page.
+  if (pathname === "/Manager/ForgotPassword" || pathname === "/Manager/Login") {
+    return <>{children}</>;
+  }
+
   return (
     <SidebarProvider>
       <Sidebar>
