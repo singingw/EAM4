@@ -10,10 +10,10 @@ export default function LoginPage() {
       <div className="absolute bottom-24 left-10 w-16 h-16 rounded-full border-2 border-blue-300"></div>
 
       <Card className="w-full max-w-4xl shadow-2xl grid md:grid-cols-2 z-10 overflow-hidden">
-        <div className="bg-primary text-primary-foreground p-8 md:p-12 flex flex-col justify-center">
-          <div className="flex-grow flex flex-col justify-center items-center text-center mb-0">
+        <div className="bg-primary text-primary-foreground p-8 md:p-12 flex flex-col">
+          <div className="flex-grow">
             <h2 className="text-4xl font-bold mb-4">XXX管理系統</h2>
-            <div className="space-y-4 text-base opacity-90">
+            <div className="space-y-4 text-base opacity-90 mt-8 text-center">
               <p>
                 本系統為XXX網站之後台管理系統,請輸入管理者帳號、密碼登入本系統。
               </p>
