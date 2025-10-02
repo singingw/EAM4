@@ -4,7 +4,6 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Settings, Moon, User } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Logo } from "@/components/logo";
 
 export function ManagerHeader() {
   const [dateTime, setDateTime] = useState(new Date());
@@ -28,25 +27,22 @@ export function ManagerHeader() {
   });
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between bg-background px-4 lg:px-6 z-30 fixed top-0 w-full">
+    <header className="flex h-16 shrink-0 items-center justify-between bg-sidebar-background px-4 lg:px-6 z-30 fixed top-0 w-full">
       <div className="flex items-center gap-4">
         <SidebarTrigger />
-        <div className="flex items-center gap-2">
-            <Logo />
-            <h2 className="text-lg font-semibold text-primary">[系統名稱]-管理系統</h2>
-        </div>
+        <h2 className="text-lg font-semibold text-primary">[系統名稱]-管理系統</h2>
       </div>
       <div className="flex items-center gap-4">
-        <span className="text-sm text-gray-600 hidden md:inline-block">
+        <span className="text-sm text-muted-foreground hidden md:inline-block">
           {formattedDate} {formattedTime}
         </span>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className="text-foreground/70 hover:text-foreground">
           <Settings className="h-5 w-5" />
         </Button>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className="text-foreground/70 hover:text-foreground">
           <Moon className="h-5 w-5" />
         </Button>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className="text-foreground/70 hover:text-foreground">
           <User className="h-5 w-5" />
         </Button>
       </div>
