@@ -56,14 +56,17 @@ export function ManagerSidebar() {
     };
 
   return (
-    <div className="flex flex-col h-full bg-sidebar-background pt-16">
+    <div className="flex flex-col h-full bg-sidebar-background pt-4">
       <SidebarContent className="flex-1 p-4">
         <SidebarMenu>
             {menuItems.map((item) => (
                 <Collapsible key={item.label} open={openSections[item.label]} onOpenChange={() => toggleSection(item.label)} className="w-full">
                     <CollapsibleTrigger asChild>
                         <div className="flex items-center justify-between w-full cursor-pointer py-2">
-                             <SidebarMenuButton className="flex items-center gap-2 w-full justify-start text-base font-semibold text-sidebar-foreground hover:bg-sidebar-accent">
+                             <SidebarMenuButton 
+                                className="flex items-center gap-2 w-full justify-start text-base font-semibold text-sidebar-foreground hover:bg-sidebar-accent"
+                                tooltip={item.label}
+                             >
                                 <item.icon className="h-5 w-5" />
                                 <span>{item.label}</span>
                             </SidebarMenuButton>
