@@ -56,7 +56,7 @@ export function ManagerSidebar() {
     };
 
   return (
-    <div className="flex flex-col h-full bg-sidebar-background pt-4">
+    <div className="flex flex-col h-full bg-sidebar-background pt-2">
       <SidebarContent className="flex-1 p-4">
         <SidebarMenu>
             {menuItems.map((item) => (
