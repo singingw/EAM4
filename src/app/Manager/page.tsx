@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, UserCheck, Percent } from "lucide-react";
+import { Users, UserCheck, Percent, Clock, MapPin, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
 import { RadialBarChart, RadialBar, PolarAngleAxis, ResponsiveContainer } from "recharts";
 import {
@@ -13,6 +13,9 @@ export default function ManagerPage() {
     activityName: "日本宇治茶道體驗",
     checkIns: 890,
     totalParticipants: 1200,
+    activityTime: "2024/08/15 14:00 - 16:00",
+    activityLocation: "台北市信義區信義路五段7號 (台北101)",
+    activityDescription: "本次活動旨在讓參與者深入體驗日本宇治茶道的精髓。我們將邀請專業的茶道老師，從茶葉的選擇、沖泡的技巧，到品茗的禮儀，進行詳盡的解說與示範。參與者不僅能品嚐到最正宗的宇治抹茶，還能親手體驗打抹茶的樂趣。",
   });
 
   const [checkInRate, setCheckInRate] = useState(0);
@@ -77,11 +80,11 @@ export default function ManagerPage() {
               <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
                   data={chartData}
-                  innerRadius="80%"
+                  innerRadius="88%"
                   outerRadius="100%"
                   startAngle={90}
                   endAngle={450}
-                  barSize={12}
+                  barSize={10}
                 >
                   <PolarAngleAxis
                     type="number"
@@ -100,7 +103,7 @@ export default function ManagerPage() {
                       y="50%"
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      className="fill-foreground text-3xl font-bold"
+                      className="fill-foreground text-2xl font-bold"
                     >
                       {checkInRate.toFixed(1)}%
                     </text>
@@ -111,6 +114,39 @@ export default function ManagerPage() {
           </CardContent>
         </Card>
       </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+          <Card className="bg-white/80 dark:bg-slate-900/80">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-primary" />
+                活動資訊
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 text-base">
+              <div className="flex items-center gap-4">
+                <p className="font-semibold w-16 shrink-0">時間:</p>
+                <p>{stats.activityTime}</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <p className="font-semibold w-16 shrink-0">地點:</p>
+                <p>{stats.activityLocation}</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-white/80 dark:bg-slate-900/80">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
+                活動說明
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-base leading-relaxed">{stats.activityDescription}</p>
+            </CardContent>
+          </Card>
+        </div>
+
     </div>
   );
 }
