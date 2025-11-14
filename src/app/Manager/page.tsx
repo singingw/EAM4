@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,7 +22,7 @@ export default function ManagerPage() {
 
 
   return (
-    <div className="flex flex-col h-full justify-center space-y-6">
+    <div className="flex flex-col space-y-6">
       <div className="flex items-center justify-center">
         <h1 className="text-5xl font-bold text-foreground">
           {stats.activityName}
