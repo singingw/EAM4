@@ -30,7 +30,7 @@ export default function ManagerPage() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <Card className="bg-white/50 h-36 dark:bg-slate-900/50">
+      <Card className="bg-white/80 h-36 dark:bg-slate-900/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">總參加人數</CardTitle>
             <Users className="h-5 w-5 text-muted-foreground" />
@@ -39,7 +39,7 @@ export default function ManagerPage() {
             <div className="text-4xl font-bold">{stats.totalParticipants}</div>
           </CardContent>
         </Card>
-        <Card className="bg-white/50 h-36 dark:bg-slate-900/50">
+        <Card className="bg-white/80 h-36 dark:bg-slate-900/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">報到總人數</CardTitle>
             <UserCheck className="h-5 w-5 text-muted-foreground" />
@@ -48,7 +48,7 @@ export default function ManagerPage() {
             <div className="text-4xl font-bold">{stats.checkIns}</div>
           </CardContent>
         </Card>
-        <Card className="bg-white/50 h-36 dark:bg-slate-900/50">
+        <Card className="bg-white/80 h-36 dark:bg-slate-900/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">報到率</CardTitle>
             <Percent className="h-5 w-5 text-muted-foreground" />
