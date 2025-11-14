@@ -76,7 +76,7 @@ export default function ManagerPage() {
               <RadialBarChart
                 data={chartData}
                 startAngle={-90}
-                endAngle={270}
+                endAngle={-450}
                 innerRadius="80%"
                 outerRadius="100%"
                 barSize={12}
