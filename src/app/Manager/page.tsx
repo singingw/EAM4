@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 export default function ManagerPage() {
   const [stats, setStats] = useState({
-    activityName: "2024 AI 開發者大會",
+    activityName: "日本宇治茶道體驗",
     checkIns: 890,
     totalParticipants: 1200,
   });
@@ -24,13 +24,22 @@ export default function ManagerPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-center">
         <h1 className="text-3xl font-bold text-foreground">
           {stats.activityName}
         </h1>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">總參加人數</CardTitle>
+            <Users className="h-5 w-5 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-4xl font-bold">{stats.totalParticipants}</div>
+          </CardContent>
+        </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">報到總人數</CardTitle>
@@ -38,15 +47,6 @@ export default function ManagerPage() {
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-bold">{stats.checkIns}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">總參加人數</CardTitle>
-            <Users className="h-5 w-5 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-4xl font-bold">{stats.totalParticipants}</div>
           </CardContent>
         </Card>
         <Card>
