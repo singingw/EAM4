@@ -35,14 +35,14 @@ const menuItems = [
       subItems: ["後台帳號管理", "角色管理"],
     },
     {
-      label: "文章管理",
+      label: "名單管理",
       icon: MessageSquare,
-      subItems: ["文章內容管理", "文章分類管理"],
+      subItems: ["參加者名單", "QR Code 下載"],
     },
     {
-      label: "功能模板",
+      label: "活動執行",
       icon: LayoutGrid,
-      subItems: ["動態表單一"],
+      subItems: ["報到掃描","報到執行"],
     },
 ];
 

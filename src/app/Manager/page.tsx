@@ -30,32 +30,37 @@ export default function ManagerPage() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <Card className="bg-white/80 h-36 dark:bg-slate-900/80">
+        <Card className="bg-white/80 dark:bg-slate-900/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">總參加人數</CardTitle>
-            <Users className="h-5 w-5 text-muted-foreground" />
+            <div className="p-2 bg-blue-100 rounded-md">
+                <Users className="h-5 w-5 text-blue-500" />
+            </div>
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-bold">{stats.totalParticipants}</div>
           </CardContent>
         </Card>
-        <Card className="bg-white/80 h-36 dark:bg-slate-900/80">
+        <Card className="bg-white/80 dark:bg-slate-900/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">報到總人數</CardTitle>
-            <UserCheck className="h-5 w-5 text-muted-foreground" />
+            <div className="p-2 bg-green-100 rounded-md">
+                <UserCheck className="h-5 w-5 text-green-500" />
+            </div>
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-bold">{stats.checkIns}</div>
           </CardContent>
         </Card>
-        <Card className="bg-white/80 h-36 dark:bg-slate-900/80">
+        <Card className="bg-white/80 dark:bg-slate-900/80">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">報到率</CardTitle>
-            <Percent className="h-5 w-5 text-muted-foreground" />
+            <div className="p-2 bg-purple-100 rounded-md">
+                <Percent className="h-5 w-5 text-purple-500" />
+            </div>
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-bold">{checkInRate.toFixed(1)}%</div>
-            <Progress value={checkInRate} className="mt-2 h-2" />
           </CardContent>
         </Card>
       </div>
