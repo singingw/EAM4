@@ -24,11 +24,10 @@ export default function ManagerPage() {
     }
   }, [stats]);
 
-  const chartData = [{ name: 'check-in', value: checkInRate }];
+  const chartData = [{ name: 'check-in', value: checkInRate, fill: "hsl(var(--primary))" }];
   const chartConfig = {
     value: {
       label: "報到率",
-      color: "hsl(var(--primary))",
     },
   };
 
@@ -81,7 +80,7 @@ export default function ManagerPage() {
                   innerRadius="80%"
                   outerRadius="100%"
                   startAngle={90}
-                  endAngle={90 + (checkInRate / 100) * 360}
+                  endAngle={450}
                   barSize={12}
                 >
                   <PolarAngleAxis
@@ -91,10 +90,9 @@ export default function ManagerPage() {
                     tick={false}
                   />
                   <RadialBar
-                    background
+                    background={{ fill: 'hsl(var(--muted))' }}
                     dataKey="value"
                     cornerRadius={10}
-                    className="fill-primary"
                   />
                    <g>
                     <text
