@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, UserCheck, Percent, Clock, MapPin, FileText } from "lucide-react";
+import { Users, UserCheck, Percent, Clock, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
 import { RadialBarChart, RadialBar, PolarAngleAxis, ResponsiveContainer } from "recharts";
 import {
@@ -41,6 +41,38 @@ export default function ManagerPage() {
           {stats.activityName}
         </h1>
       </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+          <Card className="bg-white/80 dark:bg-slate-900/80">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-primary" />
+                活動資訊
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 text-base">
+              <div className="flex items-center gap-4">
+                <p className="font-semibold w-16 shrink-0">時間:</p>
+                <p>{stats.activityTime}</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <p className="font-semibold w-16 shrink-0">地點:</p>
+                <p>{stats.activityLocation}</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="bg-white/80 dark:bg-slate-900/80">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
+                活動說明
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-base leading-relaxed">{stats.activityDescription}</p>
+            </CardContent>
+          </Card>
+        </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card className="bg-white/80 dark:bg-slate-900/80">
@@ -114,38 +146,6 @@ export default function ManagerPage() {
           </CardContent>
         </Card>
       </div>
-
-      <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="bg-white/80 dark:bg-slate-900/80">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-primary" />
-                活動資訊
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2 text-base">
-              <div className="flex items-center gap-4">
-                <p className="font-semibold w-16 shrink-0">時間:</p>
-                <p>{stats.activityTime}</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <p className="font-semibold w-16 shrink-0">地點:</p>
-                <p>{stats.activityLocation}</p>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/80 dark:bg-slate-900/80">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-primary" />
-                活動說明
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-base leading-relaxed">{stats.activityDescription}</p>
-            </CardContent>
-          </Card>
-        </div>
 
     </div>
   );
