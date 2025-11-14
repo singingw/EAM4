@@ -23,7 +23,7 @@ export default function ManagerPage() {
 
   return (
     <div className="flex flex-col space-y-6">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center mb-6">
         <h1 className="text-5xl font-bold text-foreground">
           {stats.activityName}
         </h1>
