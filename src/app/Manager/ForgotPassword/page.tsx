@@ -11,10 +11,10 @@ export default function ForgotPasswordPage() {
 
       <Card className="w-full max-w-4xl shadow-2xl grid md:grid-cols-2 z-10 overflow-hidden">
         <div className="bg-primary text-primary-foreground p-8 md:p-12 flex flex-col justify-center">
-          <h2 className="text-4xl font-bold text-center mb-8">XXX管理系統</h2>
+          <h2 className="text-4xl font-bold text-center mb-8">會展活動智聯服務</h2>
           <div className="space-y-4 text-base opacity-90 text-center mb-auto">
             <p>
-              本系統為XXX網站之後台管理系統,請輸入管理者帳號、密碼登入本系統。
+              本系統為會展活動智聯服務之後台管理系統,請輸入管理者帳號、密碼登入本系統。
             </p>
             <p>
               非本系統管理者,請關閉本頁。

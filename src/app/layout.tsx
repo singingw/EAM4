@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'XXX管理系統',
-  description: 'XXX網站之後台管理系統',
+  title: '會展活動智聯服務',
+  description: '會展活動智聯服務之後台管理系統',
 };
 
 export default function RootLayout({
