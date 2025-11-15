@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -10,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Plus } from "lucide-react";
+import { Plus, MoreVertical } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -27,6 +28,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Switch } from "@/components/ui/switch";
 
 const roles = [
   {
@@ -60,6 +62,8 @@ const roles = [
 ];
 
 export default function RolesPage() {
+  const [showFunctions, setShowFunctions] = useState(true);
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -96,7 +100,12 @@ export default function RolesPage() {
                   <TableHead>權限</TableHead>
                   <TableHead>修改時間</TableHead>
                   <TableHead>修改人員</TableHead>
-                  <TableHead>功能</TableHead>
+                  <TableHead>
+                    <div className="flex items-center gap-2">
+                      <span>功能</span>
+                      <Switch checked={showFunctions} onCheckedChange={setShowFunctions} />
+                    </div>
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -109,11 +118,19 @@ export default function RolesPage() {
                     <TableCell>{role.modifiedTime}</TableCell>
                     <TableCell>{role.modifiedBy}</TableCell>
                     <TableCell className="space-x-1">
-                      <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
-                      <Button variant="destructive" size="sm">刪除</Button>
-                      <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
-                      <Button variant="secondary" size="sm">複製</Button>
-                      <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
+                      {showFunctions ? (
+                        <>
+                          <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
+                          <Button variant="destructive" size="sm">刪除</Button>
+                          <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
+                          <Button variant="secondary" size="sm">複製</Button>
+                          <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
+                        </>
+                      ) : (
+                        <Button variant="ghost" size="icon">
+                          <MoreVertical className="h-4 w-4" />
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
