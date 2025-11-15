@@ -1,0 +1,155 @@
+"use client";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Plus, Search, CheckCircle, XCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+const features = [
+    { id: "1", name: "會員管理", status: true },
+    { id: "2", name: "活動報名", status: true },
+    { id: "3", name: "電子報發送", status: true },
+    { id: "4", name: "數據分析儀表板", status: false },
+    { id: "5", name: "線上支付 (串接中)", status: false },
+    { id: "6", name: "權限控管", status: true },
+];
+
+export default function SystemFeaturesPage() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">系統功能管理</h1>
+        <Button className="bg-blue-500 text-white hover:bg-blue-600">
+            <Plus className="mr-2 h-4 w-4" />
+            新增
+        </Button>
+      </div>
+
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div className="space-y-2">
+                <label htmlFor="title" className="text-sm font-medium">標題</label>
+                <Input id="title" placeholder="輸入標題" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="status" className="text-sm font-medium">狀態</label>
+                <Select>
+                    <SelectTrigger id="status">
+                    <SelectValue placeholder="全部" />
+                    </SelectTrigger>
+                    <SelectContent>
+                    <SelectItem value="all">全部</SelectItem>
+                    <SelectItem value="enabled">啟用</SelectItem>
+                    <SelectItem value="disabled">停用</SelectItem>
+                    </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <div className="flex justify-center">
+                <Button>
+                    <Search className="mr-2 h-4 w-4" />
+                    查詢
+                </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <span className="text-sm">顯示</span>
+                    <Select defaultValue="10">
+                    <SelectTrigger className="w-20">
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="10">10</SelectItem>
+                        <SelectItem value="20">20</SelectItem>
+                        <SelectItem value="50">50</SelectItem>
+                    </SelectContent>
+                    </Select>
+                    <span className="text-sm">項結果</span>
+                </div>
+            </div>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead className="w-4/12">標題</TableHead>
+                  <TableHead className="w-2/12">狀態</TableHead>
+                  <TableHead className="w-6/12">功能</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {features.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell className="font-medium">{item.name}</TableCell>
+                    <TableCell>
+                      <Badge variant={item.status ? "default" : "secondary"}
+                       className={item.status ? "bg-green-100 text-green-800 border-green-200 hover:bg-green-100/80" : "bg-red-100 text-red-800 border-red-200 hover:bg-red-100/80"}
+                      >
+                        {item.status ? <CheckCircle className="mr-1 h-3 w-3" /> : <XCircle className="mr-1 h-3 w-3" />}
+                        {item.status ? '啟用' : '停用'}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="space-x-1">
+                        <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
+                        <Button variant="destructive" size="sm">刪除</Button>
+                        <Button variant="secondary" size="sm">複製</Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+         <div className="p-4 border-t flex justify-between items-center">
+            <p className="text-sm text-muted-foreground">顯示第 1 至 6 項結果，共 6 項</p>
+            <Pagination>
+                <PaginationContent>
+                <PaginationItem>
+                    <PaginationPrevious href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                    <PaginationLink href="#" isActive>1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                    <PaginationNext href="#" />
+                </PaginationItem>
+                </PaginationContent>
+            </Pagination>
+        </div>
+      </Card>
+    </div>
+  );
+}
