@@ -28,6 +28,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Switch } from "@/components/ui/switch";
 
 const features = [
     { id: "1", name: "會員管理", status: true },
@@ -107,7 +108,12 @@ export default function SystemFeaturesPage() {
                 <TableRow className="bg-muted/50">
                   <TableHead className="w-4/12">標題</TableHead>
                   <TableHead className="w-2/12">狀態</TableHead>
-                  <TableHead className="w-6/12">功能</TableHead>
+                  <TableHead className="w-6/12">
+                    <div className="flex items-center gap-2">
+                      <span>功能</span>
+                      <Switch defaultChecked={true} />
+                    </div>
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
