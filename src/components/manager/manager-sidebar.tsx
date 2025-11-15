@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import {
   SidebarContent,
   SidebarMenu,
@@ -27,36 +29,51 @@ const menuItems = [
     {
       label: "系統管理",
       icon: Settings,
-      subItems: ["系統功能管理", "後台選單管理"],
+      subItems: [
+        { label: "系統功能管理", href: "/Manager/system-features" },
+        { label: "後台選單管理", href: "/Manager/menu-management" },
+      ],
     },
     {
       label: "權限管理",
       icon: Share2,
-      subItems: ["後台帳號管理", "角色管理"],
+      subItems: [
+        { label: "後台帳號管理", href: "/Manager/users" },
+        { label: "角色管理", href: "/Manager/roles" },
+      ],
     },
     {
       label: "名單管理",
       icon: MessageSquare,
-      subItems: ["參加者名單", "QR Code 下載"],
+      subItems: [
+        { label: "參加者名單", href: "/Manager/attendees" },
+        { label: "QR Code 下載", href: "/Manager/qrcode" },
+      ],
     },
     {
-      label: "活動執行",
+      label: "識別證管理",
       icon: LayoutGrid,
-      subItems: ["報到掃描","報到執行"],
+      subItems: [
+        { label: "編輯識別證", href: "/Manager/badge-editor" },
+        { label: "識別證列印", href: "/Manager/badge-printing" },
+      ],
     },
 ];
 
 
 export function ManagerSidebar() {
+  const pathname = usePathname();
+  const defaultOpenItems = menuItems.map(item => item.subItems.some(sub => pathname.startsWith(sub.href)) ? item.label : null).filter(Boolean);
+
   return (
     <div className="flex flex-col h-full bg-sidebar-background pt-16">
       <SidebarContent className="flex-1 p-4">
         <SidebarMenu>
           {menuItems.map((item) => (
-            <Collapsible key={item.label} className="w-full">
+            <Collapsible key={item.label} className="w-full" defaultOpen={defaultOpenItems.includes(item.label)}>
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
-                  <SidebarMenuButton 
+                  <SidebarMenuButton
                     className="flex items-center gap-2 w-full justify-start text-base font-semibold text-sidebar-foreground/80 hover:text-sidebar-accent-foreground group"
                     tooltip={item.label}
                   >
@@ -68,8 +85,15 @@ export function ManagerSidebar() {
                 <CollapsibleContent>
                   <SidebarMenuSub>
                     {item.subItems.map((subItem) => (
-                      <SidebarMenuSubItem key={subItem}>
-                        <SidebarMenuSubButton className="text-sidebar-foreground/80 hover:text-sidebar-accent-foreground">{subItem}</SidebarMenuSubButton>
+                      <SidebarMenuSubItem key={subItem.label}>
+                        <Link href={subItem.href} passHref>
+                          <SidebarMenuSubButton 
+                            isActive={pathname === subItem.href}
+                            className="text-sidebar-foreground/80 hover:text-sidebar-accent-foreground"
+                          >
+                            {subItem.label}
+                          </SidebarMenuSubButton>
+                        </Link>
                       </SidebarMenuSubItem>
                     ))}
                   </SidebarMenuSub>
