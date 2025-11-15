@@ -38,7 +38,7 @@ const menuItems = [
     { id: "5", name: "活動管理", status: true },
     { id: "6", name: "全站通知信", status: true },
     { id: "7", name: "會員管理", status: true },
-    { id: "8", name: "權限管理", status: true },
+    { id: "8", name: "權限管理", status: false },
     { id: "9", name: "職福資訊", status: false },
     { id: "10", name: "功能模板", status: false },
 ];

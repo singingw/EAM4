@@ -115,7 +115,10 @@ export default function UsersPage() {
               </div>
             </div>
             <div className="flex justify-center">
-              <Button>查詢</Button>
+              <Button>
+                <Search className="mr-2 h-4 w-4" />
+                查詢
+              </Button>
             </div>
           </div>
         </CardContent>
