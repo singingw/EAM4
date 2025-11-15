@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Plus, Search } from "lucide-react";
+import { Plus, Search, CheckCircle, XCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -36,7 +36,7 @@ const users = [
     email: "max.sixdots@gmail.com",
     role: "系統管理員",
     suspensionTime: "-",
-    status: "On",
+    status: "enabled",
   },
   {
     id: "2",
@@ -44,7 +44,7 @@ const users = [
     email: "linml@example.com",
     role: "業務",
     suspensionTime: "-",
-    status: "On",
+    status: "enabled",
   },
   {
     id: "3",
@@ -52,15 +52,15 @@ const users = [
     email: "wangdm@example.com",
     role: "財務",
     suspensionTime: "-",
-    status: "On",
+    status: "enabled",
   },
   {
     id: "4",
     name: "陳小華",
     email: "chenxh@example.com",
     role: "一般使用者",
-    suspensionTime: "-",
-    status: "On",
+    suspensionTime: "2025/12/31 23:59:59",
+    status: "disabled",
   },
 ];
 
@@ -91,9 +91,10 @@ export default function UsersPage() {
                 <label htmlFor="role" className="text-sm font-medium">角色</label>
                 <Select>
                   <SelectTrigger id="role">
-                    <SelectValue placeholder="系統管理員" />
+                    <SelectValue placeholder="全部" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="all">全部</SelectItem>
                     <SelectItem value="admin">系統管理員</SelectItem>
                     <SelectItem value="business">業務</SelectItem>
                     <SelectItem value="finance">財務</SelectItem>
@@ -105,11 +106,12 @@ export default function UsersPage() {
                 <label htmlFor="status" className="text-sm font-medium">狀態</label>
                 <Select>
                   <SelectTrigger id="status">
-                    <SelectValue placeholder="On" />
+                    <SelectValue placeholder="全部" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="on">On</SelectItem>
-                    <SelectItem value="off">Off</SelectItem>
+                    <SelectItem value="all">全部</SelectItem>
+                    <SelectItem value="enabled">啟用</SelectItem>
+                    <SelectItem value="disabled">停用</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -162,10 +164,11 @@ export default function UsersPage() {
                     <TableCell>{user.role}</TableCell>
                     <TableCell>{user.suspensionTime}</TableCell>
                     <TableCell>
-                      <Badge variant={user.status === "On" ? "default" : "secondary"}
-                       className={user.status === "On" ? "bg-green-500 hover:bg-green-500/80" : ""}
+                      <Badge variant={user.status === "enabled" ? "default" : "secondary"}
+                       className={user.status === "enabled" ? "bg-green-100 text-green-800 border-green-200 hover:bg-green-100/80" : "bg-red-100 text-red-800 border-red-200 hover:bg-red-100/80"}
                       >
-                        {user.status}
+                        {user.status === "enabled" ? <CheckCircle className="mr-1 h-3 w-3" /> : <XCircle className="mr-1 h-3 w-3" />}
+                        {user.status === "enabled" ? '啟用' : '停用'}
                       </Badge>
                     </TableCell>
                     <TableCell className="space-x-1">
