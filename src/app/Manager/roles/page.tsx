@@ -64,7 +64,7 @@ export default function RolesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">角色管理</h1>
-        <Button>
+        <Button className="bg-blue-500 text-white hover:bg-blue-600">
           <Plus className="mr-2 h-4 w-4" />
           新增
         </Button>
@@ -103,31 +103,17 @@ export default function RolesPage() {
                 {roles.map((role) => (
                   <TableRow key={role.id}>
                     <TableCell className="font-medium">{role.name}</TableCell>
-                    <TableCell className="space-x-1">
+                    <TableCell className="space-x-1 max-w-xs">
                       {role.permissions.map(p => <Badge key={p} variant="outline" className="font-normal">{p}</Badge>)}
                     </TableCell>
                     <TableCell>{role.modifiedTime}</TableCell>
                     <TableCell>{role.modifiedBy}</TableCell>
                     <TableCell className="space-x-1">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="bg-green-500 text-white hover:bg-green-600 hover:text-white"
-                      >
-                        編輯
-                      </Button>
-                      <Button variant="destructive" size="sm">
-                        刪除
-                      </Button>
-                      <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
-                        檢視
-                      </Button>
-                      <Button variant="secondary" size="sm">
-                        複製
-                      </Button>
-                      <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
-                        異動紀錄
-                      </Button>
+                      <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
+                      <Button variant="destructive" size="sm">刪除</Button>
+                      <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
+                      <Button variant="secondary" size="sm">複製</Button>
+                      <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -135,28 +121,21 @@ export default function RolesPage() {
             </Table>
           </div>
         </CardContent>
-        <div className="p-4 border-t">
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#" isActive>
-                  1
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">2</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+         <div className="p-4 border-t flex justify-between items-center">
+            <p className="text-sm text-muted-foreground">顯示第 1 至 4 項結果，共 4 項</p>
+            <Pagination>
+                <PaginationContent>
+                <PaginationItem>
+                    <PaginationPrevious href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                    <PaginationLink href="#" isActive>1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                    <PaginationNext href="#" />
+                </PaginationItem>
+                </PaginationContent>
+            </Pagination>
         </div>
       </Card>
     </div>
