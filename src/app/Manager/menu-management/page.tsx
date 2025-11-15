@@ -48,7 +48,7 @@ export default function MenuManagementPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">後台選單管理</h1>
-        <Button>
+        <Button className="bg-blue-500 text-white hover:bg-blue-600">
             <Plus className="mr-2 h-4 w-4" />
             新增
         </Button>
@@ -57,8 +57,23 @@ export default function MenuManagementPage() {
       <Card>
         <CardContent className="pt-6">
           <div className="flex items-center gap-4">
-            <label htmlFor="title" className="text-sm font-medium">標題</label>
-            <Input id="title" placeholder="" className="max-w-xs" />
+            <div className="flex items-center gap-2">
+              <label htmlFor="title" className="text-sm font-medium">標題</label>
+              <Input id="title" placeholder="" className="max-w-xs" />
+            </div>
+             <div className="flex items-center gap-2">
+                <label htmlFor="status" className="text-sm font-medium">狀態</label>
+                <Select>
+                    <SelectTrigger id="status" className="w-[180px]">
+                    <SelectValue placeholder="全部" />
+                    </SelectTrigger>
+                    <SelectContent>
+                    <SelectItem value="all">全部</SelectItem>
+                    <SelectItem value="enabled">啟用</SelectItem>
+                    <SelectItem value="disabled">停用</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
             <Button variant="outline">
                 <Search className="mr-2 h-4 w-4" />
                 查詢
