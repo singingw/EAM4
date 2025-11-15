@@ -9,15 +9,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MoreHorizontal } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Card, CardContent } from "@/components/ui/card";
+import { Pencil, Plus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const users = [
@@ -46,54 +39,49 @@ const users = [
 
 export default function UsersPage() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>後台帳號管理</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>姓名</TableHead>
-              <TableHead>電子郵件</TableHead>
-              <TableHead>角色</TableHead>
-              <TableHead>狀態</TableHead>
-              <TableHead>
-                <span className="sr-only">操作</span>
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell className="font-medium">{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.role}</TableCell>
-                <TableCell>
-                  <Badge variant={user.status === "Active" ? "default" : "secondary"}>
-                    {user.status}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button aria-haspopup="true" size="icon" variant="ghost">
-                        <MoreHorizontal className="h-4 w-4" />
-                        <span className="sr-only">Toggle menu</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>操作</DropdownMenuLabel>
-                      <DropdownMenuItem>編輯</DropdownMenuItem>
-                      <DropdownMenuItem>刪除</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">後台帳號管理</h1>
+        <Button>
+          <Plus className="mr-2 h-4 w-4" />
+          新增帳號
+        </Button>
+      </div>
+      <Card>
+        <CardContent className="pt-6">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>姓名</TableHead>
+                <TableHead>電子郵件</TableHead>
+                <TableHead>角色</TableHead>
+                <TableHead>狀態</TableHead>
+                <TableHead>操作</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+            </TableHeader>
+            <TableBody>
+              {users.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell className="font-medium">{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell>
+                    <Badge variant={user.status === "Active" ? "default" : "secondary"}>
+                      {user.status === "Active" ? "啟用" : "停用"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Button variant="outline" size="sm">
+                      <Pencil className="mr-2 h-4 w-4" />
+                      編輯
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
