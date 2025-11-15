@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Plus, Search, CheckCircle, XCircle } from "lucide-react";
+import { Plus, Search, CheckCircle, XCircle, Download, Upload } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -69,16 +69,22 @@ export default function UsersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">帳號管理</h1>
-        <Button className="bg-blue-500 text-white hover:bg-blue-600">
-          <Plus className="mr-2 h-4 w-4" />
-          新增
-        </Button>
+        <div className="flex items-center gap-2">
+            <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                <Plus className="mr-2 h-4 w-4" />
+                新增
+            </Button>
+            <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                <Upload className="mr-2 h-4 w-4" />
+                匯入
+            </Button>
+        </div>
       </div>
 
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
               <div className="space-y-2">
                 <label htmlFor="userName" className="text-sm font-medium">使用者名稱</label>
                 <Input id="userName" placeholder="輸入使用者名稱" />
@@ -116,10 +122,14 @@ export default function UsersPage() {
                 </Select>
               </div>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center gap-2">
               <Button>
                 <Search className="mr-2 h-4 w-4" />
                 查詢
+              </Button>
+              <Button variant="outline">
+                <Download className="mr-2 h-4 w-4" />
+                匯出
               </Button>
             </div>
           </div>
@@ -174,7 +184,7 @@ export default function UsersPage() {
                     <TableCell className="space-x-1">
                       <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
                       <Button variant="destructive" size="sm">刪除</Button>
-                      <Button variant="outline" size="sm">檢視</Button>
+                      <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
                       <Button variant="secondary" size="sm">複製</Button>
                       <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
                       <Button variant="outline" size="sm" className="bg-blue-600 text-white hover:bg-blue-700 hover:text-white">登入/登出記錄</Button>
