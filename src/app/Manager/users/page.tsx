@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Plus, Search, Trash, Copy, History } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -69,7 +69,7 @@ export default function UsersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">帳號管理</h1>
-        <Button>
+        <Button className="bg-blue-500 text-white hover:bg-blue-600">
           <Plus className="mr-2 h-4 w-4" />
           新增
         </Button>
@@ -77,42 +77,44 @@ export default function UsersPage() {
 
       <Card>
         <CardContent className="pt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
-            <div className="space-y-2">
-              <label htmlFor="userName" className="text-sm font-medium">使用者名稱</label>
-              <Input id="userName" placeholder="輸入使用者名稱" />
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div className="space-y-2">
+                <label htmlFor="userName" className="text-sm font-medium">使用者名稱</label>
+                <Input id="userName" placeholder="輸入使用者名稱" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="account" className="text-sm font-medium">帳號</label>
+                <Input id="account" placeholder="輸入帳號" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="role" className="text-sm font-medium">角色</label>
+                <Select>
+                  <SelectTrigger id="role">
+                    <SelectValue placeholder="系統管理員" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="admin">系統管理員</SelectItem>
+                    <SelectItem value="business">業務</SelectItem>
+                    <SelectItem value="finance">財務</SelectItem>
+                    <SelectItem value="user">一般使用者</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="status" className="text-sm font-medium">狀態</label>
+                <Select>
+                  <SelectTrigger id="status">
+                    <SelectValue placeholder="On" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="on">On</SelectItem>
+                    <SelectItem value="off">Off</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            <div className="space-y-2">
-              <label htmlFor="account" className="text-sm font-medium">帳號</label>
-              <Input id="account" placeholder="輸入帳號" />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="role" className="text-sm font-medium">角色</label>
-              <Select>
-                <SelectTrigger id="role">
-                  <SelectValue placeholder="系統管理員" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="admin">系統管理員</SelectItem>
-                  <SelectItem value="business">業務</SelectItem>
-                  <SelectItem value="finance">財務</SelectItem>
-                  <SelectItem value="user">一般使用者</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="status" className="text-sm font-medium">狀態</label>
-              <Select>
-                <SelectTrigger id="status">
-                  <SelectValue placeholder="On" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="on">On</SelectItem>
-                  <SelectItem value="off">Off</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="col-span-full flex justify-center mt-4">
+            <div className="flex justify-center">
               <Button>查詢</Button>
             </div>
           </div>
