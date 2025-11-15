@@ -39,7 +39,7 @@ const menuItems = [
     { id: "6", name: "全站通知信", status: true },
     { id: "7", name: "會員管理", status: true },
     { id: "8", name: "權限管理", status: true },
-    { id: "9", name: "職福資訊", status: true },
+    { id: "9", name: "職福資訊", status: false },
     { id: "10", name: "功能模板", status: false },
 ];
 
@@ -56,15 +56,16 @@ export default function MenuManagementPage() {
 
       <Card>
         <CardContent className="pt-6">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <label htmlFor="title" className="text-sm font-medium">標題</label>
-              <Input id="title" placeholder="" className="max-w-xs" />
-            </div>
-             <div className="flex items-center gap-2">
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div className="space-y-2">
+                <label htmlFor="title" className="text-sm font-medium">標題</label>
+                <Input id="title" placeholder="輸入標題" />
+              </div>
+              <div className="space-y-2">
                 <label htmlFor="status" className="text-sm font-medium">狀態</label>
                 <Select>
-                    <SelectTrigger id="status" className="w-[180px]">
+                    <SelectTrigger id="status">
                     <SelectValue placeholder="全部" />
                     </SelectTrigger>
                     <SelectContent>
@@ -73,11 +74,14 @@ export default function MenuManagementPage() {
                     <SelectItem value="disabled">停用</SelectItem>
                     </SelectContent>
                 </Select>
+              </div>
             </div>
-            <Button variant="outline">
-                <Search className="mr-2 h-4 w-4" />
-                查詢
-            </Button>
+            <div className="flex justify-center">
+                <Button>
+                    <Search className="mr-2 h-4 w-4" />
+                    查詢
+                </Button>
+            </div>
           </div>
         </CardContent>
       </Card>
