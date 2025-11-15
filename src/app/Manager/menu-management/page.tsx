@@ -34,7 +34,7 @@ const menuItems = [
     status: true,
     subItems: [
         { id: "2-1", name: "後台帳號管理", icon: "-", path: "/Manager/users", status: true },
-        { id:_2-2: "2-2", name: "角色管理", icon: "-", path: "/Manager/roles", status: true },
+        { id: "2-2", name: "角色管理", icon: "-", path: "/Manager/roles", status: true },
     ],
   },
   {
