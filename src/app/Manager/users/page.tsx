@@ -174,9 +174,11 @@ export default function UsersPage() {
                     <TableCell className="space-x-1">
                       <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
                       <Button variant="destructive" size="sm">刪除</Button>
-                      <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
+                      <Button variant="outline" size="sm">檢視</Button>
                       <Button variant="secondary" size="sm">複製</Button>
                       <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
+                      <Button variant="outline" size="sm" className="bg-blue-600 text-white hover:bg-blue-700 hover:text-white">登入/登出記錄</Button>
+                      <Button variant="outline" size="sm" className="bg-cyan-500 text-white hover:bg-cyan-600 hover:text-white">觀察模式</Button>
                     </TableCell>
                   </TableRow>
                 ))}
