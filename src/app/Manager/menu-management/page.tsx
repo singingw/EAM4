@@ -116,8 +116,8 @@ export default function MenuManagementPage() {
                   <TableHead className="w-4/12">標題</TableHead>
                   <TableHead className="w-2/12">狀態</TableHead>
                   <TableHead className="w-6/12">
-                     <div className="flex items-center gap-2">
-                      <span>功能</span>
+                     <div className="flex items-center">
+                      <span className="mr-2">功能</span>
                       <Switch checked={showFunctions} onCheckedChange={setShowFunctions} />
                     </div>
                   </TableHead>
