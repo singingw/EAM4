@@ -32,26 +32,30 @@ const roles = [
   {
     id: "1",
     name: "系統管理員",
-    userCount: 1,
-    status: "On",
+    permissions: ["後台帳號管理", "角色管理", "設備管理", "報價單管理", "展覽管理"],
+    modifiedTime: "2025/05/13 16:30:51",
+    modifiedBy: "SystemAdmin",
   },
   {
     id: "2",
     name: "業務",
-    userCount: 5,
-    status: "On",
+    permissions: ["報價單管理", "展覽管理"],
+    modifiedTime: "2025/05/12 11:20:00",
+    modifiedBy: "SystemAdmin",
   },
   {
     id: "3",
     name: "財務",
-    userCount: 2,
-    status: "On",
+    permissions: ["報價單管理"],
+    modifiedTime: "2025/05/11 09:00:15",
+    modifiedBy: "SystemAdmin",
   },
   {
     id: "4",
     name: "一般使用者",
-    userCount: 10,
-    status: "Off",
+    permissions: ["展覽管理"],
+    modifiedTime: "2025/05/10 14:45:30",
+    modifiedBy: "SystemAdmin",
   },
 ];
 
@@ -60,9 +64,9 @@ export default function RolesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">角色管理</h1>
-        <Button>
+        <Button variant="outline">
           <Plus className="mr-2 h-4 w-4" />
-          新增角色
+          新增
         </Button>
       </div>
 
@@ -89,8 +93,9 @@ export default function RolesPage() {
               <TableHeader>
                 <TableRow className="bg-muted/50">
                   <TableHead>角色名稱</TableHead>
-                  <TableHead>關聯帳號數量</TableHead>
-                  <TableHead>狀態</TableHead>
+                  <TableHead>權限</TableHead>
+                  <TableHead>修改時間</TableHead>
+                  <TableHead>修改人員</TableHead>
                   <TableHead>功能</TableHead>
                 </TableRow>
               </TableHeader>
@@ -98,19 +103,11 @@ export default function RolesPage() {
                 {roles.map((role) => (
                   <TableRow key={role.id}>
                     <TableCell className="font-medium">{role.name}</TableCell>
-                    <TableCell>{role.userCount}</TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={role.status === "On" ? "default" : "secondary"}
-                        className={
-                          role.status === "On"
-                            ? "bg-green-500 hover:bg-green-500/80"
-                            : ""
-                        }
-                      >
-                        {role.status}
-                      </Badge>
+                    <TableCell className="space-x-1">
+                      {role.permissions.map(p => <Badge key={p} variant="outline" className="font-normal">{p}</Badge>)}
                     </TableCell>
+                    <TableCell>{role.modifiedTime}</TableCell>
+                    <TableCell>{role.modifiedBy}</TableCell>
                     <TableCell className="space-x-1">
                       <Button
                         variant="outline"
@@ -122,12 +119,14 @@ export default function RolesPage() {
                       <Button variant="destructive" size="sm">
                         刪除
                       </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white"
-                      >
+                      <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
+                        檢視
+                      </Button>
+                      <Button variant="secondary" size="sm">
                         複製
+                      </Button>
+                      <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
+                        異動紀錄
                       </Button>
                     </TableCell>
                   </TableRow>
