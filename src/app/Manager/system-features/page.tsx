@@ -42,6 +42,7 @@ const features = [
     { id: "6", name: "識別證模板", status: true },
     { id: "7", name: "參加者名單", status: true },
     { id: "8", name: "QR Code 下載紀錄", status: true },
+    { id: "9", name: "獎項", status: false },
 ];
 
 export default function SystemFeaturesPage() {
@@ -159,7 +160,7 @@ export default function SystemFeaturesPage() {
           </div>
         </CardContent>
          <div className="p-4 border-t flex justify-between items-center">
-            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 8 項結果，共 8 項</p>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 9 項結果，共 9 項</p>
             <Pagination>
                 <PaginationContent>
                 <PaginationItem>
