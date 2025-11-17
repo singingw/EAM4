@@ -187,6 +187,7 @@ export default function AttendeesPage() {
                   <TableHead className="w-10">
                      <Checkbox />
                   </TableHead>
+                  <TableHead>ID</TableHead>
                   <TableHead>姓名</TableHead>
                   <TableHead>Email</TableHead>
                   <TableHead>手機</TableHead>
@@ -208,6 +209,7 @@ export default function AttendeesPage() {
                     <TableCell>
                         <Checkbox />
                     </TableCell>
+                    <TableCell>{item.id}</TableCell>
                     <TableCell className="font-medium">{item.name}</TableCell>
                     <TableCell>{item.email}</TableCell>
                     <TableCell>{item.phone}</TableCell>
