@@ -62,34 +62,34 @@ export function ManagerHeader() {
           {formattedDate} {formattedTime}
         </span>
         
-        <Dialog>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 h-8 w-8">
-                <BookOpen className="h-5 w-5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-               <DropdownMenuItem>
-                  <span>系統操作手冊</span>
-                </DropdownMenuItem>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 h-8 w-8">
+              <BookOpen className="h-5 w-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem>
+                <span>系統操作手冊</span>
+              </DropdownMenuItem>
+              <Dialog>
                 <DialogTrigger asChild>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                     <span>報到流程說明</span>
                   </DropdownMenuItem>
                 </DialogTrigger>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <DropdownMenuItem>
-                      <span>識別證印製說明</span>
-                    </DropdownMenuItem>
-                  </DialogTrigger>
-                  <BadgePrintingInstructionsDialog />
-                </Dialog>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <CheckInInstructionsDialog />
-        </Dialog>
+                <CheckInInstructionsDialog />
+              </Dialog>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                    <span>識別證印製說明</span>
+                  </DropdownMenuItem>
+                </DialogTrigger>
+                <BadgePrintingInstructionsDialog />
+              </Dialog>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 h-8 w-8">
           <Settings className="h-5 w-5" />
