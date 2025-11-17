@@ -54,7 +54,6 @@ const menuItems = [
       label: "識別證管理",
       icon: LayoutGrid,
       subItems: [
-        { label: "編輯識別證", href: "/Manager/badge-editor" },
         { label: "識別證列印", href: "/Manager/badge-printing" },
       ],
     },
