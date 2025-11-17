@@ -221,7 +221,9 @@ export default function UsersPage() {
                           <Button asChild variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
                             <Link href="/Manager/history">異動紀錄</Link>
                           </Button>
-                          <Button variant="outline" size="sm" className="bg-blue-600 text-white hover:bg-blue-700 hover:text-white">登入/登出記錄</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-blue-600 text-white hover:bg-blue-700 hover:text-white">
+                            <Link href="/Manager/users/login-history">登入/登出記錄</Link>
+                          </Button>
                           <Button variant="outline" size="sm" className="bg-cyan-500 text-white hover:bg-cyan-600 hover:text-white">觀察模式</Button>
                         </>
                       ) : (
@@ -243,7 +245,9 @@ export default function UsersPage() {
                             <DropdownMenuItem asChild>
                                 <Link href="/Manager/history" className="text-orange-600">異動紀錄</Link>
                             </DropdownMenuItem>
-                             <DropdownMenuItem className="text-blue-700">登入/登出記錄</DropdownMenuItem>
+                             <DropdownMenuItem asChild>
+                               <Link href="/Manager/users/login-history" className="text-blue-700">登入/登出記錄</Link>
+                             </DropdownMenuItem>
                              <DropdownMenuItem className="text-cyan-600">觀察模式</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -275,5 +279,7 @@ export default function UsersPage() {
     </div>
   );
 }
+
+    
 
     
