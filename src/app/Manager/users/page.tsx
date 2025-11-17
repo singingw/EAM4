@@ -191,7 +191,7 @@ export default function UsersPage() {
                         {user.status === "enabled" ? '啟用' : '停用'}
                       </Badge>
                     </TableCell>
-                    <TableCell className="space-x-1">
+                    <TableCell className="space-x-1 text-center">
                       {showFunctions ? (
                         <>
                           <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
