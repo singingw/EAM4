@@ -101,14 +101,6 @@ export default function AttendeesPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">參加者名單</h1>
         <div className="flex items-center gap-2">
-            <Button className="bg-blue-500 text-white hover:bg-blue-600">
-                <Upload className="mr-2 h-4 w-4" />
-                匯入
-            </Button>
-            <Button variant="outline">
-                <Download className="mr-2 h-4 w-4" />
-                匯出
-            </Button>
             <Button variant="outline" className="bg-purple-500 text-white hover:bg-purple-600">
                 <Mail className="mr-2 h-4 w-4" />
                 寄發行前通知
@@ -116,6 +108,12 @@ export default function AttendeesPage() {
             <Button variant="outline" className="bg-gray-500 text-white hover:bg-gray-600">
                 <QrCode className="mr-2 h-4 w-4" />
                 匯出全部的 QRCode
+            </Button>
+            <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                匯入
+            </Button>
+            <Button variant="outline">
+                匯出
             </Button>
             <Dialog>
               <DialogTrigger asChild>
