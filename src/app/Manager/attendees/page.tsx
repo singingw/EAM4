@@ -36,6 +36,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { FieldSettingsDialog } from "@/components/manager/field-settings-dialog";
 import Image from "next/image";
 import { PreEventNotificationDialog } from "@/components/manager/pre-event-notification-dialog";
+import Link from "next/link";
 
 const attendees = [
   {
@@ -203,9 +204,11 @@ export default function AttendeesPage() {
                     <PreEventNotificationDialog />
                   </Dialog>
                   <Button variant="outline" className="bg-orange-400 text-white hover:bg-orange-500 hover:text-white">匯出 QR Code</Button>
-                  <Button className="bg-blue-500 text-white hover:bg-blue-600">
-                    <Plus className="mr-2 h-4 w-4" />
-                    新增參加者
+                  <Button asChild className="bg-blue-500 text-white hover:bg-blue-600">
+                    <Link href="/Manager/attendees/add">
+                      <Plus className="mr-2 h-4 w-4" />
+                      新增參加者
+                    </Link>
                   </Button>
                 </div>
             </div>
@@ -314,5 +317,3 @@ export default function AttendeesPage() {
     </div>
   );
 }
-
-    
