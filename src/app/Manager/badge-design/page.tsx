@@ -52,6 +52,7 @@ interface Element {
   id: string;
   type: 'text' | 'qrcode' | 'image' | 'field';
   content: string;
+  originalContent?: string;
   style: React.CSSProperties;
   zIndex: number;
 }
@@ -262,18 +263,24 @@ export default function BadgeDesignPage() {
     setIsEditing(false);
     setSelectedElementId(null);
     setElements(prev =>
-      prev.map(el =>
-        el.content === '{{name}}' ? { ...el, content: 'Singing' } : el
-      )
+      prev.map(el => {
+        const newEl = { ...el, originalContent: el.originalContent || el.content };
+        if (newEl.content === '{{name}}') {
+          newEl.content = 'Singing';
+        }
+        return newEl;
+      })
     );
   };
 
   const handleEdit = () => {
     setIsEditing(true);
     setElements(prev =>
-      prev.map(el =>
-        el.id === 'name' ? { ...el, content: '{{name}}' } : el
-      )
+      prev.map(el => ({
+        ...el,
+        content: el.originalContent || el.content,
+        originalContent: undefined
+      }))
     );
   };
 
@@ -319,7 +326,6 @@ export default function BadgeDesignPage() {
 
   return (
     <div className="flex h-full w-full bg-muted/30">
-      {isEditing && (
         <div className="w-60 bg-background border-r flex flex-col">
           <div className="p-4 border-b flex items-center h-[65px]">
             <h2 className="text-base font-semibold flex items-center gap-2">
@@ -387,9 +393,10 @@ export default function BadgeDesignPage() {
               </AccordionItem>
             </Accordion>
           </div>
-          <PropertiesPanel element={selectedElement} onUpdate={updateElementStyle} onRemove={removeElement} onLayerChange={handleLayerChange} />
+          {isEditing && selectedElement && (
+            <PropertiesPanel element={selectedElement} onUpdate={updateElementStyle} onRemove={removeElement} onLayerChange={handleLayerChange} />
+          )}
         </div>
-      )}
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col" onClick={() => isEditing && setSelectedElementId(null)}>
@@ -490,3 +497,5 @@ export default function BadgeDesignPage() {
     </div>
   );
 }
+
+    
