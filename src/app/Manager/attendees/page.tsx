@@ -168,6 +168,10 @@ export default function AttendeesPage() {
                     </Select>
                     <span className="text-sm">項結果</span>
                 </div>
+                <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                  <Plus className="mr-2 h-4 w-4" />
+                  新增參加者
+                </Button>
             </div>
         </CardHeader>
         <CardContent className="pt-0">
