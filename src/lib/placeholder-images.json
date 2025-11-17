@@ -35,6 +35,30 @@
       "description": "A mobile screen showing a successful check-in for a guest.",
       "imageUrl": "https://images.unsplash.com/photo-1664913920468-e04086b46b61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtb2JpbGUlMjBzdWNjZXNzfGVufDB8fHx8MTc2MzM2ODUxNHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "mobile success"
+    },
+    {
+      "id": "print-button-click",
+      "description": "A finger pointing at a print icon on a screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1657032633395-1cb34612f86d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cHJpbnQlMjBpY29ufGVufDB8fHx8MTc2MzM2ODgwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "print icon"
+    },
+    {
+      "id": "print-options",
+      "description": "A dialog box showing print options like template selection and color/bw.",
+      "imageUrl": "https://images.unsplash.com/photo-1758518730151-cf64fddb4f0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxkaWFsb2clMjBzZXR0aW5nc3xlbnwwfHx8fDE3NjMzNjg4MDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dialog settings"
+    },
+    {
+      "id": "print-dialog-action",
+      "description": "A cursor clicking the 'Print' button in a dialog.",
+      "imageUrl": "https://images.unsplash.com/photo-1723310181223-ae4945216c2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjbGljayUyMGJ1dHRvbnxlbnwwfHx8fDE3NjMzNjg4MDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "click button"
+    },
+    {
+      "id": "printer-printing",
+      "description": "An office printer in the process of printing a document.",
+      "imageUrl": "https://images.unsplash.com/photo-1612814266697-e5814f3063cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwcmludGVyJTIwb2ZmaWNlfGVufDB8fHx8MTc2MzM2ODgwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "printer office"
     }
   ]
 }

@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { CheckInInstructionsDialog } from "@/components/manager/check-in-instructions-dialog";
+import { BadgePrintingInstructionsDialog } from "./badge-printing-instructions-dialog";
 
 
 export function ManagerHeader() {
@@ -77,9 +78,14 @@ export function ManagerHeader() {
                     <span>報到流程說明</span>
                   </DropdownMenuItem>
                 </DialogTrigger>
-                <DropdownMenuItem>
-                  <span>識別證印製說明</span>
-                </DropdownMenuItem>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <DropdownMenuItem>
+                      <span>識別證印製說明</span>
+                    </DropdownMenuItem>
+                  </DialogTrigger>
+                  <BadgePrintingInstructionsDialog />
+                </Dialog>
             </DropdownMenuContent>
           </DropdownMenu>
           <CheckInInstructionsDialog />
