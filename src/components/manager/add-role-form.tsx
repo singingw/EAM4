@@ -262,8 +262,8 @@ export function AddRoleForm() {
                              <Separator />
                              {Object.entries(group.subItems).map(([itemKey, item]) => (
                                 <div key={itemKey} className="pl-6 space-y-3">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-2">
+                                    <div className="flex items-start justify-between">
+                                        <div className="flex items-center gap-2 pt-1">
                                             <Checkbox 
                                                 id={`${groupKey}-${itemKey}`}
                                                 checked={isSubItemSelected(groupKey, itemKey)}
@@ -271,7 +271,7 @@ export function AddRoleForm() {
                                             />
                                             <Label htmlFor={`${groupKey}-${itemKey}`} className="font-medium">{item.label}</Label>
                                         </div>
-                                        <div className="flex items-center gap-x-4 gap-y-2 flex-wrap">
+                                        <div className="flex items-center gap-x-4 gap-y-2 flex-wrap max-w-4xl justify-end">
                                             {item.actions.map(action => (
                                                 <div key={action} className="flex items-center gap-2">
                                                     <Controller
@@ -303,5 +303,3 @@ export function AddRoleForm() {
     </>
   );
 }
-
-    
