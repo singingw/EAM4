@@ -104,7 +104,7 @@ export default function AttendeesPage() {
         <div className="flex items-center gap-2">
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" className="bg-purple-500 text-white hover:bg-purple-600">
+                <Button variant="outline" className="bg-teal-500 text-white hover:bg-teal-600">
                     寄發行前通知
                 </Button>
               </DialogTrigger>
@@ -198,7 +198,7 @@ export default function AttendeesPage() {
                 <div className="flex items-center gap-2">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" className="bg-purple-500 text-white hover:bg-purple-600 hover:text-white">批次寄送行前通知</Button>
+                      <Button variant="outline" className="bg-teal-500 text-white hover:bg-teal-600 hover:text-white">批次寄送行前通知</Button>
                     </DialogTrigger>
                     <PreEventNotificationDialog />
                   </Dialog>
