@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Plus, Search, CheckCircle, XCircle, Download, Upload, Mail, MessageSquare, MoreVertical, Settings } from "lucide-react";
+import { Plus, Search, CheckCircle, XCircle, Download, Upload, Mail, MessageSquare, MoreVertical, Settings, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -31,8 +32,9 @@ import {
 } from "@/components/ui/pagination";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { FieldSettingsDialog } from "@/components/manager/field-settings-dialog";
+import Image from "next/image";
 
 const attendees = [
   {
@@ -44,6 +46,7 @@ const attendees = [
     checkInTime: "2024/08/15 14:05:22",
     emailCount: 2,
     smsCount: 1,
+    qrCodeUrl: "https://placehold.co/200x200/png?text=QR+Code+1",
   },
   {
     id: "2",
@@ -54,6 +57,7 @@ const attendees = [
     checkInTime: "-",
     emailCount: 1,
     smsCount: 0,
+    qrCodeUrl: "https://placehold.co/200x200/png?text=QR+Code+2",
   },
   {
     id: "3",
@@ -64,6 +68,7 @@ const attendees = [
     checkInTime: "2024/08/15 14:10:11",
     emailCount: 2,
     smsCount: 2,
+    qrCodeUrl: "https://placehold.co/200x200/png?text=QR+Code+3",
   },
   {
     id: "4",
@@ -74,6 +79,7 @@ const attendees = [
     checkInTime: "-",
     emailCount: 0,
     smsCount: 0,
+    qrCodeUrl: "https://placehold.co/200x200/png?text=QR+Code+4",
   },
    {
     id: "5",
@@ -84,6 +90,7 @@ const attendees = [
     checkInTime: "2024/08/15 14:20:00",
     emailCount: 3,
     smsCount: 1,
+    qrCodeUrl: "https://placehold.co/200x200/png?text=QR+Code+5",
   },
 ];
 
@@ -246,6 +253,19 @@ export default function AttendeesPage() {
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Button variant="outline" size="sm" className="bg-purple-500 text-white hover:bg-purple-600 hover:text-white">Email</Button>
                           <Button variant="outline" size="sm" className="bg-teal-500 text-white hover:bg-teal-600 hover:text-white">簡訊</Button>
+                           <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm" className="bg-gray-500 text-white hover:bg-gray-600 hover:text-white">QR Code</Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[250px]">
+                              <DialogHeader>
+                                <DialogTitle>QR Code 預覽</DialogTitle>
+                              </DialogHeader>
+                              <div className="flex items-center justify-center p-4">
+                                 <Image src={item.qrCodeUrl} alt={`QR Code for ${item.name}`} width={200} height={200} />
+                              </div>
+                            </DialogContent>
+                          </Dialog>
                           <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
                           <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
                         </div>
@@ -281,3 +301,5 @@ export default function AttendeesPage() {
     </div>
   );
 }
+
+    
