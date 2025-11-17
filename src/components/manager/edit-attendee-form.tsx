@@ -22,6 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export function EditAttendeeForm() {
   const [isPending, setIsPending] = useState(false);
@@ -30,9 +31,11 @@ export function EditAttendeeForm() {
 
   // In a real app, you would fetch the attendee data here based on an ID.
   const [attendee, setAttendee] = useState({
+    id: "1",
     name: "陳曉明",
     email: "chen.hm@example.com",
     phone: "0912-345-678",
+    status: "checked-in",
   });
 
   const form = useForm<z.infer<typeof EditAttendeeSchema>>({
@@ -79,6 +82,23 @@ export function EditAttendeeForm() {
             <Form {...form}>
             <form className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <FormField
+                    control={form.control}
+                    name="id"
+                    render={({ field }) => (
+                    <FormItem>
+                        <Label>ID</Label>
+                        <FormControl>
+                        <Input
+                            {...field}
+                            disabled={isPending}
+                            placeholder="請輸入ID"
+                        />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
                 <FormField
                     control={form.control}
                     name="name"
@@ -131,6 +151,27 @@ export function EditAttendeeForm() {
                         <FormMessage />
                     </FormItem>
                     )}
+                />
+                <FormField
+                  control={form.control}
+                  name="status"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>報到狀態</Label>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="選擇報到狀態" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="checked-in">已報到</SelectItem>
+                          <SelectItem value="not-checked-in">未報到</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
                 </div>
             </form>

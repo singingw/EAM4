@@ -64,6 +64,9 @@ export const AddAttendeeSchema = z.object({
 });
 
 export const EditAttendeeSchema = z.object({
+  id: z.string().min(1, {
+    message: 'ID 為必填欄位',
+  }),
   name: z.string().min(1, {
     message: '姓名為必填欄位',
   }),
@@ -73,4 +76,5 @@ export const EditAttendeeSchema = z.object({
   phone: z.string().min(1, {
     message: '手機為必填欄位',
   }),
+  status: z.string(),
 });
