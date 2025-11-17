@@ -255,7 +255,7 @@ export default function AttendeesPage() {
           </div>
         </CardContent>
          <div className="p-4 border-t flex justify-between items-center">
-            <p className="text-sm text-muted-foreground">顯示第 1 至 5 項結果，共 5 項</p>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 5 項結果，共 5 項</p>
             <Pagination>
                 <PaginationContent>
                 <PaginationItem>
