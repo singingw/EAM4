@@ -23,7 +23,6 @@ import {
   QrCode,
   Type,
   Image as ImageIcon,
-  ChevronUp,
   Info,
   Eye,
 } from "lucide-react";
@@ -41,7 +40,7 @@ export default function BadgeDesignPage() {
     <div className="flex h-full w-full bg-muted/30">
       {/* Left Sidebar */}
       <div className="w-64 bg-background border-r flex flex-col">
-        <div className="p-4 border-b">
+        <div className="p-4 border-b flex items-center h-[65px]">
           <h2 className="text-base font-semibold flex items-center gap-2">
             <GripVertical className="h-5 w-5" />
             識別證元件
