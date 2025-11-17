@@ -47,7 +47,7 @@ const TextProperties = () => (
   <div className="bg-background border-t p-4 space-y-4">
     <div className="flex justify-between items-center">
         <h3 className="text-sm font-semibold">屬性設定</h3>
-        <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-destructive">
+        <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-destructive hover:bg-transparent">
             <Trash2 className="h-4 w-4" />
         </Button>
     </div>
@@ -107,7 +107,6 @@ export default function BadgeDesignPage() {
 
   return (
     <div className="flex h-full w-full bg-muted/30">
-      {/* Left Sidebar */}
       {isEditing && (
         <div className="w-60 bg-background border-r flex flex-col">
           <div className="p-4 border-b flex items-center h-[65px]">
