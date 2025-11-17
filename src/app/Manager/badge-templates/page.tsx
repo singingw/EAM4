@@ -3,7 +3,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Plus, Copy, Trash2, Pencil } from "lucide-react";
+import { Plus, Copy, Trash2, Pencil, Printer } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,6 +14,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { PrintBadgeDialog } from "@/components/manager/print-badge-dialog";
 
 const templates = [
   {
@@ -43,12 +45,22 @@ export default function BadgeTemplatesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">識別證模板</h1>
-        <Button asChild className="bg-blue-500 text-white hover:bg-blue-600">
-          <Link href="/Manager/badge-design">
-            <Plus className="mr-2 h-4 w-4" />
-            新增模板
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Printer className="h-4 w-4" />
+                </Button>
+              </DialogTrigger>
+              <PrintBadgeDialog templates={templates} />
+            </Dialog>
+            <Button asChild className="bg-blue-500 text-white hover:bg-blue-600">
+              <Link href="/Manager/badge-design">
+                <Plus className="mr-2 h-4 w-4" />
+                新增模板
+              </Link>
+            </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
