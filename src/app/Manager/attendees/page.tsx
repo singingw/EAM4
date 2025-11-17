@@ -194,7 +194,7 @@ export default function AttendeesPage() {
                     <span className="text-sm">項結果</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button variant="outline">批次寄送行前通知</Button>
+                  <Button variant="outline" className="bg-purple-500 text-white hover:bg-purple-600 hover:text-white">批次寄送行前通知</Button>
                   <Button variant="outline" className="bg-gray-500 text-white hover:bg-gray-600 hover:text-white">匯出 QR Code</Button>
                   <Button className="bg-blue-500 text-white hover:bg-blue-600">
                     <Plus className="mr-2 h-4 w-4" />
