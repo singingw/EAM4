@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import {
   GripVertical,
   User,
-  QrCode,
+  QrCode as QrCodeIcon,
   Type,
   Image as ImageIcon,
   Info,
@@ -37,6 +37,7 @@ import {
   AlignRight,
   Trash2,
 } from "lucide-react";
+import Image from "next/image";
 
 const ComponentItem = ({ children }: { children: React.ReactNode }) => (
   <div className="flex items-center p-2 rounded-md hover:bg-muted cursor-pointer text-sm">
@@ -138,7 +139,7 @@ export default function BadgeDesignPage() {
               <AccordionItem value="item-2">
                 <AccordionTrigger className="text-sm font-medium py-2">
                   <div className="flex items-center gap-2">
-                    <QrCode className="h-4 w-4" />
+                    <QrCodeIcon className="h-4 w-4" />
                     <span>QR Code</span>
                   </div>
                 </AccordionTrigger>
@@ -257,7 +258,7 @@ export default function BadgeDesignPage() {
                 <div className="absolute top-1/2 left-0 h-px w-full bg-gray-300 border-t border-dashed"></div>
               </>
             )}
-            <div className="absolute inset-0 p-4">
+            <div className="absolute inset-0 p-4 flex flex-col items-center justify-center gap-4">
                 <div 
                   className={`p-2 cursor-pointer ${selectedElement === 'name' ? 'ring-2 ring-blue-500' : ''}`}
                   onClick={(e) => { e.stopPropagation(); handleSelectElement('name'); }}
@@ -265,32 +266,24 @@ export default function BadgeDesignPage() {
                   <p className="text-2xl font-bold text-center">{`{{name}}`}</p>
                 </div>
                 <div 
-                  className={`p-2 mt-2 cursor-pointer ${selectedElement === 'id' ? 'ring-2 ring-blue-500' : ''}`}
-                  onClick={(e) => { e.stopPropagation(); handleSelectElement('id'); }}
+                  className={`p-2 cursor-pointer ${selectedElement === 'qr-code' ? 'ring-2 ring-blue-500' : ''}`}
+                  onClick={(e) => { e.stopPropagation(); handleSelectElement('qr-code'); }}
                 >
-                  <p className="text-sm text-gray-500 text-center">{`{{ID}}`}</p>
+                  <Image src="https://placehold.co/100x100/png?text=QR" alt="QR Code" width={100} height={100} />
                 </div>
             </div>
+            {/* Crop marks from image */}
+             <div className="absolute -top-4 -left-4 w-2 h-px bg-black"></div>
+            <div className="absolute -top-4 -left-4 w-px h-2 bg-black"></div>
+            <div className="absolute -top-4 -right-4 w-2 h-px bg-black"></div>
+            <div className="absolute -top-4 -right-4 w-px h-2 bg-black"></div>
+            <div className="absolute -bottom-4 -left-4 w-2 h-px bg-black"></div>
+            <div className="absolute -bottom-4 -left-4 w-px h-2 bg-black"></div>
+            <div className="absolute -bottom-4 -right-4 w-2 h-px bg-black"></div>
+            <div className="absolute -bottom-4 -right-4 w-px h-2 bg-black"></div>
           </div>
-            {/* Crop marks */}
-            <div className="absolute w-[calc(227px+1rem)] h-[calc(302px+1rem)] pointer-events-none">
-              {/* Top-left */}
-              <div className="absolute top-0 left-0 w-2 h-px bg-black"></div>
-              <div className="absolute top-0 left-0 w-px h-2 bg-black"></div>
-              {/* Top-right */}
-              <div className="absolute top-0 right-0 w-2 h-px bg-black"></div>
-              <div className="absolute top-0 right-0 w-px h-2 bg-black"></div>
-              {/* Bottom-left */}
-              <div className="absolute bottom-0 left-0 w-2 h-px bg-black"></div>
-              <div className="absolute bottom-0 left-0 w-px h-2 bg-black"></div>
-              {/* Bottom-right */}
-              <div className="absolute bottom-0 right-0 w-2 h-px bg-black"></div>
-              <div className="absolute bottom-0 right-0 w-px h-2 bg-black"></div>
-            </div>
         </div>
       </div>
     </div>
   );
 }
-
-    
