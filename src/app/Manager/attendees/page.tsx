@@ -114,36 +114,40 @@ export default function AttendeesPage() {
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-              <div className="space-y-2">
-                <label htmlFor="id-search" className="text-sm font-medium">ID</label>
-                <Input id="id-search" placeholder="輸入ID" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium">姓名</label>
-                <Input id="name" placeholder="輸入姓名" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium">Email</label>
-                <Input id="email" placeholder="輸入Email" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="phone" className="text-sm font-medium">手機</label>
-                <Input id="phone" placeholder="輸入手機號碼" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="status" className="text-sm font-medium">報到狀態</label>
-                <Select>
-                    <SelectTrigger id="status">
-                    <SelectValue placeholder="全部" />
-                    </SelectTrigger>
-                    <SelectContent>
-                    <SelectItem value="all">全部</SelectItem>
-                    <SelectItem value="checked-in">已報到</SelectItem>
-                    <SelectItem value="not-checked-in">未報到</SelectItem>
-                    </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                  <div className="space-y-2">
+                    <label htmlFor="id-search" className="text-sm font-medium">ID</label>
+                    <Input id="id-search" placeholder="輸入ID" />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium">姓名</label>
+                    <Input id="name" placeholder="輸入姓名" />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="status" className="text-sm font-medium">報到狀態</label>
+                    <Select>
+                        <SelectTrigger id="status">
+                        <SelectValue placeholder="全部" />
+                        </SelectTrigger>
+                        <SelectContent>
+                        <SelectItem value="all">全部</SelectItem>
+                        <SelectItem value="checked-in">已報到</SelectItem>
+                        <SelectItem value="not-checked-in">未報到</SelectItem>
+                        </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">Email</label>
+                    <Input id="email" placeholder="輸入Email" />
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="text-sm font-medium">手機</label>
+                    <Input id="phone" placeholder="輸入手機號碼" />
+                  </div>
+                </div>
             </div>
             <div className="flex justify-center">
                 <Button>
