@@ -2,7 +2,7 @@
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { Settings, Moon, Sun, User, LogOut, KeyRound } from "lucide-react";
+import { Settings, Moon, Sun, User, LogOut, KeyRound, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import {
@@ -56,6 +56,26 @@ export function ManagerHeader() {
         <span className="text-sm text-foreground/80 hidden md:inline-block">
           {formattedDate} {formattedTime}
         </span>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 h-8 w-8">
+              <BookOpen className="h-5 w-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+             <DropdownMenuItem>
+                <span>系統操作手冊</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <span>報到流程說明</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <span>識別證印製說明</span>
+              </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 h-8 w-8">
           <Settings className="h-5 w-5" />
         </Button>
