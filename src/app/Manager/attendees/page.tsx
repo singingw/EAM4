@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Plus, Search, CheckCircle, XCircle, Download, Upload, Mail, MessageSquare, MoreVertical, Settings, Eye } from "lucide-react";
+import { Plus, Search, CheckCircle, XCircle, Download, Upload, Mail, MessageSquare, MoreVertical, Settings, Eye, QrCode } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -111,11 +111,11 @@ export default function AttendeesPage() {
             </Button>
             <Button variant="outline" className="bg-purple-500 text-white hover:bg-purple-600">
                 <Mail className="mr-2 h-4 w-4" />
-                寄發Email通知
+                寄發行前通知
             </Button>
             <Button variant="outline" className="bg-teal-500 text-white hover:bg-teal-600">
-                <MessageSquare className="mr-2 h-4 w-4" />
-                寄發簡訊通知
+                <QrCode className="mr-2 h-4 w-4" />
+                匯出全部的 QRCode
             </Button>
             <Dialog>
               <DialogTrigger asChild>
