@@ -144,12 +144,12 @@ export default function RolesPage() {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            <DropdownMenuItem>編輯</DropdownMenuItem>
-                            <DropdownMenuItem>刪除</DropdownMenuItem>
-                            <DropdownMenuItem>檢視</DropdownMenuItem>
+                            <DropdownMenuItem className="text-green-600">編輯</DropdownMenuItem>
+                            <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
+                            <DropdownMenuItem className="text-blue-600">檢視</DropdownMenuItem>
                             <DropdownMenuItem>複製</DropdownMenuItem>
                             <DropdownMenuItem asChild>
-                              <Link href="/Manager/history">異動紀錄</Link>
+                              <Link href="/Manager/history" className="text-orange-600">異動紀錄</Link>
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -181,3 +181,5 @@ export default function RolesPage() {
     </div>
   );
 }
+
+    

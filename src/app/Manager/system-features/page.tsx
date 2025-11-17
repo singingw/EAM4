@@ -174,7 +174,7 @@ export default function SystemFeaturesPage() {
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
                             <DropdownMenuItem asChild>
-                                <Link href="/Manager/system-features/view">檢視</Link>
+                                <Link href="/Manager/system-features/view" className="text-blue-600">檢視</Link>
                             </DropdownMenuItem>
                              <DropdownMenuItem>複製</DropdownMenuItem>
                             <DropdownMenuItem asChild>
@@ -210,3 +210,5 @@ export default function SystemFeaturesPage() {
     </div>
   );
 }
+
+    

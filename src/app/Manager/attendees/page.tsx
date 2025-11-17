@@ -304,31 +304,33 @@ export default function AttendeesPage() {
                           </Button>
                         </div>
                       ) : (
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            <DropdownMenuItem asChild>
-                               <Link href="/Manager/attendees/edit">編輯</Link>
-                            </DropdownMenuItem>
-                             <DropdownMenuItem>刪除</DropdownMenuItem>
-                            <DialogTrigger asChild>
-                              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>行前通知</DropdownMenuItem>
-                            </DialogTrigger>
-                            <DialogTrigger asChild>
-                               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>QR Code</DropdownMenuItem>
-                            </DialogTrigger>
-                            <DropdownMenuItem asChild>
-                                <Link href="/Manager/attendees/view">檢視</Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
-                                <Link href="/Manager/history">異動紀錄</Link>
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                        <Dialog>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="icon">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              <DropdownMenuItem asChild>
+                                <Link href="/Manager/attendees/edit" className="text-green-600">編輯</Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
+                              <DialogTrigger asChild>
+                                <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-teal-600">行前通知</DropdownMenuItem>
+                              </DialogTrigger>
+                              <DialogTrigger asChild>
+                                <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-orange-500">QR Code</DropdownMenuItem>
+                              </DialogTrigger>
+                              <DropdownMenuItem asChild>
+                                  <Link href="/Manager/attendees/view" className="text-blue-600">檢視</Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem asChild>
+                                  <Link href="/Manager/history" className="text-orange-600">異動紀錄</Link>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </Dialog>
                       )}
                     </TableCell>
                   </TableRow>
@@ -357,3 +359,5 @@ export default function AttendeesPage() {
     </div>
   );
 }
+
+    

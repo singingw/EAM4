@@ -224,18 +224,18 @@ export default function UsersPage() {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
                             <DropdownMenuItem asChild>
-                                <Link href="/Manager/users/edit">編輯</Link>
+                                <Link href="/Manager/users/edit" className="text-green-600">編輯</Link>
                             </DropdownMenuItem>
-                            <DropdownMenuItem>刪除</DropdownMenuItem>
+                            <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
                             <DropdownMenuItem asChild>
-                                <Link href="/Manager/users/view">檢視</Link>
+                                <Link href="/Manager/users/view" className="text-blue-600">檢視</Link>
                             </DropdownMenuItem>
                              <DropdownMenuItem>複製</DropdownMenuItem>
                             <DropdownMenuItem asChild>
-                                <Link href="/Manager/history">異動紀錄</Link>
+                                <Link href="/Manager/history" className="text-orange-600">異動紀錄</Link>
                             </DropdownMenuItem>
-                             <DropdownMenuItem>登入/登出記錄</DropdownMenuItem>
-                             <DropdownMenuItem>觀察模式</DropdownMenuItem>
+                             <DropdownMenuItem className="text-blue-700">登入/登出記錄</DropdownMenuItem>
+                             <DropdownMenuItem className="text-cyan-600">觀察模式</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       )}
@@ -266,4 +266,5 @@ export default function UsersPage() {
     </div>
   );
 }
+
     
