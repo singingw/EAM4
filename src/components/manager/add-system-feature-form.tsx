@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, Save, RefreshCw, Plus, Trash2, GripVertical } from "lucide-react";
+import { Loader2, Save, RefreshCw, Plus, Trash2, GripVertical, AlertTriangle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +24,17 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export function AddSystemFeatureForm() {
   const [isPending, setIsPending] = useState(false);
@@ -66,6 +77,25 @@ export function AddSystemFeatureForm() {
       router.push('/Manager/system-features');
     }, 1000);
   };
+  
+  const addDefaultFunctions = () => {
+    const controller = form.getValues("controller");
+    const defaultFunctions = [
+      { name: "新增", controller, action: "Create" },
+      { name: "編輯", controller, action: "Edit" },
+      { name: "刪除", controller, action: "Delete" },
+      { name: "檢視", controller, action: "Detail" },
+      { name: "複製", controller, action: "Copy" },
+      { name: "異動紀錄", controller, action: "History" },
+    ];
+    
+    // To prevent duplicates, we can check existing function names
+    const existingNames = fields.map(f => f.name);
+    const functionsToAdd = defaultFunctions.filter(df => !existingNames.includes(df.name));
+    
+    functionsToAdd.forEach(func => append(func));
+  };
+
 
   return (
     <>
@@ -163,7 +193,7 @@ export function AddSystemFeatureForm() {
                         control={form.control}
                         name="parameters"
                         render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="md:col-span-1">
                             <Label>參數</Label>
                             <FormControl>
                             <Input
@@ -180,7 +210,30 @@ export function AddSystemFeatureForm() {
                 <div className="space-y-4">
                     <div className="flex items-center gap-2">
                         <Label>包含功能</Label>
-                        <Button type="button" variant="outline" className="bg-orange-400 text-white hover:bg-orange-500 h-8">新增預設功能</Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                             <Button type="button" variant="outline" className="bg-orange-400 text-white hover:bg-orange-500 h-8">新增預設功能</Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle className="flex flex-col items-center gap-4">
+                                <div className="w-12 h-12 rounded-full border-4 border-orange-200 flex items-center justify-center">
+                                  <AlertTriangle className="h-6 w-6 text-orange-400" />
+                                </div>
+                                提醒
+                              </AlertDialogTitle>
+                              <AlertDialogDescription className="text-center text-base py-2">
+                                <p>預設功能為：<br/>新增、編輯、刪除、檢視、複製、異動紀錄</p>
+                                <p>並且會預設帶入Controller資訊</p>
+                                <p className="mt-4">是否確認要新增預設功能？</p>
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter className="sm:justify-center">
+                              <AlertDialogAction onClick={addDefaultFunctions}>確認</AlertDialogAction>
+                              <AlertDialogCancel>再想想</AlertDialogCancel>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                         <Button type="button" variant="outline" className="bg-cyan-500 text-white hover:bg-cyan-600 h-8">自動偵測Action</Button>
                     </div>
 
