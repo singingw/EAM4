@@ -144,7 +144,9 @@ export default function MenuManagementPage() {
                     <TableCell className="space-x-1">
                       {showFunctions ? (
                         <>
-                          <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
+                            <Link href="/Manager/menu-management/edit">編輯</Link>
+                          </Button>
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Button asChild variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
                             <Link href="/Manager/menu-management/view">檢視</Link>
@@ -162,7 +164,9 @@ export default function MenuManagementPage() {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            <DropdownMenuItem className="text-green-600">編輯</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                               <Link href="/Manager/menu-management/edit" className="text-green-600">編輯</Link>
+                            </DropdownMenuItem>
                             <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
                             <DropdownMenuItem asChild>
                               <Link href="/Manager/menu-management/view" className="text-blue-600">檢視</Link>

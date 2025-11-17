@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -34,14 +34,16 @@ export function AddMenuForm() {
   const [isPending, setIsPending] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  const pathname = usePathname();
+  const isEditing = pathname.includes('/edit');
 
   const form = useForm<z.infer<typeof AddMenuSchema>>({
     resolver: zodResolver(AddMenuSchema),
     defaultValues: {
-      title: "",
-      status: "enabled",
-      sort: 1,
-      systemFeatures: [],
+      title: isEditing ? "系統管理" : "",
+      status: isEditing ? "enabled" : "enabled",
+      sort: isEditing ? 1 : 1,
+      systemFeatures: isEditing ? ["系統功能管理", "後台選單管理"] : [],
     },
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -52,8 +54,8 @@ export function AddMenuForm() {
     setTimeout(() => {
       console.log(values);
       toast({
-        title: "選單已新增",
-        description: `"${values.title}" 已被成功加入選單中。`,
+        title: isEditing ? "選單已更新" : "選單已新增",
+        description: `"${values.title}" 已被成功${isEditing ? '更新' : '加入選單中'}。`,
       });
       setIsPending(false);
       router.push('/Manager/menu-management');
@@ -72,7 +74,7 @@ export function AddMenuForm() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">新增選單</h1>
+        <h1 className="text-2xl font-bold">{isEditing ? "編輯選單" : "新增選單"}</h1>
         <div className="flex items-center gap-2">
             <Button variant="outline" asChild>
                 <Link href="/Manager/menu-management">
