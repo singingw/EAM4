@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -30,6 +31,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import Link from "next/link";
 
 const menuItems = [
     { id: "1", name: "系統管理", status: true },
@@ -142,7 +144,9 @@ export default function MenuManagementPage() {
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
                           <Button variant="secondary" size="sm">複製</Button>
-                          <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
+                            <Link href="/Manager/history">異動紀錄</Link>
+                          </Button>
                         </>
                       ) : (
                         <Button variant="ghost" size="icon">
