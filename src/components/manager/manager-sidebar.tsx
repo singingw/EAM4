@@ -16,9 +16,10 @@ import {
   Settings,
   Share2,
   MessageSquare,
-  LayoutGrid,
   ChevronUp,
-  CreditCard
+  CreditCard,
+  HelpCircle,
+  Headset
 } from "lucide-react";
 import {
   Collapsible,
@@ -61,6 +62,19 @@ const menuItems = [
       ],
     },
 ];
+
+const bottomMenuItems = [
+    {
+        label: "常見 Q & A",
+        icon: HelpCircle,
+        href: "/Manager/faq",
+    },
+    {
+        label: "客服服務",
+        icon: Headset,
+        href: "/Manager/support",
+    }
+]
 
 
 export function ManagerSidebar() {
@@ -106,6 +120,27 @@ export function ManagerSidebar() {
           ))}
         </SidebarMenu>
       </SidebarContent>
+       <div className="mt-auto p-4">
+          <SidebarMenu>
+             {bottomMenuItems.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                    <Link href={item.href} passHref legacyBehavior>
+                        <SidebarMenuButton
+                            asChild
+                            isActive={pathname === item.href}
+                            className="flex items-center gap-2 w-full justify-start text-base font-semibold text-sidebar-foreground/80 hover:text-sidebar-accent-foreground group"
+                            tooltip={item.label}
+                        >
+                            <a>
+                                <item.icon className="h-5 w-5" />
+                                <span>{item.label}</span>
+                            </a>
+                        </SidebarMenuButton>
+                    </Link>
+                </SidebarMenuItem>
+             ))}
+          </SidebarMenu>
+        </div>
     </div>
   );
 }
