@@ -75,7 +75,6 @@ export default function BadgeDesignPage() {
               <AccordionContent className="pb-2">
                  <div className="flex flex-col gap-1 pl-4">
                   <ComponentItem>來賓ID</ComponentItem>
-                  <ComponentItem>來賓專屬頁面</ComponentItem>
                 </div>
               </AccordionContent>
             </AccordionItem>
