@@ -100,7 +100,7 @@ export default function AttendeesPage() {
                 <Download className="mr-2 h-4 w-4" />
                 匯出
             </Button>
-            <Button variant="outline" className="bg-orange-500 text-white hover:bg-orange-600">
+            <Button variant="outline" className="bg-purple-500 text-white hover:bg-purple-600">
                 <Mail className="mr-2 h-4 w-4" />
                 寄發Email通知
             </Button>
