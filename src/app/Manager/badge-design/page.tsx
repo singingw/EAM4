@@ -34,6 +34,7 @@ import {
   AlignLeft,
   AlignCenter,
   AlignRight,
+  Trash2,
 } from "lucide-react";
 
 const ComponentItem = ({ children }: { children: React.ReactNode }) => (
@@ -44,7 +45,12 @@ const ComponentItem = ({ children }: { children: React.ReactNode }) => (
 
 const TextProperties = () => (
   <div className="bg-background border-t p-4 space-y-4">
-    <h3 className="text-sm font-semibold">屬性設定</h3>
+    <div className="flex justify-between items-center">
+        <h3 className="text-sm font-semibold">屬性設定</h3>
+        <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-destructive">
+            <Trash2 className="h-4 w-4" />
+        </Button>
+    </div>
     <div className="grid grid-cols-2 gap-4">
       <div className="space-y-2">
         <Label htmlFor="font-size" className="text-xs">字體大小</Label>
