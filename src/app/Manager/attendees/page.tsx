@@ -37,6 +37,7 @@ import { FieldSettingsDialog } from "@/components/manager/field-settings-dialog"
 import Image from "next/image";
 import { PreEventNotificationDialog } from "@/components/manager/pre-event-notification-dialog";
 import Link from "next/link";
+import { ImportDialog } from "@/components/manager/import-dialog";
 
 const attendees = [
   {
@@ -114,9 +115,14 @@ export default function AttendeesPage() {
             <Button variant="outline" className="bg-orange-400 text-white hover:bg-orange-500">
                 匯出全部的 QRCode
             </Button>
-            <Button>
-                匯入
-            </Button>
+            <Dialog>
+                <DialogTrigger asChild>
+                    <Button>
+                        匯入
+                    </Button>
+                </DialogTrigger>
+                <ImportDialog />
+            </Dialog>
             <Button variant="outline">
                 匯出
             </Button>
