@@ -84,9 +84,11 @@ export default function UsersPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">帳號管理</h1>
         <div className="flex items-center gap-2">
-            <Button className="bg-blue-500 text-white hover:bg-blue-600">
+            <Button asChild className="bg-blue-500 text-white hover:bg-blue-600">
+              <Link href="/Manager/users/add">
                 <Plus className="mr-2 h-4 w-4" />
                 新增
+              </Link>
             </Button>
             <Dialog>
               <DialogTrigger asChild>
