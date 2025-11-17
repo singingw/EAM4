@@ -84,4 +84,8 @@ export const AddMenuSchema = z.object({
     message: '標題為必填欄位',
   }),
   status: z.string(),
+  sort: z.number().min(1, { message: "排序為必填欄位"}),
+  systemFeatures: z.array(z.string()).refine(value => value.some(item => item), {
+    message: "至少需選擇一個系統功能",
+  }),
 });

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, Save, X } from "lucide-react";
+import { Loader2, Save, X, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +23,12 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Badge } from "@/components/ui/badge";
+
+const allFeatures = ["會員管理", "活動報名", "電子報發送", "數據分析儀表板", "線上支付 (串接中)", "權限控管", "抽獎", "點卷"];
+
 
 export function AddMenuForm() {
   const [isPending, setIsPending] = useState(false);
@@ -34,6 +40,8 @@ export function AddMenuForm() {
     defaultValues: {
       title: "",
       status: "enabled",
+      sort: 1,
+      systemFeatures: [],
     },
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -51,6 +59,15 @@ export function AddMenuForm() {
       router.push('/Manager/menu-management');
     }, 1000);
   };
+  
+  const toggleFeature = (feature: string) => {
+    const currentFeatures = form.getValues("systemFeatures");
+    const newFeatures = currentFeatures.includes(feature)
+      ? currentFeatures.filter((f) => f !== feature)
+      : [...currentFeatures, feature];
+    form.setValue("systemFeatures", newFeatures, { shouldValidate: true });
+  };
+
 
   return (
     <>
@@ -92,6 +109,25 @@ export function AddMenuForm() {
                         </FormItem>
                         )}
                     />
+                     <FormField
+                        control={form.control}
+                        name="sort"
+                        render={({ field }) => (
+                        <FormItem>
+                            <Label>排序</Label>
+                            <FormControl>
+                            <Input
+                                {...field}
+                                type="number"
+                                disabled={isPending}
+                                placeholder="請輸入排序"
+                                onChange={e => field.onChange(parseInt(e.target.value, 10))}
+                            />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
                     <FormField
                       control={form.control}
                       name="status"
@@ -110,6 +146,56 @@ export function AddMenuForm() {
                             </SelectContent>
                           </Select>
                           <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="systemFeatures"
+                      render={({ field }) => (
+                        <FormItem>
+                            <Label>系統功能選單</Label>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <FormControl>
+                                    <div className="flex min-h-10 w-full items-center gap-1 flex-wrap rounded-md border border-input bg-transparent px-3 py-2 text-sm">
+                                        {field.value.length > 0 ? (
+                                            field.value.map(feature => (
+                                                <Badge key={feature} variant="secondary" className="font-normal bg-gray-200 text-gray-800">
+                                                    {feature}
+                                                    <button onClick={(e) => { e.stopPropagation(); toggleFeature(feature); }} className="ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                                        <X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
+                                                    </button>
+                                                </Badge>
+                                            ))
+                                        ) : (
+                                            <span className="text-muted-foreground">請點擊以選擇功能</span>
+                                        )}
+                                    </div>
+                                    </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+                                    <Command>
+                                        <CommandInput placeholder="搜尋功能..." />
+                                        <CommandList>
+                                            <CommandEmpty>找不到功能</CommandEmpty>
+                                            <CommandGroup>
+                                                {allFeatures.map(feature => (
+                                                    <CommandItem
+                                                        key={feature}
+                                                        onSelect={() => toggleFeature(feature)}
+                                                        className="flex items-center justify-between"
+                                                    >
+                                                        <span>{feature}</span>
+                                                        {field.value.includes(feature) && <Check className="h-4 w-4" />}
+                                                    </CommandItem>
+                                                ))}
+                                            </CommandGroup>
+                                        </CommandList>
+                                    </Command>
+                                </PopoverContent>
+                            </Popover>
+                            <FormMessage />
                         </FormItem>
                       )}
                     />
