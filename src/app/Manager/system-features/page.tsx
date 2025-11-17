@@ -34,14 +34,14 @@ import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
 
 const features = [
-    { id: "1", name: "會員管理", status: true },
-    { id: "2", name: "活動報名", status: true },
-    { id: "3", name: "電子報發送", status: true },
-    { id: "4", name: "數據分析儀表板", status: false },
-    { id: "5", name: "線上支付 (串接中)", status: false },
-    { id: "6", name: "權限控管", status: true },
-    { id: "7", name: "抽獎", status: false },
-    { id: "8", name: "點卷", status: false },
+    { id: "1", name: "系統功能管理", status: true },
+    { id: "2", name: "後台選單管理", status: true },
+    { id: "3", name: "後台帳號管理", status: true },
+    { id: "4", name: "角色管理", status: true },
+    { id: "5", name: "識別證設計", status: true },
+    { id: "6", name: "識別證模板", status: true },
+    { id: "7", name: "參加者名單", status: true },
+    { id: "8", name: "QR Code 下載紀錄", status: true },
 ];
 
 export default function SystemFeaturesPage() {
