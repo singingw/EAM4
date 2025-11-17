@@ -163,7 +163,7 @@ export function AddSystemFeatureForm() {
                         control={form.control}
                         name="parameters"
                         render={({ field }) => (
-                        <FormItem className="md:col-span-2">
+                        <FormItem>
                             <Label>參數</Label>
                             <FormControl>
                             <Input
