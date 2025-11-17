@@ -2,8 +2,6 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -43,51 +41,19 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import update from 'immutability-helper';
-
-
-const ItemTypes = {
-  ELEMENT: 'element',
-}
 
 interface Element {
   id: string;
   type: 'text' | 'qrcode' | 'image' | 'field';
   content: string;
-  top: number;
-  left: number;
   style: React.CSSProperties;
+  zIndex: number;
 }
 
 const initialElements: Element[] = [
-    { id: 'name', type: 'text', content: '{{name}}', top: 60, left: 50, style: { fontSize: '24px', fontWeight: 'bold', textAlign: 'center', width: '100%', position: 'absolute' } },
-    { id: 'qr-code', type: 'qrcode', content: 'https://placehold.co/100x100/png?text=QR', top: 120, left: 63, style: { position: 'absolute' } },
+    { id: 'name', type: 'text', content: '{{name}}', style: { top: '60px', left: '50px', fontSize: '24px', fontWeight: 'bold', textAlign: 'center', width: '100%' }, zIndex: 1 },
+    { id: 'qr-code', type: 'qrcode', content: 'https://placehold.co/100x100/png?text=QR', style: { top: '120px', left: '63px', width: '100px', height: '100px' }, zIndex: 2 },
 ];
-
-
-const DraggableElement = ({ id, left, top, children, onSelect, isSelected }: { id: string, left: number, top: number, children: React.ReactNode, onSelect: () => void, isSelected: boolean }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: ItemTypes.ELEMENT,
-    item: { id, left, top },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  }), [id, left, top]);
-
-  drag(ref);
-
-  return (
-    <div
-      ref={ref}
-      style={{ left, top, opacity: isDragging ? 0.5 : 1 }}
-      className={cn('p-1 cursor-move absolute', isSelected ? 'ring-2 ring-blue-500' : '')}
-      onClick={(e) => { e.stopPropagation(); onSelect(); }}
-    >
-      {children}
-    </div>
-  );
-};
 
 
 const ComponentItem = ({ children, onClick }: { children: React.ReactNode; onClick: () => void }) => (
@@ -96,7 +62,9 @@ const ComponentItem = ({ children, onClick }: { children: React.ReactNode; onCli
   </div>
 );
 
-const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { element: Element; onUpdate: (id: string, style: React.CSSProperties) => void; onRemove: (id: string) => void; onLayerChange: (id: string, direction: 'up' | 'down') => void }) => {
+const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { element: Element | null; onUpdate: (id: string, style: React.CSSProperties) => void; onRemove: (id: string) => void; onLayerChange: (id: string, direction: 'up' | 'down') => void }) => {
+  if (!element) return null;
+
   const [style, setStyle] = useState(element.style);
 
   const handleStyleChange = (prop: keyof React.CSSProperties, value: string | number) => {
@@ -108,10 +76,8 @@ const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { eleme
   const handleTextAlign = (alignment: 'left' | 'center' | 'right') => {
     handleStyleChange('textAlign', alignment);
     handleStyleChange('width', '100%');
-    handleStyleChange('left', 0);
+    handleStyleChange('left', '0px');
   }
-
-  if (!element) return null;
 
   return (
       <div className="bg-background border-t p-4 space-y-4">
@@ -121,6 +87,17 @@ const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { eleme
                   <Trash2 className="h-4 w-4" />
               </Button>
           </div>
+          
+          <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="pos-x" className="text-xs">X 座標</Label>
+                <Input id="pos-x" type="number" value={parseInt(style.left as string, 10) || 0} onChange={(e) => handleStyleChange('left', `${e.target.value}px`)} className="h-8" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="pos-y" className="text-xs">Y 座標</Label>
+                <Input id="pos-y" type="number" value={parseInt(style.top as string, 10) || 0} onChange={(e) => handleStyleChange('top', `${e.target.value}px`)} className="h-8" />
+              </div>
+            </div>
 
           {element.type === 'text' && (
               <>
@@ -167,13 +144,15 @@ const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { eleme
           )}
 
           {(element.type === 'qrcode' || element.type === 'image') && (
-              <div className="space-y-2">
-                  <Label htmlFor="element-size" className="text-xs">大小 (寬)</Label>
-                  <Input id="element-size" type="number" value={parseInt(style.width as string, 10) || 100} onChange={(e) => {
-                      const newSize = `${e.target.value}px`;
-                      handleStyleChange('width', newSize);
-                      handleStyleChange('height', newSize);
-                  }} className="h-8" />
+              <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="element-width" className="text-xs">寬</Label>
+                    <Input id="element-width" type="number" value={parseInt(style.width as string, 10) || 100} onChange={(e) => handleStyleChange('width', `${e.target.value}px`)} className="h-8" />
+                  </div>
+                   <div className="space-y-2">
+                    <Label htmlFor="element-height" className="text-xs">高</Label>
+                    <Input id="element-height" type="number" value={parseInt(style.height as string, 10) || 100} onChange={(e) => handleStyleChange('height', `${e.target.value}px`)} className="h-8" />
+                  </div>
               </div>
           )}
           
@@ -199,27 +178,6 @@ export default function BadgeDesignPage() {
   const [elements, setElements] = useState<Element[]>(initialElements);
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
 
-  const moveElement = useCallback((id: string, left: number, top: number) => {
-    setElements((prevElements) =>
-      prevElements.map(el =>
-        el.id === id ? { ...el, left, top } : el
-      )
-    );
-  }, []);
-
-  const [, drop] = useDrop(() => ({
-    accept: ItemTypes.ELEMENT,
-    drop(item: { id: string; left: number; top: number }, monitor) {
-      const delta = monitor.getDifferenceFromInitialOffset();
-      if (!delta) return;
-      const left = Math.round(item.left + delta.x);
-      const top = Math.round(item.top + delta.y);
-      moveElement(item.id, left, top);
-      return undefined;
-    },
-  }), [moveElement]);
-
-
   const handleSelectElement = (elementId: string) => {
     if (isEditing) {
       setSelectedElementId(elementId);
@@ -228,11 +186,15 @@ export default function BadgeDesignPage() {
 
   const addElement = (type: 'text' | 'qrcode' | 'image' | 'field', content: string) => {
     const newId = `${type}-${Date.now()}`;
+    const newZIndex = elements.length > 0 ? Math.max(...elements.map(e => e.zIndex)) + 1 : 1;
     let newElement: Element;
+
+    const baseStyle = { top: '10px', left: '10px' };
+
     if (type === 'qrcode' || type === 'image') {
-        newElement = { id: newId, type, content, top: 10, left: 10, style: { position: 'absolute', width: '100px', height: '100px' } };
+        newElement = { id: newId, type, content, style: { ...baseStyle, width: '100px', height: '100px' }, zIndex: newZIndex };
     } else {
-        newElement = { id: newId, type, content, top: 10, left: 10, style: { fontSize: '16px', position: 'absolute' } };
+        newElement = { id: newId, type, content, style: { ...baseStyle, fontSize: '16px' }, zIndex: newZIndex };
     }
     setElements(prev => [...prev, newElement]);
     setSelectedElementId(newId);
@@ -248,36 +210,49 @@ export default function BadgeDesignPage() {
   }
 
   const handleLayerChange = (id: string, direction: 'up' | 'down') => {
-    const currentIndex = elements.findIndex(el => el.id === id);
-    if (currentIndex === -1) return;
-
-    const newIndex = direction === 'up' 
-      ? Math.min(elements.length - 1, currentIndex + 1)
-      : Math.max(0, currentIndex - 1);
-
-    if (newIndex === currentIndex) return;
-
     setElements(prevElements => {
-      return update(prevElements, {
-        $splice: [
-          [currentIndex, 1],
-          [newIndex, 0, prevElements[currentIndex]],
-        ],
-      });
+      const newElements = [...prevElements];
+      const currentIndex = newElements.findIndex(el => el.id === id);
+      if (currentIndex === -1) return newElements;
+
+      const currentElement = newElements[currentIndex];
+      
+      if (direction === 'up') {
+        const nextElement = newElements.find(el => el.zIndex === currentElement.zIndex + 1);
+        if (nextElement) {
+          newElements[currentIndex] = { ...currentElement, zIndex: currentElement.zIndex + 1 };
+          const nextIndex = newElements.findIndex(el => el.id === nextElement.id);
+          newElements[nextIndex] = { ...nextElement, zIndex: nextElement.zIndex - 1 };
+        }
+      } else { // down
+        const prevElement = newElements.find(el => el.zIndex === currentElement.zIndex - 1);
+        if (prevElement) {
+          newElements[currentIndex] = { ...currentElement, zIndex: currentElement.zIndex - 1 };
+          const prevIndex = newElements.findIndex(el => el.id === prevElement.id);
+          newElements[prevIndex] = { ...prevElement, zIndex: prevElement.zIndex + 1 };
+        }
+      }
+      return newElements.sort((a,b) => a.zIndex - b.zIndex);
     });
   };
 
   const selectedElement = elements.find(el => el.id === selectedElementId);
 
   const renderElement = (element: Element) => {
-      const { id, type, content, left, top, style } = element;
+      const { id, type, content, style, zIndex } = element;
       const isSelected = selectedElementId === id;
+
+      const combinedStyle: React.CSSProperties = {
+        position: 'absolute',
+        ...style,
+        zIndex,
+      };
 
       const elementContent = () => {
           switch (type) {
               case 'text':
               case 'field':
-                  return <p style={style} className="whitespace-nowrap">{content}</p>;
+                  return <p className="whitespace-nowrap">{content}</p>;
               case 'qrcode':
                   return <Image src={content} alt="QR Code" width={parseInt(style.width as string, 10) || 100} height={parseInt(style.height as string, 10) || 100} style={{width: style.width, height: style.height}}/>;
               case 'image':
@@ -287,26 +262,20 @@ export default function BadgeDesignPage() {
           }
       };
 
-      if (!isEditing) {
-         return (
-            <div style={{ position: 'absolute', left, top, ...style, zIndex: elements.findIndex(e => e.id === id) }}>
-                {elementContent()}
-            </div>
-         );
-      }
-
       return (
-          <DraggableElement key={id} id={id} left={left} top={top} onSelect={() => handleSelectElement(id)} isSelected={isSelected}>
-            <div style={{...style, zIndex: elements.findIndex(e => e.id === id)}}>
+          <div
+            key={id}
+            style={combinedStyle}
+            onClick={(e) => { e.stopPropagation(); handleSelectElement(id); }}
+            className={cn('p-1', isEditing ? 'cursor-pointer' : '', isSelected ? 'ring-2 ring-blue-500' : '')}
+          >
               {elementContent()}
-            </div>
-          </DraggableElement>
+          </div>
       );
   };
 
 
   return (
-    <DndProvider backend={HTML5Backend}>
     <div className="flex h-full w-full bg-muted/30">
       {isEditing && (
         <div className="w-60 bg-background border-r flex flex-col">
@@ -376,7 +345,7 @@ export default function BadgeDesignPage() {
               </AccordionItem>
             </Accordion>
           </div>
-          {selectedElement && isEditing && <PropertiesPanel element={selectedElement} onUpdate={updateElementStyle} onRemove={removeElement} onLayerChange={handleLayerChange} />}
+          <PropertiesPanel element={selectedElement} onUpdate={updateElementStyle} onRemove={removeElement} onLayerChange={handleLayerChange} />
         </div>
       )}
 
@@ -448,7 +417,6 @@ export default function BadgeDesignPage() {
         </div>
         <div className="flex-1 flex items-center justify-center p-8 bg-muted/60 relative overflow-hidden">
           <div
-            ref={drop}
             className="relative bg-white shadow-lg"
             style={{ width: "227px", height: "302px" }}
             onClick={() => isEditing && setSelectedElementId(null)}
@@ -479,8 +447,5 @@ export default function BadgeDesignPage() {
         </div>
       </div>
     </div>
-    </DndProvider>
   );
 }
-
-    
