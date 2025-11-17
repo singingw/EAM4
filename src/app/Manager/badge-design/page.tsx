@@ -123,8 +123,16 @@ export default function BadgeDesignPage() {
                         </SelectTrigger>
                         <SelectContent>
                         <SelectItem value="60x80">60mm * 80mm</SelectItem>
-                        <SelectItem value="70x100">70mm * 100mm</SelectItem>
-                        <SelectItem value="80x110">80mm * 110mm</SelectItem>
+                        <SelectItem value="80x60">80mm * 60mm</SelectItem>
+                        <SelectItem value="80x90">80mm * 90mm</SelectItem>
+                        <SelectItem value="90x80">90mm * 80mm</SelectItem>
+                        <SelectItem value="90x120">90mm * 120mm</SelectItem>
+                        <SelectItem value="90x130">90mm * 130mm</SelectItem>
+                        <SelectItem value="78x130">78mm * 130mm</SelectItem>
+                        <SelectItem value="a4-portrait">A4(直向)</SelectItem>
+                        <SelectItem value="a4-landscape">A4(橫向)</SelectItem>
+                        <SelectItem value="a5-portrait">A5(直向)</SelectItem>
+                        <SelectItem value="a5-landscape">A5(橫向)</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
