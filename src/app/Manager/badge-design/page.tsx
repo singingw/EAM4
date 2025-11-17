@@ -1,7 +1,8 @@
 
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -201,6 +202,7 @@ export default function BadgeDesignPage() {
   const [isEditing, setIsEditing] = useState(true);
   const [elements, setElements] = useState<Element[]>(initialElements);
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSelectElement = (elementId: string) => {
     if (isEditing) {
@@ -263,7 +265,9 @@ export default function BadgeDesignPage() {
   const handlePreviewToggle = () => {
     const newIsEditing = !isEditing;
     setIsEditing(newIsEditing);
-    setSelectedElementId(null);
+    if (newIsEditing) {
+      setSelectedElementId(null);
+    }
     
     if (newIsEditing) {
       // Back to Edit mode
@@ -286,12 +290,19 @@ export default function BadgeDesignPage() {
       );
     }
   };
+  
+  const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    // In a real app, you'd save the `elements` state here.
+    console.log("Saving badge design...", elements);
+    router.push('/Manager/badge-templates');
+  };
 
   const selectedElement = elements.find(el => el.id === selectedElementId);
 
   const renderElement = (element: Element) => {
       const { id, type, content, style, zIndex } = element;
-      const isSelected = selectedElementId === id;
+      const isSelected = selectedElementId === id && isEditing;
 
       const combinedStyle: React.CSSProperties = {
         position: 'absolute',
@@ -318,7 +329,7 @@ export default function BadgeDesignPage() {
             key={id}
             style={combinedStyle}
             onClick={(e) => { e.stopPropagation(); handleSelectElement(id); }}
-            className={cn('p-1', isEditing ? 'cursor-pointer' : '', isSelected ? 'ring-2 ring-blue-500' : '')}
+            className={cn('p-1', isEditing ? 'cursor-move' : '', isSelected ? 'ring-2 ring-blue-500' : '')}
           >
               {elementContent()}
           </div>
@@ -442,10 +453,7 @@ export default function BadgeDesignPage() {
                 </Button>
                 <Button 
                   className="bg-green-500 text-white hover:bg-green-600"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // Save logic here
-                  }}
+                  onClick={handleSave}
                 >
                     <Save className="mr-2 h-4 w-4" />
                     儲存
@@ -458,7 +466,7 @@ export default function BadgeDesignPage() {
             style={{ width: "227px", height: "302px" }}
             onClick={() => isEditing && setSelectedElementId(null)}
           >
-            {showCenterLine && (
+            {showCenterLine && isEditing && (
               <>
                 <div className="absolute top-0 left-1/2 w-px h-full bg-gray-300 border-l border-dashed z-0"></div>
                 <div className="absolute top-1/2 left-0 h-px w-full bg-gray-300 border-t border-dashed z-0"></div>
@@ -468,7 +476,7 @@ export default function BadgeDesignPage() {
                 {elements.map((el) => renderElement(el))}
             </div>
           </div>
-          {showCenterLine && (
+          {showCenterLine && isEditing && (
             <div className="absolute" style={{ width: "259px", height: "334px", pointerEvents: 'none' }}>
               {/* Crop marks */}
               <div className="absolute -top-2 -left-2 w-2 h-px bg-black"></div>

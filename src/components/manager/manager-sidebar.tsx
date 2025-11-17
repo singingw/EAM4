@@ -17,7 +17,8 @@ import {
   Share2,
   MessageSquare,
   LayoutGrid,
-  ChevronUp
+  ChevronUp,
+  CreditCard
 } from "lucide-react";
 import {
   Collapsible,
@@ -43,11 +44,12 @@ const menuItems = [
         { label: "角色管理", href: "/Manager/roles" },
       ],
     },
-    {
+     {
       label: "識別證",
-      icon: LayoutGrid,
+      icon: CreditCard,
       subItems: [
         { label: "識別證設計", href: "/Manager/badge-design" },
+        { label: "識別證模板", href: "/Manager/badge-templates" },
       ],
     },
     {
@@ -88,10 +90,11 @@ export function ManagerSidebar() {
                       <SidebarMenuSubItem key={subItem.label}>
                         <Link href={subItem.href} passHref legacyBehavior>
                           <SidebarMenuSubButton 
+                            asChild
                             isActive={pathname === subItem.href}
                             className="text-sidebar-foreground/80 hover:text-sidebar-accent-foreground"
                           >
-                            {subItem.label}
+                            <a>{subItem.label}</a>
                           </SidebarMenuSubButton>
                         </Link>
                       </SidebarMenuSubItem>
