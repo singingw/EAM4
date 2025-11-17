@@ -38,6 +38,8 @@ const menuItems = [
     { id: "2", name: "權限管理", status: true },
     { id: "3", name: "識別證", status: true },
     { id: "4", name: "名單管理", status: true },
+    { id: "5", name: "抽獎", status: false },
+    { id: "6", name: "點卷", status: false },
 ];
 
 export default function MenuManagementPage() {
@@ -157,7 +159,7 @@ export default function MenuManagementPage() {
           </div>
         </CardContent>
          <div className="p-4 border-t flex justify-between items-center">
-            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 4 項結果，共 4 項</p>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 6 項結果，共 6 項</p>
             <Pagination>
                 <PaginationContent>
                 <PaginationItem>
