@@ -40,6 +40,8 @@ const features = [
     { id: "4", name: "數據分析儀表板", status: false },
     { id: "5", name: "線上支付 (串接中)", status: false },
     { id: "6", name: "權限控管", status: true },
+    { id: "7", name: "抽獎", status: false },
+    { id: "8", name: "點卷", status: false },
 ];
 
 export default function SystemFeaturesPage() {
@@ -157,7 +159,7 @@ export default function SystemFeaturesPage() {
           </div>
         </CardContent>
          <div className="p-4 border-t flex justify-between items-center">
-            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 6 項結果，共 6 項</p>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 8 項結果，共 8 項</p>
             <Pagination>
                 <PaginationContent>
                 <PaginationItem>
