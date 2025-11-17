@@ -62,3 +62,15 @@ export const AddAttendeeSchema = z.object({
     message: '手機為必填欄位',
   }),
 });
+
+export const EditAttendeeSchema = z.object({
+  name: z.string().min(1, {
+    message: '姓名為必填欄位',
+  }),
+  email: z.string().email({
+    message: '請輸入有效的電子郵件地址。',
+  }),
+  phone: z.string().min(1, {
+    message: '手機為必填欄位',
+  }),
+});

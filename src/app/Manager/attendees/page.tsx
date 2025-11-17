@@ -261,7 +261,9 @@ export default function AttendeesPage() {
                     <TableCell className="space-x-1">
                       {showFunctions ? (
                         <div className="flex flex-wrap gap-1">
-                          <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
+                            <Link href="/Manager/attendees/edit">編輯</Link>
+                          </Button>
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Dialog>
                             <DialogTrigger asChild>
