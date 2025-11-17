@@ -35,7 +35,6 @@ import {
   Info,
   Eye,
   EyeOff,
-  Edit,
   Save,
   Bold,
   Italic,
@@ -46,13 +45,14 @@ import {
   Trash2,
   ArrowUp,
   ArrowDown,
+  Shapes,
 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface Element {
   id: string;
-  type: 'text' | 'qrcode' | 'image' | 'field';
+  type: 'text' | 'qrcode' | 'image' | 'field' | 'shape';
   content: string;
   originalContent?: string;
   style: React.CSSProperties;
@@ -152,7 +152,7 @@ const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { eleme
               </>
           )}
 
-          {(element.type === 'qrcode' || element.type === 'image') && (
+          {(element.type === 'qrcode' || element.type === 'image' || element.type === 'shape') && (
               <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="element-width" className="text-xs">寬</Label>
@@ -163,6 +163,13 @@ const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { eleme
                     <Input id="element-height" type="number" value={parseInt(style.height as string, 10) || 100} onChange={(e) => handleStyleChange('height', `${e.target.value}px`)} className="h-8" />
                   </div>
               </div>
+          )}
+
+          {element.type === 'shape' && (
+            <div className="space-y-2">
+              <Label htmlFor="shape-color" className="text-xs">顏色</Label>
+              <Input id="shape-color" type="color" value={(style.backgroundColor as string) || '#000000'} onChange={(e) => handleStyleChange('backgroundColor', e.target.value)} className="h-8 p-1" />
+            </div>
           )}
           
           <div className="space-y-2">
@@ -210,17 +217,29 @@ export default function BadgeDesignPage() {
     }
   };
 
-  const addElement = (type: 'text' | 'qrcode' | 'image' | 'field', content: string) => {
+  const addElement = (type: Element['type'], content: string) => {
     const newId = `${type}-${Date.now()}`;
     const newZIndex = elements.length > 0 ? Math.max(...elements.map(e => e.zIndex)) + 1 : 1;
     let newElement: Element;
 
-    const baseStyle = { top: '10px', left: '10px' };
+    const baseStyle: React.CSSProperties = { top: '10px', left: '10px' };
 
-    if (type === 'qrcode' || type === 'image') {
+    switch (type) {
+      case 'qrcode':
+      case 'image':
         newElement = { id: newId, type, content, style: { ...baseStyle, width: '100px', height: '100px' }, zIndex: newZIndex };
-    } else {
+        break;
+      case 'shape':
+        newElement = { id: newId, type, content, style: { ...baseStyle, width: '50px', height: '50px', backgroundColor: '#000000' }, zIndex: newZIndex };
+        if (content === 'circle') {
+          newElement.style.borderRadius = '50%';
+        }
+        break;
+      case 'text':
+      case 'field':
+      default:
         newElement = { id: newId, type, content, originalContent: content, style: { ...baseStyle, fontSize: '16px' }, zIndex: newZIndex };
+        break;
     }
     setElements(prev => [...prev, newElement]);
     setSelectedElementId(newId);
@@ -265,11 +284,9 @@ export default function BadgeDesignPage() {
   const handlePreviewToggle = () => {
     const newIsEditing = !isEditing;
     setIsEditing(newIsEditing);
-    if (newIsEditing) {
-      setSelectedElementId(null);
-    }
     
     if (newIsEditing) {
+      setSelectedElementId(null);
       // Back to Edit mode
        setElements(prev =>
         prev.map(el => ({
@@ -281,11 +298,10 @@ export default function BadgeDesignPage() {
       // Enter Preview mode
       setElements(prev =>
         prev.map(el => {
-          const newEl = { ...el };
-          if (newEl.content === '{{name}}') {
-            newEl.content = 'Singing';
+          if (el.content === '{{name}}') {
+            return { ...el, content: 'Singing' };
           }
-          return newEl;
+          return el;
         })
       );
     }
@@ -316,9 +332,11 @@ export default function BadgeDesignPage() {
               case 'field':
                   return <p className="whitespace-nowrap">{content}</p>;
               case 'qrcode':
-                  return <Image src={content} alt="QR Code" width={parseInt(style.width as string, 10) || 100} height={parseInt(style.height as string, 10) || 100} style={{width: style.width, height: style.height}}/>;
+                  return <Image src={content} alt="QR Code" width={parseInt(style.width as string, 10) || 100} height={parseInt(style.height as string, 10) || 100} style={{width: '100%', height: '100%'}}/>;
               case 'image':
-                   return <Image src={content} alt="Image" width={parseInt(style.width as string, 10) || 100} height={parseInt(style.height as string, 10) || 100} style={{width: style.width, height: style.height}} />;
+                   return <Image src={content} alt="Image" width={parseInt(style.width as string, 10) || 100} height={parseInt(style.height as string, 10) || 100} style={{width: '100%', height: '100%'}} />;
+              case 'shape':
+                  return <div style={{width: '100%', height: '100%', backgroundColor: style.backgroundColor, borderRadius: style.borderRadius}} />;
               default:
                   return null;
           }
@@ -329,7 +347,7 @@ export default function BadgeDesignPage() {
             key={id}
             style={combinedStyle}
             onClick={(e) => { e.stopPropagation(); handleSelectElement(id); }}
-            className={cn('p-1', isEditing ? 'cursor-move' : '', isSelected ? 'ring-2 ring-blue-500' : '')}
+            className={cn('p-1', isSelected ? 'ring-2 ring-blue-500' : '')}
           >
               {elementContent()}
           </div>
@@ -348,7 +366,7 @@ export default function BadgeDesignPage() {
             </h2>
           </div>
           <div className="flex-1 overflow-y-auto p-2">
-            <Accordion type="multiple" defaultValue={["item-1", "item-2", "item-3", "item-4"]} className="w-full">
+            <Accordion type="multiple" defaultValue={["item-1", "item-2", "item-3", "item-4", "item-5"]} className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger className="text-sm font-medium py-2">
                   <div className="flex items-center gap-2">
@@ -404,6 +422,20 @@ export default function BadgeDesignPage() {
                   </div>
                 </AccordionContent>
               </AccordionItem>
+              <AccordionItem value="item-5">
+                <AccordionTrigger className="text-sm font-medium py-2">
+                  <div className="flex items-center gap-2">
+                    <Shapes className="h-4 w-4" />
+                    <span>圖形</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pb-2">
+                  <div className="flex flex-col gap-1 pl-4">
+                    <ComponentItem onClick={() => addElement('shape', 'rectangle')}>矩形</ComponentItem>
+                    <ComponentItem onClick={() => addElement('shape', 'circle')}>圓形</ComponentItem>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
             </Accordion>
           </div>
           {isEditing && selectedElement && (
@@ -412,7 +444,7 @@ export default function BadgeDesignPage() {
         </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col" onClick={() => isEditing && setSelectedElementId(null)}>
+      <div className="flex-1 flex flex-col">
         <div className="p-4 border-b bg-background flex items-center justify-between gap-4 h-[65px]">
             <div className="flex items-center gap-4">
                 <div className="space-y-1">
@@ -460,11 +492,10 @@ export default function BadgeDesignPage() {
                 </Button>
             </div>
         </div>
-        <div className="flex-1 flex items-center justify-center p-8 bg-muted/60 relative overflow-hidden">
+        <div className="flex-1 flex items-center justify-center p-8 bg-muted/60 relative overflow-hidden" onClick={() => isEditing && setSelectedElementId(null)}>
           <div
             className="relative bg-white shadow-lg"
             style={{ width: "227px", height: "302px" }}
-            onClick={() => isEditing && setSelectedElementId(null)}
           >
             {showCenterLine && isEditing && (
               <>
