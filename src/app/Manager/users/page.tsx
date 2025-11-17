@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Plus, Search, CheckCircle, XCircle, Download, Upload, MoreVertical } from "lucide-react";
+import { Plus, Search, CheckCircle, XCircle, Download, Upload, MoreVertical, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -40,6 +40,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { ImportDialog } from "@/components/manager/import-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const users = [
   {
@@ -224,7 +235,28 @@ export default function UsersPage() {
                           <Button asChild variant="outline" size="sm" className="bg-blue-600 text-white hover:bg-blue-700 hover:text-white">
                             <Link href="/Manager/users/login-history">登入/登出記錄</Link>
                           </Button>
-                          <Button variant="outline" size="sm" className="bg-cyan-500 text-white hover:bg-cyan-600 hover:text-white">觀察模式</Button>
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button variant="outline" size="sm" className="bg-cyan-500 text-white hover:bg-cyan-600 hover:text-white">觀察模式</Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle className="flex flex-col items-center gap-4 text-xl">
+                                   <div className="w-16 h-16 rounded-full border-4 border-orange-200 flex items-center justify-center">
+                                    <AlertTriangle className="h-8 w-8 text-orange-400" />
+                                  </div>
+                                  提醒
+                                </AlertDialogTitle>
+                                <AlertDialogDescription className="text-center text-base py-2">
+                                  您確定要開始觀察 {user.name} 嗎？
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter className="sm:justify-center">
+                                <AlertDialogAction>確認</AlertDialogAction>
+                                <AlertDialogCancel>再想想</AlertDialogCancel>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         </>
                       ) : (
                         <DropdownMenu>
@@ -248,7 +280,28 @@ export default function UsersPage() {
                              <DropdownMenuItem asChild>
                                <Link href="/Manager/users/login-history" className="text-blue-700">登入/登出記錄</Link>
                              </DropdownMenuItem>
-                             <DropdownMenuItem className="text-cyan-600">觀察模式</DropdownMenuItem>
+                             <AlertDialog>
+                               <AlertDialogTrigger asChild>
+                                <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-cyan-600">觀察模式</DropdownMenuItem>
+                               </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle className="flex flex-col items-center gap-4 text-xl">
+                                      <div className="w-16 h-16 rounded-full border-4 border-orange-200 flex items-center justify-center">
+                                        <AlertTriangle className="h-8 w-8 text-orange-400" />
+                                      </div>
+                                      提醒
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription className="text-center text-base py-2">
+                                      您確定要開始觀察 {user.name} 嗎？
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter className="sm:justify-center">
+                                    <AlertDialogAction>確認</AlertDialogAction>
+                                    <AlertDialogCancel>再想想</AlertDialogCancel>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       )}
@@ -279,6 +332,8 @@ export default function UsersPage() {
     </div>
   );
 }
+
+    
 
     
 
