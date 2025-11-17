@@ -284,7 +284,9 @@ export default function AttendeesPage() {
                               </div>
                             </DialogContent>
                           </Dialog>
-                          <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
+                           <Button asChild variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
+                             <Link href="/Manager/attendees/view">檢視</Link>
+                          </Button>
                           <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
                         </div>
                       ) : (
