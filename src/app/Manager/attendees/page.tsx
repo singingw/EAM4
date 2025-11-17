@@ -38,6 +38,12 @@ import Image from "next/image";
 import { PreEventNotificationDialog } from "@/components/manager/pre-event-notification-dialog";
 import Link from "next/link";
 import { ImportDialog } from "@/components/manager/import-dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const attendees = [
   {
@@ -298,9 +304,31 @@ export default function AttendeesPage() {
                           </Button>
                         </div>
                       ) : (
-                        <Button variant="ghost" size="icon">
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuItem asChild>
+                               <Link href="/Manager/attendees/edit">編輯</Link>
+                            </DropdownMenuItem>
+                             <DropdownMenuItem>刪除</DropdownMenuItem>
+                            <DialogTrigger asChild>
+                              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>行前通知</DropdownMenuItem>
+                            </DialogTrigger>
+                            <DialogTrigger asChild>
+                               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>QR Code</DropdownMenuItem>
+                            </DialogTrigger>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/attendees/view">檢視</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/history">異動紀錄</Link>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       )}
                     </TableCell>
                   </TableRow>

@@ -31,6 +31,12 @@ import {
 } from "@/components/ui/pagination";
 import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const roles = [
   {
@@ -131,9 +137,22 @@ export default function RolesPage() {
                           </Button>
                         </>
                       ) : (
-                        <Button variant="ghost" size="icon">
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuItem>編輯</DropdownMenuItem>
+                            <DropdownMenuItem>刪除</DropdownMenuItem>
+                            <DropdownMenuItem>檢視</DropdownMenuItem>
+                            <DropdownMenuItem>複製</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                              <Link href="/Manager/history">異動紀錄</Link>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       )}
                     </TableCell>
                   </TableRow>

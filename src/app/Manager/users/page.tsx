@@ -32,6 +32,12 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Switch } from "@/components/ui/switch";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const users = [
   {
@@ -210,9 +216,28 @@ export default function UsersPage() {
                           <Button variant="outline" size="sm" className="bg-cyan-500 text-white hover:bg-cyan-600 hover:text-white">觀察模式</Button>
                         </>
                       ) : (
-                        <Button variant="ghost" size="icon">
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/users/edit">編輯</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>刪除</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/users/view">檢視</Link>
+                            </DropdownMenuItem>
+                             <DropdownMenuItem>複製</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/history">異動紀錄</Link>
+                            </DropdownMenuItem>
+                             <DropdownMenuItem>登入/登出記錄</DropdownMenuItem>
+                             <DropdownMenuItem>觀察模式</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       )}
                     </TableCell>
                   </TableRow>
