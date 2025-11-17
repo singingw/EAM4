@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -43,19 +44,19 @@ const menuItems = [
       ],
     },
     {
-      label: "名單管理",
-      icon: MessageSquare,
-      subItems: [
-        { label: "參加者名單", href: "/Manager/attendees" },
-        { label: "QR Code 下載紀錄", href: "/Manager/qrcode" },
-      ],
-    },
-    {
       label: "識別證管理",
       icon: LayoutGrid,
       subItems: [
         { label: "識別證列印", href: "/Manager/badge-printing" },
         { label: "識別證設計", href: "/Manager/badge-design" },
+      ],
+    },
+    {
+      label: "名單管理",
+      icon: MessageSquare,
+      subItems: [
+        { label: "參加者名單", href: "/Manager/attendees" },
+        { label: "QR Code 下載紀錄", href: "/Manager/qrcode" },
       ],
     },
 ];
@@ -106,3 +107,4 @@ export function ManagerSidebar() {
     </div>
   );
 }
+
