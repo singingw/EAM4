@@ -38,6 +38,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { ImportDialog } from "@/components/manager/import-dialog";
 
 const users = [
   {
@@ -86,10 +88,15 @@ export default function UsersPage() {
                 <Plus className="mr-2 h-4 w-4" />
                 新增
             </Button>
-            <Button className="bg-blue-500 text-white hover:bg-blue-600">
-                <Upload className="mr-2 h-4 w-4" />
-                匯入
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                    <Upload className="mr-2 h-4 w-4" />
+                    匯入
+                </Button>
+              </DialogTrigger>
+              <ImportDialog />
+            </Dialog>
         </div>
       </div>
 
