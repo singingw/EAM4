@@ -119,7 +119,7 @@ export default function AttendeesPage() {
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="hover:bg-transparent">
                   <Settings className="h-4 w-4" />
                 </Button>
               </DialogTrigger>
