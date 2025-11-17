@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "staff-scan-qr",
+      "description": "Staff scanning a QR code to enter the event execution page.",
+      "imageUrl": "https://images.unsplash.com/photo-1559131397-f94da358f7ca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxxciUyMGNvZGV8ZW58MHx8fHwxNzYzMjczMDM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "qr code"
+    },
+    {
+      "id": "staff-login",
+      "description": "Staff login page for the event.",
+      "imageUrl": "https://images.unsplash.com/photo-1762330466873-9a7dba6135b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2dpbiUyMG1vYmlsZXxlbnwwfHx8fDE3NjMzNjg1MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "login mobile"
+    },
+    {
+      "id": "staff-scan-guest",
+      "description": "Staff member scanning a guest's QR code on a mobile device.",
+      "imageUrl": "https://images.unsplash.com/photo-1629128625414-374a9e16d56a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzY2FuJTIwcXJ8ZW58MHx8fHwxNzYzMzY4NTE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "scan qr"
+    },
+    {
+      "id": "guest-show-qr",
+      "description": "Guest showing their QR code on a mobile device.",
+      "imageUrl": "https://images.unsplash.com/photo-1760179426896-9767a7bc193e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwZXJzb24lMjBxcnxlbnwwfHx8fDE3NjMzNjg1MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person qr"
+    },
+    {
+      "id": "staff-scanning-guest-qr",
+      "description": "A close-up of a staff member's hands scanning a guest's QR code.",
+      "imageUrl": "https://images.unsplash.com/photo-1706759755767-526cdaa02109?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzY2FuJTIwcXJ8ZW58MHx8fHwxNzYzMzY4NTE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "scan qr"
+    },
+    {
+      "id": "guest-check-in-success",
+      "description": "A mobile screen showing a successful check-in for a guest.",
+      "imageUrl": "https://images.unsplash.com/photo-1664913920468-e04086b46b61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtb2JpbGUlMjBzdWNjZXNzfGVufDB8fHx8MTc2MzM2ODUxNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mobile success"
+    }
+  ]
 }

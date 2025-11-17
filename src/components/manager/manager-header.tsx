@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { CheckInInstructionsDialog } from "@/components/manager/check-in-instructions-dialog";
 
 
 export function ManagerHeader() {
@@ -59,24 +61,29 @@ export function ManagerHeader() {
           {formattedDate} {formattedTime}
         </span>
         
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 h-8 w-8">
-              <BookOpen className="h-5 w-5" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
-             <DropdownMenuItem>
-                <span>系統操作手冊</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <span>報到流程說明</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <span>識別證印製說明</span>
-              </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Dialog>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 h-8 w-8">
+                <BookOpen className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+               <DropdownMenuItem>
+                  <span>系統操作手冊</span>
+                </DropdownMenuItem>
+                <DialogTrigger asChild>
+                  <DropdownMenuItem>
+                    <span>報到流程說明</span>
+                  </DropdownMenuItem>
+                </DialogTrigger>
+                <DropdownMenuItem>
+                  <span>識別證印製說明</span>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <CheckInInstructionsDialog />
+        </Dialog>
 
         <Button variant="ghost" size="icon" className="text-primary hover:bg-primary/10 h-8 w-8">
           <Settings className="h-5 w-5" />
