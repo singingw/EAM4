@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef } from "react";
@@ -79,7 +80,7 @@ export function ImportDialog() {
       <DialogFooter>
         <Button type="submit" className="w-full" disabled={!fileName}>
           <Upload className="mr-2 h-4 w-4" />
-          請上傳檔案
+          {fileName ? "匯入" : "請上傳檔案"}
         </Button>
       </DialogFooter>
     </DialogContent>
