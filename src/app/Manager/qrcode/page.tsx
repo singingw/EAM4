@@ -101,37 +101,41 @@ export default function QrCodePage() {
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-              <div className="space-y-2">
-                <label htmlFor="id" className="text-sm font-medium">ID</label>
-                <Input id="id" placeholder="輸入ID" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium">姓名</label>
-                <Input id="name" placeholder="輸入姓名" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium">Email</label>
-                <Input id="email" placeholder="輸入Email" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="phone" className="text-sm font-medium">手機</label>
-                <Input id="phone" placeholder="輸入手機號碼" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="progress" className="text-sm font-medium">下載進度</label>
-                <Select>
-                    <SelectTrigger id="progress">
-                    <SelectValue placeholder="全部" />
-                    </SelectTrigger>
-                    <SelectContent>
-                    <SelectItem value="all">全部</SelectItem>
-                    <SelectItem value="completed">已完成</SelectItem>
-                    <SelectItem value="in-progress">進行中</SelectItem>
-                    <SelectItem value="not-started">未開始</SelectItem>
-                    </SelectContent>
-                </Select>
-              </div>
+            <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div className="space-y-2">
+                    <label htmlFor="id" className="text-sm font-medium">ID</label>
+                    <Input id="id" placeholder="輸入ID" />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium">姓名</label>
+                    <Input id="name" placeholder="輸入姓名" />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="progress" className="text-sm font-medium">下載進度</label>
+                    <Select>
+                        <SelectTrigger id="progress">
+                        <SelectValue placeholder="全部" />
+                        </SelectTrigger>
+                        <SelectContent>
+                        <SelectItem value="all">全部</SelectItem>
+                        <SelectItem value="completed">已完成</SelectItem>
+                        <SelectItem value="in-progress">進行中</SelectItem>
+                        <SelectItem value="not-started">未開始</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">Email</label>
+                    <Input id="email" placeholder="輸入Email" />
+                </div>
+                <div className="space-y-2">
+                    <label htmlFor="phone" className="text-sm font-medium">手機</label>
+                    <Input id="phone" placeholder="輸入手機號碼" />
+                </div>
+                </div>
             </div>
             <div className="flex justify-center gap-2">
                 <Button>
