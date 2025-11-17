@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -168,7 +169,7 @@ export default function UsersPage() {
                   <TableHead>停權時間</TableHead>
                   <TableHead>狀態</TableHead>
                   <TableHead>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center gap-2">
                       <span>功能</span>
                       <Switch checked={showFunctions} onCheckedChange={setShowFunctions} />
                     </div>
@@ -193,7 +194,9 @@ export default function UsersPage() {
                     <TableCell className="space-x-1">
                       {showFunctions ? (
                         <>
-                          <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
+                            <Link href="/Manager/users/edit">編輯</Link>
+                          </Button>
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
                           <Button variant="secondary" size="sm">複製</Button>
@@ -233,3 +236,5 @@ export default function UsersPage() {
     </div>
   );
 }
+
+    
