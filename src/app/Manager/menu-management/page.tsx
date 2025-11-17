@@ -35,15 +35,9 @@ import Link from "next/link";
 
 const menuItems = [
     { id: "1", name: "系統管理", status: true },
-    { id: "2", name: "所得資料庫", status: true },
-    { id: "3", name: "按摩小站", status: true },
-    { id: "4", name: "系統參數設定", status: true },
-    { id: "5", name: "活動管理", status: true },
-    { id: "6", name: "全站通知信", status: true },
-    { id: "7", name: "會員管理", status: true },
-    { id: "8", name: "權限管理", status: false },
-    { id: "9", name: "職福資訊", status: false },
-    { id: "10", name: "功能模板", status: false },
+    { id: "2", name: "權限管理", status: true },
+    { id: "3", name: "識別證", status: true },
+    { id: "4", name: "名單管理", status: true },
 ];
 
 export default function MenuManagementPage() {
@@ -161,7 +155,7 @@ export default function MenuManagementPage() {
           </div>
         </CardContent>
          <div className="p-4 border-t flex justify-between items-center">
-            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 10 項結果，共 14 項</p>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 4 項結果，共 4 項</p>
             <Pagination>
                 <PaginationContent>
                 <PaginationItem>
@@ -169,9 +163,6 @@ export default function MenuManagementPage() {
                 </PaginationItem>
                 <PaginationItem>
                     <PaginationLink href="#" isActive>1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#">2</PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
                     <PaginationNext href="#" />
