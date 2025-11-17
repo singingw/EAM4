@@ -31,12 +31,16 @@ export default function BadgeDesignPage() {
       {isEditing ? (
         <div>
           <p>編輯模式</p>
-          {/* Add your badge design editing components here */}
+          <div className="mt-4 p-8 border-dashed border-2 border-gray-400 rounded-lg min-h-[400px] flex items-center justify-center">
+            <p className="text-gray-500">識別證設計區</p>
+          </div>
         </div>
       ) : (
         <div>
           <p>預覽模式</p>
-          {/* Add your badge preview components here */}
+          <div className="mt-4 p-8 border border-gray-300 rounded-lg min-h-[400px] flex items-center justify-center bg-gray-50">
+             <p className="text-gray-500">識別證預覽</p>
+          </div>
         </div>
       )}
     </div>
