@@ -402,34 +402,30 @@ export default function BadgeDesignPage() {
       <div className="flex-1 flex flex-col" onClick={() => isEditing && setSelectedElementId(null)}>
         <div className="p-4 border-b bg-background flex items-center justify-between gap-4 h-[65px]">
             <div className="flex items-center gap-4">
-                {isEditing && (
-                  <>
-                    <div className="space-y-1">
-                        <Label className="text-xs font-semibold flex items-center gap-1">
-                            識別證標籤尺寸 <Info className="h-3 w-3 text-muted-foreground" />
-                        </Label>
-                        <Select defaultValue="custom-1">
-                            <SelectTrigger className="w-[180px] h-8">
-                            <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="custom-1">90mm x 54mm (名片)</SelectItem>
-                              <SelectItem value="custom-2">70mm x 100mm</SelectItem>
-                              <SelectItem value="custom-3">100mm x 70mm</SelectItem>
-                              <SelectItem value="custom-4">85mm x 110mm</SelectItem>
-                              <SelectItem value="custom-5">105mm x 148mm (A6)</SelectItem>
-                              <SelectItem value="custom-6">210mm x 148mm (A5)</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <div className="flex items-center space-x-2 pt-5">
-                        <Switch id="center-line" checked={showCenterLine} onCheckedChange={setShowCenterLine} />
-                        <Label htmlFor="center-line" className="text-sm font-semibold flex items-center gap-1">
-                            開啟中心線 <Info className="h-3 w-3 text-muted-foreground" />
-                        </Label>
-                    </div>
-                  </>
-                )}
+                <div className="space-y-1">
+                    <Label className="text-xs font-semibold flex items-center gap-1">
+                        識別證標籤尺寸 <Info className="h-3 w-3 text-muted-foreground" />
+                    </Label>
+                    <Select defaultValue="custom-1">
+                        <SelectTrigger className="w-[180px] h-8">
+                        <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="custom-1">90mm x 54mm (名片)</SelectItem>
+                          <SelectItem value="custom-2">70mm x 100mm</SelectItem>
+                          <SelectItem value="custom-3">100mm x 70mm</SelectItem>
+                          <SelectItem value="custom-4">85mm x 110mm</SelectItem>
+                          <SelectItem value="custom-5">105mm x 148mm (A6)</SelectItem>
+                          <SelectItem value="custom-6">210mm x 148mm (A5)</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+                <div className="flex items-center space-x-2 pt-5">
+                    <Switch id="center-line" checked={showCenterLine} onCheckedChange={setShowCenterLine} />
+                    <Label htmlFor="center-line" className="text-sm font-semibold flex items-center gap-1">
+                        開啟中心線 <Info className="h-3 w-3 text-muted-foreground" />
+                    </Label>
+                </div>
                 {!isEditing && (
                   <h2 className="text-base font-semibold">預覽模式</h2>
                 )}
@@ -469,7 +465,7 @@ export default function BadgeDesignPage() {
             style={{ width: "227px", height: "302px" }}
             onClick={() => isEditing && setSelectedElementId(null)}
           >
-            {showCenterLine && isEditing && (
+            {showCenterLine && (
               <>
                 <div className="absolute top-0 left-1/2 w-px h-full bg-gray-300 border-l border-dashed z-0"></div>
                 <div className="absolute top-1/2 left-0 h-px w-full bg-gray-300 border-t border-dashed z-0"></div>
@@ -479,7 +475,7 @@ export default function BadgeDesignPage() {
                 {elements.map((el) => renderElement(el))}
             </div>
           </div>
-          {showCenterLine && isEditing && (
+          {showCenterLine && (
             <div className="absolute" style={{ width: "259px", height: "334px", pointerEvents: 'none' }}>
               {/* Crop marks */}
               <div className="absolute -top-2 -left-2 w-2 h-px bg-black"></div>
