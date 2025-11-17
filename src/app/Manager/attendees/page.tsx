@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Plus, Search, CheckCircle, XCircle, Download, Upload, Mail, MessageSquare, MoreVertical } from "lucide-react";
+import { Plus, Search, CheckCircle, XCircle, Download, Upload, Mail, MessageSquare, MoreVertical, Settings } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -168,10 +168,15 @@ export default function AttendeesPage() {
                     </Select>
                     <span className="text-sm">項結果</span>
                 </div>
-                <Button className="bg-blue-500 text-white hover:bg-blue-600">
-                  <Plus className="mr-2 h-4 w-4" />
-                  新增參加者
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                    <Plus className="mr-2 h-4 w-4" />
+                    新增參加者
+                  </Button>
+                  <Button variant="outline" size="icon">
+                    <Settings className="h-4 w-4" />
+                  </Button>
+                </div>
             </div>
         </CardHeader>
         <CardContent className="pt-0">
