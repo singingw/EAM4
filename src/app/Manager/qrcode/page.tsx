@@ -101,7 +101,11 @@ export default function QrCodePage() {
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+              <div className="space-y-2">
+                <label htmlFor="id" className="text-sm font-medium">ID</label>
+                <Input id="id" placeholder="輸入ID" />
+              </div>
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">姓名</label>
                 <Input id="name" placeholder="輸入姓名" />
