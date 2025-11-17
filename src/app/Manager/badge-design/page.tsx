@@ -258,6 +258,26 @@ export default function BadgeDesignPage() {
     });
   };
 
+  const handlePreview = () => {
+    setIsEditing(false);
+    setSelectedElementId(null);
+    setElements(prev =>
+      prev.map(el =>
+        el.content === '{{name}}' ? { ...el, content: 'Singing' } : el
+      )
+    );
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+    setElements(prev =>
+      prev.map(el =>
+        el.id === 'name' ? { ...el, content: '{{name}}' } : el
+      )
+    );
+  };
+
+
   const selectedElement = elements.find(el => el.id === selectedElementId);
 
   const renderElement = (element: Element) => {
@@ -412,8 +432,7 @@ export default function BadgeDesignPage() {
                   variant="outline" 
                   onClick={(e) => { 
                     e.stopPropagation();
-                    setIsEditing(false); 
-                    setSelectedElementId(null); 
+                    handlePreview();
                   }}
                   disabled={!isEditing}
                   className={!isEditing ? "hidden" : ""}
@@ -425,10 +444,10 @@ export default function BadgeDesignPage() {
                   className={isEditing ? "bg-green-500 text-white hover:bg-green-600" : "bg-blue-500 text-white hover:bg-blue-600"}
                   onClick={(e) => {
                     e.stopPropagation();
-                    const newIsEditing = !isEditing;
-                    setIsEditing(newIsEditing);
-                    if (!newIsEditing) {
-                      setSelectedElementId(null);
+                    if(isEditing) {
+                      // Save logic here
+                    } else {
+                      handleEdit();
                     }
                   }}
                 >
