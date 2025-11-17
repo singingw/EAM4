@@ -43,6 +43,8 @@ const features = [
     { id: "7", name: "參加者名單", status: true },
     { id: "8", name: "QR Code 下載紀錄", status: true },
     { id: "9", name: "獎項", status: false },
+    { id: "10", name: "抽獎", status: false },
+    { id: "11", name: "點卷", status: false },
 ];
 
 export default function SystemFeaturesPage() {
@@ -52,9 +54,11 @@ export default function SystemFeaturesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">系統功能管理</h1>
-        <Button className="bg-blue-500 text-white hover:bg-blue-600">
+        <Button asChild className="bg-blue-500 text-white hover:bg-blue-600">
+          <Link href="/Manager/system-features/add">
             <Plus className="mr-2 h-4 w-4" />
             新增
+          </Link>
         </Button>
       </div>
 
@@ -160,7 +164,7 @@ export default function SystemFeaturesPage() {
           </div>
         </CardContent>
          <div className="p-4 border-t flex justify-between items-center">
-            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 9 項結果，共 9 項</p>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 11 項結果，共 11 項</p>
             <Pagination>
                 <PaginationContent>
                 <PaginationItem>
