@@ -16,7 +16,9 @@ type ManagerLayoutProps = {
 export default function ManagerLayout({ children }: ManagerLayoutProps) {
   const pathname = usePathname();
 
-  if (pathname === "/Manager/ForgotPassword" || pathname === "/Manager/Login") {
+  const noLayoutPages = ["/Manager/ForgotPassword", "/Manager/Login", "/Manager/ChangePassword"];
+
+  if (noLayoutPages.includes(pathname)) {
     return <>{children}</>;
   }
 

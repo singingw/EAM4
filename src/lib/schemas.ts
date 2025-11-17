@@ -35,3 +35,18 @@ export const ForgotPasswordSchema = z.object({
       message: '請輸入有效的電子郵件地址。',
     }),
 });
+
+export const ChangePasswordSchema = z
+  .object({
+    oldPassword: z.string().min(1, {
+      message: '舊密碼為必填項。',
+    }),
+    newPassword: z.string().min(8, {
+      message: '新密碼長度至少需 8 個字元。',
+    }),
+    confirmPassword: z.string(),
+  })
+  .refine(data => data.newPassword === data.confirmPassword, {
+    message: '新密碼與確認密碼不相符。',
+    path: ['confirmPassword'],
+  });
