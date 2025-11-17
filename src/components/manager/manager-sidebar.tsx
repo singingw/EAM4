@@ -86,7 +86,7 @@ export function ManagerSidebar() {
                   <SidebarMenuSub>
                     {item.subItems.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.label}>
-                        <Link href={subItem.href} passHref>
+                        <Link href={subItem.href} passHref legacyBehavior>
                           <SidebarMenuSubButton 
                             isActive={pathname === subItem.href}
                             className="text-sidebar-foreground/80 hover:text-sidebar-accent-foreground"
@@ -106,4 +106,3 @@ export function ManagerSidebar() {
     </div>
   );
 }
-
