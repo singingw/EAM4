@@ -117,6 +117,14 @@ export default function AttendeesPage() {
                 <MessageSquare className="mr-2 h-4 w-4" />
                 寄發簡訊通知
             </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Settings className="h-4 w-4" />
+                </Button>
+              </DialogTrigger>
+              <FieldSettingsDialog />
+            </Dialog>
         </div>
       </div>
 
@@ -190,14 +198,6 @@ export default function AttendeesPage() {
                     <Plus className="mr-2 h-4 w-4" />
                     新增參加者
                   </Button>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="outline" size="icon">
-                        <Settings className="h-4 w-4" />
-                      </Button>
-                    </DialogTrigger>
-                    <FieldSettingsDialog />
-                  </Dialog>
                 </div>
             </div>
         </CardHeader>
@@ -301,5 +301,3 @@ export default function AttendeesPage() {
     </div>
   );
 }
-
-    
