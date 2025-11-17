@@ -31,6 +31,8 @@ import {
 } from "@/components/ui/pagination";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { FieldSettingsDialog } from "@/components/manager/field-settings-dialog";
 
 const attendees = [
   {
@@ -181,9 +183,14 @@ export default function AttendeesPage() {
                     <Plus className="mr-2 h-4 w-4" />
                     新增參加者
                   </Button>
-                  <Button variant="outline" size="icon">
-                    <Settings className="h-4 w-4" />
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" size="icon">
+                        <Settings className="h-4 w-4" />
+                      </Button>
+                    </DialogTrigger>
+                    <FieldSettingsDialog />
+                  </Dialog>
                 </div>
             </div>
         </CardHeader>
