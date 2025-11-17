@@ -1,7 +1,9 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
+import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -36,78 +38,275 @@ import {
   AlignCenter,
   AlignRight,
   Trash2,
+  ArrowUp,
+  ArrowDown,
 } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+import update from 'immutability-helper';
 
-const ComponentItem = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex items-center p-2 rounded-md hover:bg-muted cursor-pointer text-sm">
+
+const ItemTypes = {
+  ELEMENT: 'element',
+}
+
+interface Element {
+  id: string;
+  type: 'text' | 'qrcode' | 'image' | 'field';
+  content: string;
+  top: number;
+  left: number;
+  style: React.CSSProperties;
+}
+
+const initialElements: Element[] = [
+    { id: 'name', type: 'text', content: '{{name}}', top: 60, left: 50, style: { fontSize: '24px', fontWeight: 'bold', textAlign: 'center', width: '100%', position: 'absolute' } },
+    { id: 'qr-code', type: 'qrcode', content: 'https://placehold.co/100x100/png?text=QR', top: 120, left: 63, style: { position: 'absolute' } },
+];
+
+
+const DraggableElement = ({ id, left, top, children, onSelect, isSelected }: { id: string, left: number, top: number, children: React.ReactNode, onSelect: () => void, isSelected: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: ItemTypes.ELEMENT,
+    item: { id, left, top },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }), [id, left, top]);
+
+  drag(ref);
+
+  return (
+    <div
+      ref={ref}
+      style={{ left, top, opacity: isDragging ? 0.5 : 1 }}
+      className={cn('p-1 cursor-move absolute', isSelected ? 'ring-2 ring-blue-500' : '')}
+      onClick={(e) => { e.stopPropagation(); onSelect(); }}
+    >
+      {children}
+    </div>
+  );
+};
+
+
+const ComponentItem = ({ children, onClick }: { children: React.ReactNode; onClick: () => void }) => (
+  <div onClick={onClick} className="flex items-center p-2 rounded-md hover:bg-muted cursor-pointer text-sm">
     {children}
   </div>
 );
 
-const TextProperties = () => (
-  <div className="bg-background border-t p-4 space-y-4">
-    <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold">屬性設定</h3>
-        <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-destructive hover:bg-transparent">
-            <Trash2 className="h-4 w-4" />
-        </Button>
-    </div>
-    <div className="grid grid-cols-2 gap-4">
-      <div className="space-y-2">
-        <Label htmlFor="font-size" className="text-xs">字體大小</Label>
-        <Input id="font-size" type="number" defaultValue="24" className="h-8" />
+const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { element: Element; onUpdate: (id: string, style: React.CSSProperties) => void; onRemove: (id: string) => void; onLayerChange: (id: string, direction: 'up' | 'down') => void }) => {
+  const [style, setStyle] = useState(element.style);
+
+  const handleStyleChange = (prop: keyof React.CSSProperties, value: string | number) => {
+    const newStyle = { ...style, [prop]: value };
+    setStyle(newStyle);
+    onUpdate(element.id, newStyle);
+  };
+  
+  const handleTextAlign = (alignment: 'left' | 'center' | 'right') => {
+    handleStyleChange('textAlign', alignment);
+    handleStyleChange('width', '100%');
+    handleStyleChange('left', 0);
+  }
+
+  if (!element) return null;
+
+  return (
+      <div className="bg-background border-t p-4 space-y-4">
+          <div className="flex justify-between items-center">
+              <h3 className="text-sm font-semibold">屬性設定</h3>
+              <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-destructive hover:bg-transparent" onClick={() => onRemove(element.id)}>
+                  <Trash2 className="h-4 w-4" />
+              </Button>
+          </div>
+
+          {element.type === 'text' && (
+              <>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="font-size" className="text-xs">字體大小</Label>
+                    <Input id="font-size" type="number" value={parseInt(style.fontSize as string, 10) || 24} onChange={(e) => handleStyleChange('fontSize', `${e.target.value}px`)} className="h-8" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="font-family" className="text-xs">字體</Label>
+                    <Select value={style.fontFamily || 'noto-sans'} onValueChange={(value) => handleStyleChange('fontFamily', value)}>
+                      <SelectTrigger id="font-family" className="h-8">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="'Noto Sans TC', sans-serif">思源黑體</SelectItem>
+                        <SelectItem value="Arial, sans-serif">Arial</SelectItem>
+                        <SelectItem value="'Times New Roman', serif">Times New Roman</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs">樣式</Label>
+                  <div className="flex items-center gap-1">
+                    <Button variant={style.fontWeight === 'bold' ? 'secondary': 'outline'} size="icon" className="h-8 w-8" onClick={() => handleStyleChange('fontWeight', style.fontWeight === 'bold' ? 'normal' : 'bold')}><Bold className="h-4 w-4" /></Button>
+                    <Button variant={style.fontStyle === 'italic' ? 'secondary': 'outline'} size="icon" className="h-8 w-8" onClick={() => handleStyleChange('fontStyle', style.fontStyle === 'italic' ? 'normal' : 'italic')}><Italic className="h-4 w-4" /></Button>
+                    <Button variant={style.textDecoration === 'underline' ? 'secondary': 'outline'} size="icon" className="h-8 w-8" onClick={() => handleStyleChange('textDecoration', style.textDecoration === 'underline' ? 'none' : 'underline')}><Underline className="h-4 w-4" /></Button>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-xs">對齊</Label>
+                  <div className="flex items-center gap-1">
+                    <Button variant={style.textAlign === 'left' ? 'secondary': 'outline'} size="icon" className="h-8 w-8" onClick={() => handleTextAlign('left')}><AlignLeft className="h-4 w-4" /></Button>
+                    <Button variant={style.textAlign === 'center' ? 'secondary': 'outline'} size="icon" className="h-8 w-8" onClick={() => handleTextAlign('center')}><AlignCenter className="h-4 w-4" /></Button>
+                    <Button variant={style.textAlign === 'right' ? 'secondary': 'outline'} size="icon" className="h-8 w-8" onClick={() => handleTextAlign('right')}><AlignRight className="h-4 w-4" /></Button>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="font-color" className="text-xs">顏色</Label>
+                    <Input id="font-color" type="color" value={(style.color as string) || '#000000'} onChange={(e) => handleStyleChange('color', e.target.value)} className="h-8 p-1" />
+                </div>
+              </>
+          )}
+
+          {(element.type === 'qrcode' || element.type === 'image') && (
+              <div className="space-y-2">
+                  <Label htmlFor="element-size" className="text-xs">大小 (寬)</Label>
+                  <Input id="element-size" type="number" value={parseInt(style.width as string, 10) || 100} onChange={(e) => {
+                      const newSize = `${e.target.value}px`;
+                      handleStyleChange('width', newSize);
+                      handleStyleChange('height', newSize);
+                  }} className="h-8" />
+              </div>
+          )}
+          
+          <div className="space-y-2">
+            <Label className="text-xs">圖層順序</Label>
+            <div className="flex items-center gap-1">
+                <Button variant="outline" size="sm" className="h-8" onClick={() => onLayerChange(element.id, 'up')}>
+                    <ArrowUp className="h-4 w-4 mr-1" /> 上移一層
+                </Button>
+                <Button variant="outline" size="sm" className="h-8" onClick={() => onLayerChange(element.id, 'down')}>
+                    <ArrowDown className="h-4 w-4 mr-1" /> 下移一層
+                </Button>
+            </div>
+          </div>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="font-family" className="text-xs">字體</Label>
-        <Select defaultValue="noto-sans">
-          <SelectTrigger id="font-family" className="h-8">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="noto-sans">思源黑體</SelectItem>
-            <SelectItem value="arial">Arial</SelectItem>
-            <SelectItem value="times-new-roman">Times New Roman</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-    <div className="space-y-2">
-      <Label className="text-xs">樣式</Label>
-      <div className="flex items-center gap-1">
-        <Button variant="outline" size="icon" className="h-8 w-8"><Bold className="h-4 w-4" /></Button>
-        <Button variant="outline" size="icon" className="h-8 w-8"><Italic className="h-4 w-4" /></Button>
-        <Button variant="outline" size="icon" className="h-8 w-8"><Underline className="h-4 w-4" /></Button>
-      </div>
-    </div>
-    <div className="space-y-2">
-      <Label className="text-xs">對齊</Label>
-      <div className="flex items-center gap-1">
-        <Button variant="outline" size="icon" className="h-8 w-8"><AlignLeft className="h-4 w-4" /></Button>
-        <Button variant="outline" size="icon" className="h-8 w-8"><AlignCenter className="h-4 w-4" /></Button>
-        <Button variant="outline" size="icon" className="h-8 w-8"><AlignRight className="h-4 w-4" /></Button>
-      </div>
-    </div>
-     <div className="space-y-2">
-        <Label htmlFor="font-color" className="text-xs">顏色</Label>
-        <Input id="font-color" type="color" defaultValue="#000000" className="h-8 p-1" />
-      </div>
-  </div>
-);
+  );
+};
 
 
 export default function BadgeDesignPage() {
   const [showCenterLine, setShowCenterLine] = useState(true);
   const [isEditing, setIsEditing] = useState(true);
-  const [selectedElement, setSelectedElement] = useState<string | null>(null);
+  const [elements, setElements] = useState<Element[]>(initialElements);
+  const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
+
+  const moveElement = useCallback((id: string, left: number, top: number) => {
+    setElements((prevElements) =>
+      prevElements.map(el =>
+        el.id === id ? { ...el, left, top } : el
+      )
+    );
+  }, []);
+
+  const [, drop] = useDrop(() => ({
+    accept: ItemTypes.ELEMENT,
+    drop(item: { id: string; left: number; top: number }, monitor) {
+      const delta = monitor.getDifferenceFromInitialOffset();
+      if (!delta) return;
+      const left = Math.round(item.left + delta.x);
+      const top = Math.round(item.top + delta.y);
+      moveElement(item.id, left, top);
+      return undefined;
+    },
+  }), [moveElement]);
+
 
   const handleSelectElement = (elementId: string) => {
     if (isEditing) {
-      setSelectedElement(elementId);
+      setSelectedElementId(elementId);
     }
   };
 
+  const addElement = (type: 'text' | 'qrcode' | 'image' | 'field', content: string) => {
+    const newId = `${type}-${Date.now()}`;
+    let newElement: Element;
+    if (type === 'qrcode' || type === 'image') {
+        newElement = { id: newId, type, content, top: 10, left: 10, style: { position: 'absolute', width: '100px', height: '100px' } };
+    } else {
+        newElement = { id: newId, type, content, top: 10, left: 10, style: { fontSize: '16px', position: 'absolute' } };
+    }
+    setElements(prev => [...prev, newElement]);
+    setSelectedElementId(newId);
+  }
+
+  const updateElementStyle = (id: string, newStyle: React.CSSProperties) => {
+    setElements(prev => prev.map(el => el.id === id ? {...el, style: newStyle} : el));
+  }
+  
+  const removeElement = (id: string) => {
+    setElements(prev => prev.filter(el => el.id !== id));
+    setSelectedElementId(null);
+  }
+
+  const handleLayerChange = (id: string, direction: 'up' | 'down') => {
+    const currentIndex = elements.findIndex(el => el.id === id);
+    if (currentIndex === -1) return;
+
+    const newIndex = direction === 'up' 
+      ? Math.min(elements.length - 1, currentIndex + 1)
+      : Math.max(0, currentIndex - 1);
+
+    if (newIndex === currentIndex) return;
+
+    setElements(prevElements => {
+      return update(prevElements, {
+        $splice: [
+          [currentIndex, 1],
+          [newIndex, 0, prevElements[currentIndex]],
+        ],
+      });
+    });
+  };
+
+  const selectedElement = elements.find(el => el.id === selectedElementId);
+
+  const renderElement = (element: Element) => {
+      const { id, type, content, left, top, style } = element;
+      const isSelected = selectedElementId === id;
+
+      const elementContent = () => {
+          switch (type) {
+              case 'text':
+              case 'field':
+                  return <p style={style} className="whitespace-nowrap">{content}</p>;
+              case 'qrcode':
+                  return <Image src={content} alt="QR Code" width={parseInt(style.width as string, 10) || 100} height={parseInt(style.height as string, 10) || 100} style={{width: style.width, height: style.height}}/>;
+              case 'image':
+                   return <Image src={content} alt="Image" width={parseInt(style.width as string, 10) || 100} height={parseInt(style.height as string, 10) || 100} style={{width: style.width, height: style.height}} />;
+              default:
+                  return null;
+          }
+      };
+
+      if (!isEditing) {
+         return (
+            <div style={{ position: 'absolute', left, top, ...style, zIndex: elements.findIndex(e => e.id === id) }}>
+                {elementContent()}
+            </div>
+         );
+      }
+
+      return (
+          <DraggableElement key={id} id={id} left={left} top={top} onSelect={() => handleSelectElement(id)} isSelected={isSelected}>
+            <div style={{...style, zIndex: elements.findIndex(e => e.id === id)}}>
+              {elementContent()}
+            </div>
+          </DraggableElement>
+      );
+  };
+
+
   return (
+    <DndProvider backend={HTML5Backend}>
     <div className="flex h-full w-full bg-muted/30">
       {isEditing && (
         <div className="w-60 bg-background border-r flex flex-col">
@@ -129,10 +328,10 @@ export default function BadgeDesignPage() {
                 </AccordionTrigger>
                 <AccordionContent className="pb-2">
                   <div className="flex flex-col gap-1 pl-4">
-                    <ComponentItem>ID</ComponentItem>
-                    <ComponentItem>姓名/Name</ComponentItem>
-                    <ComponentItem>信箱/Email</ComponentItem>
-                    <ComponentItem>手機/Cellphone</ComponentItem>
+                    <ComponentItem onClick={() => addElement('field', '{{ID}}')}>ID</ComponentItem>
+                    <ComponentItem onClick={() => addElement('field', '{{姓名/Name}}')}>姓名/Name</ComponentItem>
+                    <ComponentItem onClick={() => addElement('field', '{{信箱/Email}}')}>信箱/Email</ComponentItem>
+                    <ComponentItem onClick={() => addElement('field', '{{手機/Cellphone}}')}>手機/Cellphone</ComponentItem>
                   </div>
                 </AccordionContent>
               </AccordionItem>
@@ -145,7 +344,7 @@ export default function BadgeDesignPage() {
                 </AccordionTrigger>
                 <AccordionContent className="pb-2">
                    <div className="flex flex-col gap-1 pl-4">
-                    <ComponentItem>來賓ID</ComponentItem>
+                    <ComponentItem onClick={() => addElement('qrcode', 'https://placehold.co/100x100/png?text=QR')}>來賓ID</ComponentItem>
                   </div>
                 </AccordionContent>
               </AccordionItem>
@@ -158,7 +357,7 @@ export default function BadgeDesignPage() {
                 </AccordionTrigger>
                 <AccordionContent className="pb-2">
                   <div className="flex flex-col gap-1 pl-4">
-                    <ComponentItem>單行文字</ComponentItem>
+                    <ComponentItem onClick={() => addElement('text', '單行文字')}>單行文字</ComponentItem>
                   </div>
                 </AccordionContent>
               </AccordionItem>
@@ -171,18 +370,18 @@ export default function BadgeDesignPage() {
                 </AccordionTrigger>
                 <AccordionContent className="pb-2">
                   <div className="flex flex-col gap-1 pl-4">
-                    <ComponentItem>上傳圖片</ComponentItem>
+                    <ComponentItem onClick={() => addElement('image', 'https://placehold.co/100x50/png?text=Image')}>上傳圖片</ComponentItem>
                   </div>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
           </div>
-          {selectedElement && isEditing && <TextProperties />}
+          {selectedElement && isEditing && <PropertiesPanel element={selectedElement} onUpdate={updateElementStyle} onRemove={removeElement} onLayerChange={handleLayerChange} />}
         </div>
       )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col" onClick={() => setSelectedElement(null)}>
+      <div className="flex-1 flex flex-col" onClick={() => isEditing && setSelectedElementId(null)}>
         <div className="p-4 border-b bg-background flex items-center justify-between gap-4 h-[65px]">
             <div className="flex items-center gap-4">
                 {isEditing && (
@@ -223,7 +422,7 @@ export default function BadgeDesignPage() {
                   onClick={(e) => { 
                     e.stopPropagation();
                     setIsEditing(false); 
-                    setSelectedElement(null); 
+                    setSelectedElementId(null); 
                   }}
                   disabled={!isEditing}
                   className={!isEditing ? "hidden" : ""}
@@ -238,7 +437,7 @@ export default function BadgeDesignPage() {
                     const newIsEditing = !isEditing;
                     setIsEditing(newIsEditing);
                     if (!newIsEditing) {
-                      setSelectedElement(null);
+                      setSelectedElementId(null);
                     }
                   }}
                 >
@@ -249,32 +448,23 @@ export default function BadgeDesignPage() {
         </div>
         <div className="flex-1 flex items-center justify-center p-8 bg-muted/60 relative overflow-hidden">
           <div
+            ref={drop}
             className="relative bg-white shadow-lg"
             style={{ width: "227px", height: "302px" }}
+            onClick={() => isEditing && setSelectedElementId(null)}
           >
             {showCenterLine && isEditing && (
               <>
-                <div className="absolute top-0 left-1/2 w-px h-full bg-gray-300 border-l border-dashed z-10"></div>
-                <div className="absolute top-1/2 left-0 h-px w-full bg-gray-300 border-t border-dashed z-10"></div>
+                <div className="absolute top-0 left-1/2 w-px h-full bg-gray-300 border-l border-dashed z-0"></div>
+                <div className="absolute top-1/2 left-0 h-px w-full bg-gray-300 border-t border-dashed z-0"></div>
               </>
             )}
-            <div className="absolute inset-0 p-4 flex flex-col items-center justify-center gap-4">
-                <div 
-                  className={`p-2 cursor-pointer ${selectedElement === 'name' ? 'ring-2 ring-blue-500' : ''}`}
-                  onClick={(e) => { e.stopPropagation(); handleSelectElement('name'); }}
-                >
-                  <p className="text-2xl font-bold text-center">{`{{name}}`}</p>
-                </div>
-                <div 
-                  className={`p-2 cursor-pointer ${selectedElement === 'qr-code' ? 'ring-2 ring-blue-500' : ''}`}
-                  onClick={(e) => { e.stopPropagation(); handleSelectElement('qr-code'); }}
-                >
-                  <Image src="https://placehold.co/100x100/png?text=QR" alt="QR Code" width={100} height={100} />
-                </div>
+             <div className="absolute inset-0">
+                {elements.map((el) => renderElement(el))}
             </div>
           </div>
           {showCenterLine && isEditing && (
-            <div className="absolute" style={{ width: "259px", height: "334px" }}>
+            <div className="absolute" style={{ width: "259px", height: "334px", pointerEvents: 'none' }}>
               {/* Crop marks */}
               <div className="absolute -top-2 -left-2 w-2 h-px bg-black"></div>
               <div className="absolute -top-2 -left-2 w-px h-2 bg-black"></div>
@@ -289,5 +479,8 @@ export default function BadgeDesignPage() {
         </div>
       </div>
     </div>
+    </DndProvider>
   );
 }
+
+    
