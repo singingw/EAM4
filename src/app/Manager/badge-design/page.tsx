@@ -20,6 +20,12 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
+import {
   GripVertical,
   User,
   QrCode as QrCodeIcon,
@@ -158,14 +164,30 @@ const PropertiesPanel = ({ element, onUpdate, onRemove, onLayerChange }: { eleme
           
           <div className="space-y-2">
             <Label className="text-xs">圖層順序</Label>
-            <div className="flex items-center gap-1">
-                <Button variant="outline" size="sm" className="h-8" onClick={() => onLayerChange(element.id, 'up')}>
-                    <ArrowUp className="h-4 w-4 mr-1" /> 上移一層
-                </Button>
-                <Button variant="outline" size="sm" className="h-8" onClick={() => onLayerChange(element.id, 'down')}>
-                    <ArrowDown className="h-4 w-4 mr-1" /> 下移一層
-                </Button>
-            </div>
+             <TooltipProvider>
+                <div className="flex items-center gap-1">
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => onLayerChange(element.id, 'up')}>
+                                <ArrowUp className="h-4 w-4" />
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>上移一層</p>
+                        </TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => onLayerChange(element.id, 'down')}>
+                                <ArrowDown className="h-4 w-4" />
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>下移一層</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </div>
+            </TooltipProvider>
           </div>
       </div>
   );
