@@ -102,11 +102,9 @@ export default function AttendeesPage() {
         <h1 className="text-2xl font-bold">參加者名單</h1>
         <div className="flex items-center gap-2">
             <Button variant="outline" className="bg-purple-500 text-white hover:bg-purple-600">
-                <Mail className="mr-2 h-4 w-4" />
                 寄發行前通知
             </Button>
             <Button variant="outline" className="bg-gray-500 text-white hover:bg-gray-600">
-                <QrCode className="mr-2 h-4 w-4" />
                 匯出全部的 QRCode
             </Button>
             <Button className="bg-blue-500 text-white hover:bg-blue-600">
