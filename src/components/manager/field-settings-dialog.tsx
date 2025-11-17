@@ -10,13 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Lock, Settings, Trash2, PlusCircle } from "lucide-react";
 
 type Field = {
@@ -56,15 +49,6 @@ export function FieldSettingsDialog() {
         <DialogTitle>欄位設定</DialogTitle>
       </DialogHeader>
       <div className="space-y-4 py-4">
-        <Select defaultValue="zh-tw">
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="zh-tw">繁體中文</SelectItem>
-            <SelectItem value="en">English</SelectItem>
-          </SelectContent>
-        </Select>
         <div className="space-y-3">
           {fields.map((field) => (
             <div key={field.id} className="flex items-center gap-2">
