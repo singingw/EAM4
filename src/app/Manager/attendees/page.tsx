@@ -113,7 +113,7 @@ export default function AttendeesPage() {
                 <Mail className="mr-2 h-4 w-4" />
                 寄發行前通知
             </Button>
-            <Button variant="outline" className="bg-teal-500 text-white hover:bg-teal-600">
+            <Button variant="outline" className="bg-gray-500 text-white hover:bg-gray-600">
                 <QrCode className="mr-2 h-4 w-4" />
                 匯出全部的 QRCode
             </Button>
