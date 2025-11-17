@@ -261,7 +261,12 @@ export default function AttendeesPage() {
                           <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Button variant="outline" size="sm" className="bg-purple-500 text-white hover:bg-purple-600 hover:text-white">Email</Button>
-                          <Button variant="outline" size="sm" className="bg-teal-500 text-white hover:bg-teal-600 hover:text-white">簡訊</Button>
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm" className="bg-teal-500 text-white hover:bg-teal-600 hover:text-white">行前通知</Button>
+                            </DialogTrigger>
+                            <PreEventNotificationDialog />
+                          </Dialog>
                            <Dialog>
                             <DialogTrigger asChild>
                               <Button variant="outline" size="sm" className="bg-gray-500 text-white hover:bg-gray-600 hover:text-white">QR Code</Button>
@@ -310,5 +315,7 @@ export default function AttendeesPage() {
     </div>
   );
 }
+
+    
 
     
