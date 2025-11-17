@@ -78,3 +78,10 @@ export const EditAttendeeSchema = z.object({
   }),
   status: z.string(),
 });
+
+export const AddMenuSchema = z.object({
+  title: z.string().min(1, {
+    message: '標題為必填欄位',
+  }),
+  status: z.string(),
+});
