@@ -32,6 +32,12 @@ import {
 } from "@/components/ui/pagination";
 import { Switch } from "@/components/ui/switch";
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const features = [
     { id: "1", name: "系統功能管理", status: true },
@@ -156,9 +162,26 @@ export default function SystemFeaturesPage() {
                           </Button>
                         </>
                       ) : (
-                        <Button variant="ghost" size="icon">
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/system-features/edit" className="text-green-600">編輯</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/system-features/view">檢視</Link>
+                            </DropdownMenuItem>
+                             <DropdownMenuItem>複製</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/history" className="text-orange-600">異動紀錄</Link>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       )}
                     </TableCell>
                   </TableRow>
