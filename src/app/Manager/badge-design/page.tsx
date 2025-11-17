@@ -39,7 +39,7 @@ export default function BadgeDesignPage() {
   return (
     <div className="flex h-full w-full bg-muted/30">
       {/* Left Sidebar */}
-      <div className="w-64 bg-background border-r flex flex-col">
+      <div className="w-60 bg-background border-r flex flex-col">
         <div className="p-4 border-b flex items-center h-[65px]">
           <h2 className="text-base font-semibold flex items-center gap-2">
             <GripVertical className="h-5 w-5" />
@@ -116,22 +116,17 @@ export default function BadgeDesignPage() {
                     <Label className="text-xs font-semibold flex items-center gap-1">
                         識別證標籤尺寸 <Info className="h-3 w-3 text-muted-foreground" />
                     </Label>
-                    <Select defaultValue="60x80">
+                    <Select defaultValue="custom-1">
                         <SelectTrigger className="w-[180px] h-8">
                         <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                        <SelectItem value="60x80">60mm * 80mm</SelectItem>
-                        <SelectItem value="80x60">80mm * 60mm</SelectItem>
-                        <SelectItem value="80x90">80mm * 90mm</SelectItem>
-                        <SelectItem value="90x80">90mm * 80mm</SelectItem>
-                        <SelectItem value="90x120">90mm * 120mm</SelectItem>
-                        <SelectItem value="90x130">90mm * 130mm</SelectItem>
-                        <SelectItem value="78x130">78mm * 130mm</SelectItem>
-                        <SelectItem value="a4-portrait">A4(直向)</SelectItem>
-                        <SelectItem value="a4-landscape">A4(橫向)</SelectItem>
-                        <SelectItem value="a5-portrait">A5(直向)</SelectItem>
-                        <SelectItem value="a5-landscape">A5(橫向)</SelectItem>
+                          <SelectItem value="custom-1">90mm x 54mm (名片)</SelectItem>
+                          <SelectItem value="custom-2">70mm x 100mm</SelectItem>
+                          <SelectItem value="custom-3">100mm x 70mm</SelectItem>
+                          <SelectItem value="custom-4">85mm x 110mm</SelectItem>
+                          <SelectItem value="custom-5">105mm x 148mm (A6)</SelectItem>
+                          <SelectItem value="custom-6">210mm x 148mm (A5)</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
