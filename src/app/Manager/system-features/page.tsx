@@ -37,11 +37,11 @@ const features = [
     { id: "1", name: "系統功能管理", status: true },
     { id: "2", name: "後台選單管理", status: true },
     { id: "3", name: "後台帳號管理", status: true },
-    { id: "4", name: "角色管理", status: true },
-    { id: "5", name: "識別證設計", status: true },
-    { id: "6", name: "識別證模板", status: true },
-    { id: "7", name: "參加者名單", status: true },
-    { id: "8", name: "QR Code 下載紀錄", status: true },
+    { id: "4-role", name: "角色管理", status: true },
+    { id: "5-badge-design", name: "識別證設計", status: true },
+    { id: "6-badge-template", name: "識別證模板", status: true },
+    { id: "7-attendees", name: "參加者名單", status: true },
+    { id: "8-qrcode", name: "QR Code 下載紀錄", status: true },
     { id: "9", name: "獎項", status: false },
     { id: "10", name: "抽獎", status: false },
     { id: "11", name: "點卷", status: false },
@@ -143,7 +143,9 @@ export default function SystemFeaturesPage() {
                     <TableCell className="space-x-1">
                       {showFunctions ? (
                         <>
-                          <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
+                            <Link href="/Manager/system-features/edit">編輯</Link>
+                          </Button>
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Button asChild variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
                             <Link href="/Manager/system-features/view">檢視</Link>

@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -40,6 +40,8 @@ export function AddSystemFeatureForm() {
   const [isPending, setIsPending] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  const pathname = usePathname();
+  const isEditing = pathname.includes('/edit');
 
   const form = useForm<z.infer<typeof AddSystemFeatureSchema>>({
     resolver: zodResolver(AddSystemFeatureSchema),
@@ -70,8 +72,8 @@ export function AddSystemFeatureForm() {
     setTimeout(() => {
       console.log(values);
       toast({
-        title: "功能已新增",
-        description: `${values.title} 已被成功加入系統功能中。`,
+        title: isEditing ? "功能已更新" : "功能已新增",
+        description: `${values.title} 已被成功${isEditing ? '更新' : '加入系統功能中'}。`,
       });
       setIsPending(false);
       router.push('/Manager/system-features');
@@ -100,7 +102,7 @@ export function AddSystemFeatureForm() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">編輯</h1>
+        <h1 className="text-2xl font-bold">{isEditing ? '編輯' : '新增'}</h1>
         <div className="flex items-center gap-2">
             <Button variant="outline" className="bg-gray-500 text-white hover:bg-gray-600" asChild>
                 <Link href="/Manager/system-features">
