@@ -110,7 +110,7 @@ export default function AttendeesPage() {
               </DialogTrigger>
               <PreEventNotificationDialog />
             </Dialog>
-            <Button variant="outline" className="bg-gray-500 text-white hover:bg-gray-600">
+            <Button variant="outline" className="bg-orange-400 text-white hover:bg-orange-500">
                 匯出全部的 QRCode
             </Button>
             <Button>
@@ -202,7 +202,7 @@ export default function AttendeesPage() {
                     </DialogTrigger>
                     <PreEventNotificationDialog />
                   </Dialog>
-                  <Button variant="outline" className="bg-gray-500 text-white hover:bg-gray-600 hover:text-white">匯出 QR Code</Button>
+                  <Button variant="outline" className="bg-orange-400 text-white hover:bg-orange-500 hover:text-white">匯出 QR Code</Button>
                   <Button className="bg-blue-500 text-white hover:bg-blue-600">
                     <Plus className="mr-2 h-4 w-4" />
                     新增參加者
@@ -268,7 +268,7 @@ export default function AttendeesPage() {
                           </Dialog>
                            <Dialog>
                             <DialogTrigger asChild>
-                              <Button variant="outline" size="sm" className="bg-gray-500 text-white hover:bg-gray-600 hover:text-white">QR Code</Button>
+                              <Button variant="outline" size="sm" className="bg-orange-400 text-white hover:bg-orange-500 hover:text-white">QR Code</Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[250px]">
                               <DialogHeader>
@@ -314,9 +314,5 @@ export default function AttendeesPage() {
     </div>
   );
 }
-
-    
-
-    
 
     
