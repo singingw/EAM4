@@ -59,7 +59,7 @@ interface Element {
 }
 
 const initialElements: Element[] = [
-    { id: 'name', type: 'text', content: '{{name}}', style: { top: '60px', left: '50px', fontSize: '24px', fontWeight: 'bold', textAlign: 'center', width: '100%' }, zIndex: 1 },
+    { id: 'name', type: 'text', content: '{{name}}', originalContent: '{{name}}', style: { top: '60px', left: '50px', fontSize: '24px', fontWeight: 'bold', textAlign: 'center', width: '100%' }, zIndex: 1 },
     { id: 'qr-code', type: 'qrcode', content: 'https://placehold.co/100x100/png?text=QR', style: { top: '120px', left: '63px', width: '100px', height: '100px' }, zIndex: 2 },
 ];
 
@@ -218,7 +218,7 @@ export default function BadgeDesignPage() {
     if (type === 'qrcode' || type === 'image') {
         newElement = { id: newId, type, content, style: { ...baseStyle, width: '100px', height: '100px' }, zIndex: newZIndex };
     } else {
-        newElement = { id: newId, type, content, style: { ...baseStyle, fontSize: '16px' }, zIndex: newZIndex };
+        newElement = { id: newId, type, content, originalContent: content, style: { ...baseStyle, fontSize: '16px' }, zIndex: newZIndex };
     }
     setElements(prev => [...prev, newElement]);
     setSelectedElementId(newId);
@@ -260,31 +260,32 @@ export default function BadgeDesignPage() {
     });
   };
 
-  const handlePreview = () => {
-    setIsEditing(false);
+  const handlePreviewToggle = () => {
+    const newIsEditing = !isEditing;
+    setIsEditing(newIsEditing);
     setSelectedElementId(null);
-    setElements(prev =>
-      prev.map(el => {
-        const newEl = { ...el, originalContent: el.originalContent || el.content };
-        if (newEl.content === '{{name}}') {
-          newEl.content = 'Singing';
-        }
-        return newEl;
-      })
-    );
+    
+    if (newIsEditing) {
+      // Back to Edit mode
+       setElements(prev =>
+        prev.map(el => ({
+          ...el,
+          content: el.originalContent || el.content,
+        }))
+      );
+    } else {
+      // Enter Preview mode
+      setElements(prev =>
+        prev.map(el => {
+          const newEl = { ...el };
+          if (newEl.content === '{{name}}') {
+            newEl.content = 'Singing';
+          }
+          return newEl;
+        })
+      );
+    }
   };
-
-  const handleEdit = () => {
-    setIsEditing(true);
-    setElements(prev =>
-      prev.map(el => ({
-        ...el,
-        content: el.originalContent || el.content,
-        originalContent: undefined
-      }))
-    );
-  };
-
 
   const selectedElement = elements.find(el => el.id === selectedElementId);
 
@@ -427,20 +428,13 @@ export default function BadgeDesignPage() {
                         開啟中心線 <Info className="h-3 w-3 text-muted-foreground" />
                     </Label>
                 </div>
-                {!isEditing && (
-                  <h2 className="text-base font-semibold">預覽模式</h2>
-                )}
             </div>
             <div className="flex items-center gap-2">
                 <Button 
                   variant="outline" 
                   onClick={(e) => { 
                     e.stopPropagation();
-                    if (isEditing) {
-                      handlePreview();
-                    } else {
-                      handleEdit();
-                    }
+                    handlePreviewToggle();
                   }}
                 >
                     {isEditing ? <Eye className="mr-2 h-4 w-4" /> : <EyeOff className="mr-2 h-4 w-4" />}
@@ -455,16 +449,6 @@ export default function BadgeDesignPage() {
                 >
                     <Save className="mr-2 h-4 w-4" />
                     儲存
-                </Button>
-                 <Button 
-                  className={!isEditing ? "bg-blue-500 text-white hover:bg-blue-600" : "hidden"}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleEdit();
-                  }}
-                >
-                    <Edit className="mr-2 h-4 w-4" />
-                    編輯
                 </Button>
             </div>
         </div>
