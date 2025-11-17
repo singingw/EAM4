@@ -199,7 +199,9 @@ export default function UsersPage() {
                             <Link href="/Manager/users/edit">編輯</Link>
                           </Button>
                           <Button variant="destructive" size="sm">刪除</Button>
-                          <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
+                            <Link href="/Manager/users/view">檢視</Link>
+                          </Button>
                           <Button variant="secondary" size="sm">複製</Button>
                           <Button asChild variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
                             <Link href="/Manager/history">異動紀錄</Link>
