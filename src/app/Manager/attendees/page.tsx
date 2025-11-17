@@ -224,6 +224,8 @@ export default function AttendeesPage() {
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">Email</Button>
                           <Button variant="outline" size="sm" className="bg-teal-500 text-white hover:bg-teal-600 hover:text-white">簡訊</Button>
+                          <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
+                          <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">異動紀錄</Button>
                         </div>
                       ) : (
                         <Button variant="ghost" size="icon">
