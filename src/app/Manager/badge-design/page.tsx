@@ -273,17 +273,19 @@ export default function BadgeDesignPage() {
                 </div>
             </div>
           </div>
-          <div className="absolute" style={{ width: "259px", height: "334px" }}>
-            {/* Crop marks */}
-            <div className="absolute -top-2 -left-2 w-2 h-px bg-black"></div>
-            <div className="absolute -top-2 -left-2 w-px h-2 bg-black"></div>
-            <div className="absolute -top-2 -right-2 w-2 h-px bg-black"></div>
-            <div className="absolute -top-2 -right-2 w-px h-2 bg-black"></div>
-            <div className="absolute -bottom-2 -left-2 w-2 h-px bg-black"></div>
-            <div className="absolute -bottom-2 -left-2 w-px h-2 bg-black"></div>
-            <div className="absolute -bottom-2 -right-2 w-2 h-px bg-black"></div>
-            <div className="absolute -bottom-2 -right-2 w-px h-2 bg-black"></div>
-          </div>
+          {showCenterLine && isEditing && (
+            <div className="absolute" style={{ width: "259px", height: "334px" }}>
+              {/* Crop marks */}
+              <div className="absolute -top-2 -left-2 w-2 h-px bg-black"></div>
+              <div className="absolute -top-2 -left-2 w-px h-2 bg-black"></div>
+              <div className="absolute -top-2 -right-2 w-2 h-px bg-black"></div>
+              <div className="absolute -top-2 -right-2 w-px h-2 bg-black"></div>
+              <div className="absolute -bottom-2 -left-2 w-2 h-px bg-black"></div>
+              <div className="absolute -bottom-2 -left-2 w-px h-2 bg-black"></div>
+              <div className="absolute -bottom-2 -right-2 w-2 h-px bg-black"></div>
+              <div className="absolute -bottom-2 -right-2 w-px h-2 bg-black"></div>
+            </div>
+          )}
         </div>
       </div>
     </div>
