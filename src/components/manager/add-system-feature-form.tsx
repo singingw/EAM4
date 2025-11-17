@@ -234,7 +234,29 @@ export function AddSystemFeatureForm() {
                             </AlertDialogFooter>
                           </AlertDialogContent>
                         </AlertDialog>
-                        <Button type="button" variant="outline" className="bg-cyan-500 text-white hover:bg-cyan-600 h-8">自動偵測Action</Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button type="button" variant="outline" className="bg-cyan-500 text-white hover:bg-cyan-600 h-8">自動偵測Action</Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle className="flex flex-col items-center gap-4">
+                                <div className="w-12 h-12 rounded-full border-4 border-orange-200 flex items-center justify-center">
+                                  <AlertTriangle className="h-6 w-6 text-orange-400" />
+                                </div>
+                                提醒
+                              </AlertDialogTitle>
+                              <AlertDialogDescription className="text-center text-base py-2">
+                                <p>是否自動偵測並帶入目前Controller的Action?</p>
+                                <p className="text-muted-foreground text-sm mt-1">(需帶有HttpGet標籤才會被偵測到)</p>
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter className="sm:justify-center">
+                              <AlertDialogAction>確認</AlertDialogAction>
+                              <AlertDialogCancel>再想想</AlertDialogCancel>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                     </div>
 
                     <div className="space-y-4">
