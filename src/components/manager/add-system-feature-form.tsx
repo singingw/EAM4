@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, Save, RefreshCw, Plus, Trash2 } from "lucide-react";
+import { Loader2, Save, RefreshCw, Plus, Trash2, GripVertical } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 
 export function AddSystemFeatureForm() {
   const [isPending, setIsPending] = useState(false);
@@ -32,12 +33,15 @@ export function AddSystemFeatureForm() {
   const form = useForm<z.infer<typeof AddSystemFeatureSchema>>({
     resolver: zodResolver(AddSystemFeatureSchema),
     defaultValues: {
-      title: "",
+      title: "我的社團_活動管理_個人活動",
       status: "enabled",
-      controller: "",
-      action: "",
+      controller: "MyClubEventRegisterSoloEnroll",
+      action: "Index",
       parameters: "",
-      includedFunctions: [{ name: "" }],
+      includedFunctions: [
+        { name: "編輯", controller: "MyClubEventRegisterSoloEnroll", action: "Edit" },
+        { name: "檢視", controller: "MyClubEventRegisterSoloEnroll", action: "Detail" },
+      ],
     },
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -66,7 +70,7 @@ export function AddSystemFeatureForm() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">新增</h1>
+        <h1 className="text-2xl font-bold">編輯</h1>
         <div className="flex items-center gap-2">
             <Button variant="outline" className="bg-gray-500 text-white hover:bg-gray-600" asChild>
                 <Link href="/Manager/system-features">
@@ -77,7 +81,7 @@ export function AddSystemFeatureForm() {
             <Button onClick={form.handleSubmit(onSubmit)} disabled={isPending} className="bg-green-500 text-white hover:bg-green-600">
                 {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 <Save className="mr-2 h-4 w-4" />
-                儲存並新增
+                儲存
             </Button>
         </div>
       </div>
@@ -159,7 +163,7 @@ export function AddSystemFeatureForm() {
                         control={form.control}
                         name="parameters"
                         render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="md:col-span-2">
                             <Label>參數</Label>
                             <FormControl>
                             <Input
@@ -172,37 +176,73 @@ export function AddSystemFeatureForm() {
                         )}
                     />
                 </div>
+                <Separator />
                 <div className="space-y-4">
-                    <Label>包含功能</Label>
-                    <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                        <Label>包含功能</Label>
+                        <Button type="button" variant="outline" className="bg-orange-400 text-white hover:bg-orange-500 h-8">新增預設功能</Button>
+                        <Button type="button" variant="outline" className="bg-cyan-500 text-white hover:bg-cyan-600 h-8">自動偵測Action</Button>
+                    </div>
+
+                    <div className="space-y-4">
                         {fields.map((field, index) => (
-                            <div key={field.id} className="flex items-center gap-2">
-                                <FormField
-                                    control={form.control}
-                                    name={`includedFunctions.${index}.name`}
-                                    render={({ field }) => (
-                                        <FormItem className="flex-1">
-                                            <FormControl>
-                                                <Input {...field} placeholder={`功能 ${index + 1}`} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                {fields.length > 1 && (
-                                  <Button variant="ghost" size="icon" onClick={() => remove(index)}>
-                                    <Trash2 className="h-4 w-4 text-destructive"/>
-                                  </Button>
-                                )}
-                            </div>
+                            <Card key={field.id} className="p-4 bg-muted/30">
+                                <div className="flex items-start gap-2">
+                                     <Button variant="ghost" size="icon" className="cursor-move h-8 w-8 mt-6">
+                                        <GripVertical className="h-4 w-4" />
+                                    </Button>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
+                                      <FormField
+                                        control={form.control}
+                                        name={`includedFunctions.${index}.name`}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <Label>功能名稱</Label>
+                                                <FormControl>
+                                                    <Input {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                      />
+                                       <FormField
+                                        control={form.control}
+                                        name={`includedFunctions.${index}.controller`}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <Label>Controller</Label>
+                                                <FormControl>
+                                                    <Input {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                      />
+                                      <FormField
+                                        control={form.control}
+                                        name={`includedFunctions.${index}.action`}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <Label>Action</Label>
+                                                <FormControl>
+                                                    <Input {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                      />
+                                    </div>
+                                    <Button variant="destructive" size="sm" onClick={() => remove(index)} className="mt-6">
+                                        <Trash2 className="h-4 w-4 mr-1" />
+                                        刪除
+                                    </Button>
+                                </div>
+                            </Card>
                         ))}
                     </div>
-                     <div className="flex items-center gap-2">
-                        <Button type="button" variant="outline" className="bg-orange-400 text-white hover:bg-orange-500">新增預設功能</Button>
-                        <Button type="button" variant="outline" className="bg-cyan-500 text-white hover:bg-cyan-600">自動偵測Action</Button>
-                    </div>
-                    <div className="flex justify-center">
-                        <Button type="button" onClick={() => append({ name: "" })}>
+                    
+                    <div className="flex justify-center pt-2">
+                        <Button type="button" variant="outline" onClick={() => append({ name: "", controller: "", action: "" })}>
                             <Plus className="mr-2 h-4 w-4" />
                             更多
                         </Button>

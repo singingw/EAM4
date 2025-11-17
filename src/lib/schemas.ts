@@ -95,10 +95,12 @@ export const AddSystemFeatureSchema = z.object({
   status: z.string(),
   controller: z.string().min(1, { message: "Controller 為必填欄位" }),
   action: z.string().min(1, { message: "Action 為必填欄位" }),
-  parameters: z.string().min(1, { message: "參數為必填欄位" }),
+  parameters: z.string().optional(),
   includedFunctions: z.array(
     z.object({
       name: z.string().min(1, { message: "功能名稱不得為空" }),
+      controller: z.string().min(1, { message: "Controller 不得為空" }),
+      action: z.string().min(1, { message: "Action 不得為空" }),
     })
   ).min(1, { message: "至少需包含一個功能" }),
 });
