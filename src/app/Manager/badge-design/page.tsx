@@ -247,15 +247,15 @@ export default function BadgeDesignPage() {
                 </Button>
             </div>
         </div>
-        <div className="flex-1 flex items-center justify-center p-8 bg-muted/60 relative">
+        <div className="flex-1 flex items-center justify-center p-8 bg-muted/60 relative overflow-hidden">
           <div
             className="relative bg-white shadow-lg"
             style={{ width: "227px", height: "302px" }}
           >
             {showCenterLine && isEditing && (
               <>
-                <div className="absolute top-0 left-1/2 w-px h-full bg-gray-300 border-l border-dashed"></div>
-                <div className="absolute top-1/2 left-0 h-px w-full bg-gray-300 border-t border-dashed"></div>
+                <div className="absolute top-0 left-1/2 w-px h-full bg-gray-300 border-l border-dashed z-10"></div>
+                <div className="absolute top-1/2 left-0 h-px w-full bg-gray-300 border-t border-dashed z-10"></div>
               </>
             )}
             <div className="absolute inset-0 p-4 flex flex-col items-center justify-center gap-4">
@@ -272,15 +272,17 @@ export default function BadgeDesignPage() {
                   <Image src="https://placehold.co/100x100/png?text=QR" alt="QR Code" width={100} height={100} />
                 </div>
             </div>
-            {/* Crop marks from image */}
-             <div className="absolute -top-4 -left-4 w-2 h-px bg-black"></div>
-            <div className="absolute -top-4 -left-4 w-px h-2 bg-black"></div>
-            <div className="absolute -top-4 -right-4 w-2 h-px bg-black"></div>
-            <div className="absolute -top-4 -right-4 w-px h-2 bg-black"></div>
-            <div className="absolute -bottom-4 -left-4 w-2 h-px bg-black"></div>
-            <div className="absolute -bottom-4 -left-4 w-px h-2 bg-black"></div>
-            <div className="absolute -bottom-4 -right-4 w-2 h-px bg-black"></div>
-            <div className="absolute -bottom-4 -right-4 w-px h-2 bg-black"></div>
+          </div>
+          <div className="absolute" style={{ width: "259px", height: "334px" }}>
+            {/* Crop marks */}
+            <div className="absolute -top-2 -left-2 w-2 h-px bg-black"></div>
+            <div className="absolute -top-2 -left-2 w-px h-2 bg-black"></div>
+            <div className="absolute -top-2 -right-2 w-2 h-px bg-black"></div>
+            <div className="absolute -top-2 -right-2 w-px h-2 bg-black"></div>
+            <div className="absolute -bottom-2 -left-2 w-2 h-px bg-black"></div>
+            <div className="absolute -bottom-2 -left-2 w-px h-2 bg-black"></div>
+            <div className="absolute -bottom-2 -right-2 w-2 h-px bg-black"></div>
+            <div className="absolute -bottom-2 -right-2 w-px h-2 bg-black"></div>
           </div>
         </div>
       </div>
