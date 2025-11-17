@@ -69,8 +69,10 @@ export function ManagerHeader() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem>
-                <span>系統操作手冊</span>
+              <DropdownMenuItem asChild>
+                <a href="/Manager/manual" target="_blank" rel="noopener noreferrer">
+                  <span>系統操作手冊</span>
+                </a>
               </DropdownMenuItem>
               <Dialog>
                 <DialogTrigger asChild>
