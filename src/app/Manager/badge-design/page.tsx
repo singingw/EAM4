@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -245,7 +246,7 @@ export default function BadgeDesignPage() {
                 </Button>
             </div>
         </div>
-        <div className="flex-1 flex items-center justify-center p-8 bg-muted/60">
+        <div className="flex-1 flex items-center justify-center p-8 bg-muted/60 relative">
           <div
             className="relative bg-white shadow-lg"
             style={{ width: "227px", height: "302px" }}
@@ -271,8 +272,25 @@ export default function BadgeDesignPage() {
                 </div>
             </div>
           </div>
+            {/* Crop marks */}
+            <div className="absolute w-[calc(227px+1rem)] h-[calc(302px+1rem)] pointer-events-none">
+              {/* Top-left */}
+              <div className="absolute top-0 left-0 w-2 h-px bg-black"></div>
+              <div className="absolute top-0 left-0 w-px h-2 bg-black"></div>
+              {/* Top-right */}
+              <div className="absolute top-0 right-0 w-2 h-px bg-black"></div>
+              <div className="absolute top-0 right-0 w-px h-2 bg-black"></div>
+              {/* Bottom-left */}
+              <div className="absolute bottom-0 left-0 w-2 h-px bg-black"></div>
+              <div className="absolute bottom-0 left-0 w-px h-2 bg-black"></div>
+              {/* Bottom-right */}
+              <div className="absolute bottom-0 right-0 w-2 h-px bg-black"></div>
+              <div className="absolute bottom-0 right-0 w-px h-2 bg-black"></div>
+            </div>
         </div>
       </div>
     </div>
   );
 }
+
+    
