@@ -33,6 +33,7 @@ import {
   Image as ImageIcon,
   Info,
   Eye,
+  EyeOff,
   Edit,
   Save,
   Bold,
@@ -435,27 +436,35 @@ export default function BadgeDesignPage() {
                   variant="outline" 
                   onClick={(e) => { 
                     e.stopPropagation();
-                    handlePreview();
-                  }}
-                  disabled={!isEditing}
-                  className={!isEditing ? "hidden" : ""}
-                >
-                    <Eye className="mr-2 h-4 w-4" />
-                    預覽
-                </Button>
-                <Button 
-                  className={isEditing ? "bg-green-500 text-white hover:bg-green-600" : "bg-blue-500 text-white hover:bg-blue-600"}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if(isEditing) {
-                      // Save logic here
+                    if (isEditing) {
+                      handlePreview();
                     } else {
                       handleEdit();
                     }
                   }}
                 >
-                    {isEditing ? <Save className="mr-2 h-4 w-4" /> : <Edit className="mr-2 h-4 w-4" />}
-                    {isEditing ? "儲存" : "編輯"}
+                    {isEditing ? <Eye className="mr-2 h-4 w-4" /> : <EyeOff className="mr-2 h-4 w-4" />}
+                    預覽
+                </Button>
+                <Button 
+                  className="bg-green-500 text-white hover:bg-green-600"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // Save logic here
+                  }}
+                >
+                    <Save className="mr-2 h-4 w-4" />
+                    儲存
+                </Button>
+                 <Button 
+                  className={!isEditing ? "bg-blue-500 text-white hover:bg-blue-600" : "hidden"}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleEdit();
+                  }}
+                >
+                    <Edit className="mr-2 h-4 w-4" />
+                    編輯
                 </Button>
             </div>
         </div>
@@ -493,5 +502,3 @@ export default function BadgeDesignPage() {
     </div>
   );
 }
-
-    
