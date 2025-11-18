@@ -49,15 +49,6 @@ const menuItems = [
       ],
     },
     {
-      label: "名單管理",
-      icon: MessageSquare,
-      subItems: [
-        { label: "參加者名單", href: "/Manager/attendees" },
-        { label: "參加者名單(小幫手)", href: "/Manager/attendees-helper" },
-        { label: "QR Code 下載紀錄", href: "/Manager/qrcode" },
-      ],
-    },
-    {
       label: "進銷存管理",
       icon: Truck,
       subItems: [
