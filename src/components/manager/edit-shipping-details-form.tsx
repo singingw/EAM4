@@ -47,8 +47,8 @@ const mockData: EditShippingDetailValues = {
   picker: "",
   devices: [
     { id: "1", name: "Laptop A", serialNumber: "", status: "尚未撿貨" },
-    { id: "2", name: "Laptop B", serialNumber: "SN-B-456", status: "已撿貨" },
-    { id: "3", name: "Monitor C", serialNumber: "SN-C-789", status: "已出貨" },
+    { id: "2", name: "Laptop B", serialNumber: "", status: "尚未撿貨" },
+    { id: "3", name: "Monitor C", serialNumber: "", status: "尚未撿貨" },
     { id: "4", name: "Laptop D", serialNumber: "", status: "尚未撿貨" },
   ],
 };
