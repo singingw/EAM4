@@ -49,8 +49,13 @@ const shippingData = [
   },
   {
     quoteId: "ORD004",
-    status: "已出貨",
+    status: "撿貨處理中",
     lastModified: "2024/08/19 18:00",
+  },
+  {
+    quoteId: "ORD005",
+    status: "已完成",
+    lastModified: "2024/08/18 14:00",
   },
 ];
 
@@ -58,7 +63,8 @@ const statusMap: { [key: string]: { label: string; className: string } } = {
   已轉檔: { label: "已轉檔", className: "bg-blue-100 text-blue-800" },
   待放行: { label: "待放行", className: "bg-yellow-100 text-yellow-800" },
   待檢貨: { label: "待檢貨", className: "bg-orange-100 text-orange-800" },
-  已出貨: { label: "已出貨", className: "bg-green-100 text-green-800" },
+  撿貨處理中: { label: "撿貨處理中", className: "bg-purple-100 text-purple-800" },
+  已完成: { label: "已完成", className: "bg-green-100 text-green-800" },
 };
 
 export default function ShippingDetailsPage() {
@@ -141,7 +147,7 @@ export default function ShippingDetailsPage() {
           </div>
         </CardContent>
          <div className="p-4 border-t flex justify-between items-center">
-            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 4 項結果，共 4 項</p>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 5 項結果，共 5 項</p>
             <Pagination>
                 <PaginationContent>
                 <PaginationItem>
@@ -160,4 +166,3 @@ export default function ShippingDetailsPage() {
     </div>
   );
 }
-

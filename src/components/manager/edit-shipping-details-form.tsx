@@ -59,7 +59,7 @@ const statusMap: { [key: string]: { label: string; className: string } } = {
   已出貨: { label: "已出貨", className: "bg-green-100 text-green-800" },
 };
 
-const mainStatusOptions = ["已轉檔", "待放行", "待檢貨"];
+const mainStatusOptions = ["已轉檔", "待放行", "待檢貨", "撿貨處理中", "已完成"];
 
 export function EditShippingDetailsForm() {
   const [isPending, setIsPending] = useState(false);
@@ -80,7 +80,7 @@ export function EditShippingDetailsForm() {
   const onSubmit = (values: EditShippingDetailValues) => {
     setIsPending(true);
 
-    const updatedValues = { ...values };
+    let updatedValues = { ...values };
     
     // Logic for state transition
     if (values.status === "已轉檔") {
@@ -94,6 +94,15 @@ export function EditShippingDetailsForm() {
             device.status = "已撿貨";
         }
     });
+
+    const allDevicesShipped = updatedValues.devices.every(d => d.status === '已出貨');
+    const anyDevicePicked = updatedValues.devices.some(d => d.status === '已撿貨' || d.status === '已出貨');
+
+    if (allDevicesShipped) {
+      updatedValues.status = "已完成";
+    } else if (anyDevicePicked && updatedValues.status === '待檢貨') {
+      updatedValues.status = "撿貨處理中";
+    }
     
     console.log("Saving data:", updatedValues);
     toast({
@@ -107,7 +116,7 @@ export function EditShippingDetailsForm() {
     }, 1000);
   };
   
-  const canStartPicking = form.watch('status') === '待檢貨';
+  const canStartPicking = form.watch('status') === '待檢貨' || form.watch('status') === '撿貨處理中';
 
   return (
     <>
@@ -171,7 +180,7 @@ export function EditShippingDetailsForm() {
                   render={({ field }) => (
                     <FormItem>
                       <Label>撿貨人員</Label>
-                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending || !canStartPicking}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending || form.watch('status') !== '待檢貨'}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="-- 請選擇 --" />
@@ -256,4 +265,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
