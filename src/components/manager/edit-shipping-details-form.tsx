@@ -250,7 +250,7 @@ export function EditShippingDetailsForm() {
                   name="picker"
                   render={({ field }) => (
                     <FormItem>
-                      <Label>撿貨人員</Label>
+                      <Label>目前處理人員</Label>
                       <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending || form.watch('status') !== '待檢貨'}>
                         <FormControl>
                           <SelectTrigger>
@@ -668,7 +668,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="w-[50px]">項次</TableHead>
                             <TableHead className="w-[120px]">料號</TableHead>
                             <TableHead className="min-w-[150px]">名稱</TableHead>
-                            <TableHead className="w-[80px]">數量</TableHead>
+                            <TableHead className="w-[80px]">数量</TableHead>
                             <TableHead className="w-[120px]">序號</TableHead>
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
@@ -749,3 +749,4 @@ export function EditShippingDetailsForm() {
   );
 }
 
+    

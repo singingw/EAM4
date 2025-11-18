@@ -97,7 +97,7 @@ export function ViewShippingDetails() {
                 <div className="space-y-1"><Label>報價單號</Label><p className="text-foreground">{data.quoteId}</p></div>
                 <div className="space-y-1"><Label>物料需求單號</Label><p className="text-foreground">{data.materialRequestNo}</p></div>
                 <div className="space-y-1"><Label>狀態</Label><p className="text-foreground">{data.status}</p></div>
-                <div className="space-y-1"><Label>撿貨人員</Label><p className="text-foreground">{data.picker || 'N/A'}</p></div>
+                <div className="space-y-1"><Label>目前處理人員</Label><p className="text-foreground">{data.picker || 'N/A'}</p></div>
                 <div className="space-y-1"><Label>場站名稱</Label><p className="text-foreground">{data.siteName}</p></div>
                 <div className="space-y-1"><Label>場站地址</Label><p className="text-foreground">{data.siteAddress}</p></div>
                 
@@ -154,7 +154,7 @@ export function ViewShippingDetails() {
                             <TableHead className="w-[50px]">項次</TableHead>
                             <TableHead className="w-[120px]">料號</TableHead>
                             <TableHead className="min-w-[150px]">名稱</TableHead>
-                            <TableHead className="w-[80px]">數量</TableHead>
+                            <TableHead className="w-[80px]">数量</TableHead>
                             <TableHead className="w-[120px]">序號</TableHead>
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
@@ -196,3 +196,4 @@ export function ViewShippingDetails() {
   );
 }
 
+    
