@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, Download, Edit } from "lucide-react";
+import { Search, Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -145,9 +145,9 @@ export default function ShippingDetailsPage() {
                     <TableCell>{item.handler}</TableCell>
                     <TableCell>{item.lastModified}</TableCell>
                     <TableCell>
-                      <Button asChild variant="outline" size="icon" className="h-8 w-8">
+                      <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
                          <Link href="/Manager/shipping-details/edit">
-                           <Edit className="h-4 w-4" />
+                           編輯
                          </Link>
                       </Button>
                     </TableCell>
