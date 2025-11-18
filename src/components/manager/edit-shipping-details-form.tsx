@@ -65,7 +65,7 @@ const mockData: EditShippingDetailValues = {
   materialRequestNo: 'MRN001',
   siteName: '中山機房',
   siteAddress: '台北市中山區中山北路二段48巷7號',
-  siteCategory: 'outdoor',
+  siteCategory: '',
   classificationName: '',
   equipmentType: '',
   surveyorName: '王小明',
@@ -275,7 +275,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>案場分類</Label>
-                        <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+                        <Select onValueChange={field.onChange} value={field.value} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
@@ -297,7 +297,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>分級名稱</Label>
-                        <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+                        <Select onValueChange={field.onChange} value={field.value} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
@@ -565,3 +565,5 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
