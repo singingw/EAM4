@@ -134,7 +134,9 @@ export default function RolesPage() {
                             <Link href="/Manager/roles/edit">編輯</Link>
                           </Button>
                           <Button variant="destructive" size="sm">刪除</Button>
-                          <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
+                            <Link href="/Manager/roles/view">檢視</Link>
+                          </Button>
                           <Button variant="secondary" size="sm">複製</Button>
                           <Button asChild variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
                             <Link href="/Manager/history">異動紀錄</Link>
@@ -152,7 +154,9 @@ export default function RolesPage() {
                               <Link href="/Manager/roles/edit" className="text-green-600">編輯</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
-                            <DropdownMenuItem className="text-blue-600">檢視</DropdownMenuItem>
+                             <DropdownMenuItem asChild>
+                                <Link href="/Manager/roles/view" className="text-blue-600">檢視</Link>
+                            </DropdownMenuItem>
                             <DropdownMenuItem>複製</DropdownMenuItem>
                             <DropdownMenuItem asChild>
                               <Link href="/Manager/history" className="text-orange-600">異動紀錄</Link>
