@@ -27,8 +27,15 @@ import { Checkbox } from "../ui/checkbox";
 
 const deviceSchema = z.object({
   id: z.string(),
+  partNumber: z.string(),
   name: z.string(),
+  quantity: z.number(),
   serialNumber: z.string(),
+  note: z.string(),
+  location: z.string(),
+  inventoryStatus: z.enum(["存貨", "備品", "缺貨"]),
+  deviceSerialNumberS: z.string(),
+  deviceSerialNumberSpare: z.string(),
   status: z.enum(["尚未撿貨", "已撿貨", "已出貨"]),
 });
 
@@ -69,7 +76,7 @@ const mockData: EditShippingDetailValues = {
   classificationName: '',
   equipmentType: '',
   surveyorName: '王小明',
-  maintenanceStation: 'station1',
+  maintenanceStation: '泰山站',
   panelStandardForm: 'formA',
   panelAdditionalItems: 'itemB',
   dispatchPanelVendor: '百訊',
@@ -79,10 +86,10 @@ const mockData: EditShippingDetailValues = {
   psopQuoteNote: 'PSOP 報價單備註內容',
   note: '一般備註',
   devices: [
-    { id: "1", name: "Laptop A", serialNumber: "", status: "尚未撿貨" },
-    { id: "2", name: "Laptop B", serialNumber: "", status: "尚未撿貨" },
-    { id: "3", name: "Monitor C", serialNumber: "", status: "尚未撿貨" },
-    { id: "4", name: "Laptop D", serialNumber: "", status: "尚未撿貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", quantity: 1, serialNumber: "", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", quantity: 2, serialNumber: "", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", quantity: 1, serialNumber: "", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
+    { id: "4", partNumber: 'PN004', name: "Laptop D", quantity: 3, serialNumber: "", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
   ],
 };
 
@@ -90,6 +97,12 @@ const statusMap: { [key: string]: { label: string; className: string } } = {
   尚未撿貨: { label: "尚未撿貨", className: "bg-gray-200 text-gray-800" },
   已撿貨: { label: "已撿貨", className: "bg-yellow-100 text-yellow-800" },
   已出貨: { label: "已出貨", className: "bg-green-100 text-green-800" },
+};
+
+const inventoryStatusMap: { [key: string]: { label: string; className: string } } = {
+  存貨: { label: "存貨", className: "bg-blue-100 text-blue-800" },
+  備品: { label: "備品", className: "bg-purple-100 text-purple-800" },
+  缺貨: { label: "缺貨", className: "bg-red-100 text-red-800" },
 };
 
 const mainStatusOptions = ["已轉檔", "待放行", "待撿貨", "撿貨處理中", "已完成"];
@@ -123,7 +136,7 @@ export function EditShippingDetailsForm() {
     // Auto-update device status if serial number is added
     updatedValues.devices.forEach((device, index) => {
         const originalDevice = mockData.devices[index];
-        if (device.serialNumber && originalDevice.status === "尚未撿貨") {
+        if (device.deviceSerialNumberS && originalDevice.status === "尚未撿貨") {
             device.status = "已撿貨";
         }
     });
@@ -512,59 +525,89 @@ export function EditShippingDetailsForm() {
                 <CardTitle>設備列表</CardTitle>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>項次</TableHead>
-                    <TableHead>設備名稱</TableHead>
-                    <TableHead>設備序號</TableHead>
-                    <TableHead>設備狀態</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {fields.map((field, index) => (
-                    <TableRow key={field.id}>
-                      <TableCell>{index + 1}</TableCell>
-                      <TableCell>{field.name}</TableCell>
-                      <TableCell>
-                        <FormField
-                            control={form.control}
-                            name={`devices.${index}.serialNumber`}
-                            render={({ field: f }) => (
-                                <Input 
-                                    {...f} 
-                                    disabled={isPending || !canStartPicking || field.status !== '尚未撿貨'}
-                                    placeholder={field.status === '尚未撿貨' && canStartPicking ? '請輸入或掃描序號' : ''}
+                <div className="overflow-x-auto">
+                    <Table className="min-w-full">
+                        <TableHeader>
+                        <TableRow>
+                            <TableHead className="w-[50px]">項次</TableHead>
+                            <TableHead className="w-[120px]">料號</TableHead>
+                            <TableHead className="min-w-[150px]">名稱</TableHead>
+                            <TableHead className="w-[80px]">數量</TableHead>
+                            <TableHead className="w-[120px]">序號</TableHead>
+                            <TableHead className="min-w-[150px]">備註</TableHead>
+                            <TableHead className="w-[120px]">放置地點</TableHead>
+                            <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
+                            <TableHead className="min-w-[200px]">設備序號(S)</TableHead>
+                            <TableHead className="min-w-[200px]">設備序號(備品)</TableHead>
+                            <TableHead className="w-[150px]">設備狀態</TableHead>
+                        </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                        {fields.map((field, index) => (
+                            <TableRow key={field.id}>
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>{field.partNumber}</TableCell>
+                            <TableCell>{field.name}</TableCell>
+                            <TableCell>{field.quantity}</TableCell>
+                            <TableCell>{field.serialNumber}</TableCell>
+                             <TableCell>
+                                <FormField
+                                    control={form.control}
+                                    name={`devices.${index}.note`}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || !canStartPicking} /> )}
                                 />
-                            )}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        {field.status === '已撿貨' ? (
-                             <Select 
-                                defaultValue={field.status} 
-                                onValueChange={(value) => {
-                                    const newStatus = value as "尚未撿貨" | "已撿貨" | "已出貨";
-                                    update(index, { ...field, status: newStatus });
-                                }}
-                                disabled={isPending || !canStartPicking}
-                            >
-                                <SelectTrigger className="w-32">
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="已撿貨">已撿貨</SelectItem>
-                                    <SelectItem value="已出貨">已出貨</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        ) : (
-                             <Badge variant="outline" className={statusMap[field.status].className}>{statusMap[field.status].label}</Badge>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                            </TableCell>
+                            <TableCell>{field.location}</TableCell>
+                            <TableCell>
+                                 <Badge variant="outline" className={inventoryStatusMap[field.inventoryStatus].className}>{inventoryStatusMap[field.inventoryStatus].label}</Badge>
+                            </TableCell>
+                            <TableCell>
+                                <FormField
+                                    control={form.control}
+                                    name={`devices.${index}.deviceSerialNumberS`}
+                                    render={({ field: f }) => (
+                                        <Input 
+                                            {...f} 
+                                            disabled={isPending || !canStartPicking || field.status !== '尚未撿貨'}
+                                            placeholder={field.status === '尚未撿貨' && canStartPicking ? '請輸入或掃描序號' : ''}
+                                        />
+                                    )}
+                                />
+                            </TableCell>
+                            <TableCell>
+                                <FormField
+                                    control={form.control}
+                                    name={`devices.${index}.deviceSerialNumberSpare`}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || !canStartPicking} /> )}
+                                />
+                            </TableCell>
+                            <TableCell>
+                                {field.status === '已撿貨' ? (
+                                    <Select 
+                                        defaultValue={field.status} 
+                                        onValueChange={(value) => {
+                                            const newStatus = value as "尚未撿貨" | "已撿貨" | "已出貨";
+                                            update(index, { ...field, status: newStatus });
+                                        }}
+                                        disabled={isPending || !canStartPicking}
+                                    >
+                                        <SelectTrigger className="w-32">
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="已撿貨">已撿貨</SelectItem>
+                                            <SelectItem value="已出貨">已出貨</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                ) : (
+                                    <Badge variant="outline" className={statusMap[field.status].className}>{statusMap[field.status].label}</Badge>
+                                )}
+                            </TableCell>
+                            </TableRow>
+                        ))}
+                        </TableBody>
+                    </Table>
+                </div>
             </CardContent>
           </Card>
         </form>
@@ -572,5 +615,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
-    
