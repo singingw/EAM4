@@ -72,7 +72,7 @@ const mockData: EditShippingDetailValues = {
   maintenanceStation: 'station1',
   panelStandardForm: 'formA',
   panelAdditionalItems: 'itemB',
-  dispatchPanelVendor: 'vendorC',
+  dispatchPanelVendor: '百訊',
   yuanChuangRequirement: true,
   panelDispatchPersonnel: '李大維',
   psopMaterialRequestNote: 'PSOP 物料需求單備註內容',
@@ -427,8 +427,10 @@ export function EditShippingDetailsForm() {
                       <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                         <FormControl><SelectTrigger><SelectValue placeholder="請選擇" /></SelectTrigger></FormControl>
                         <SelectContent>
-                          <SelectItem value="vendorA">廠商A</SelectItem>
-                          <SelectItem value="vendorB">廠商B</SelectItem>
+                          <SelectItem value="百訊">百訊</SelectItem>
+                          <SelectItem value="正合旭">正合旭</SelectItem>
+                          <SelectItem value="三匠">三匠</SelectItem>
+                          <SelectItem value="創星">創星</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -570,3 +572,5 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
