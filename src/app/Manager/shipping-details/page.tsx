@@ -36,26 +36,31 @@ const shippingData = [
     quoteId: "ORD001",
     status: "待放行",
     lastModified: "2024/08/22 10:00",
+    handler: "人員A",
   },
   {
     quoteId: "ORD002",
     status: "已轉檔",
     lastModified: "2024/08/21 15:30",
+    handler: "系統",
   },
   {
     quoteId: "ORD003",
     status: "待檢貨",
     lastModified: "2024/08/20 11:00",
+    handler: "人員B",
   },
   {
     quoteId: "ORD004",
     status: "撿貨處理中",
     lastModified: "2024/08/19 18:00",
+    handler: "人員C",
   },
   {
     quoteId: "ORD005",
     status: "已完成",
     lastModified: "2024/08/18 14:00",
+    handler: "系統",
   },
 ];
 
@@ -119,6 +124,7 @@ export default function ShippingDetailsPage() {
                 <TableRow className="bg-muted/50">
                   <TableHead>報價單號</TableHead>
                   <TableHead>狀態</TableHead>
+                  <TableHead>目前處理人員</TableHead>
                   <TableHead>最後更新時間</TableHead>
                   <TableHead>編輯</TableHead>
                 </TableRow>
@@ -132,6 +138,7 @@ export default function ShippingDetailsPage() {
                         {statusMap[item.status as keyof typeof statusMap]?.label || item.status}
                       </Badge>
                     </TableCell>
+                    <TableCell>{item.handler}</TableCell>
                     <TableCell>{item.lastModified}</TableCell>
                     <TableCell>
                       <Button asChild variant="outline" size="icon" className="h-8 w-8">
