@@ -370,8 +370,13 @@ export function EditShippingDetailsForm() {
                                 </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
-                                    <SelectItem value="station1">維運站一</SelectItem>
-                                    <SelectItem value="station2">維運站二</SelectItem>
+                                    <SelectItem value="泰山站">泰山站</SelectItem>
+                                    <SelectItem value="樹林站">樹林站</SelectItem>
+                                    <SelectItem value="楊梅站">楊梅站</SelectItem>
+                                    <SelectItem value="后里站">后里站</SelectItem>
+                                    <SelectItem value="員林站">員林站</SelectItem>
+                                    <SelectItem value="新市站">新市站</SelectItem>
+                                    <SelectItem value="田寮站">田寮站</SelectItem>
                                 </SelectContent>
                             </Select>
                             <FormMessage />
@@ -565,5 +570,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
-    
