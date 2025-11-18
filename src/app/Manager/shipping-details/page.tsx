@@ -182,6 +182,11 @@ export default function ShippingDetailsPage() {
                               <Eye className="mr-2 h-4 w-4" />
                               預覽檢貨單
                             </Button>
+                            {item.status === '待放行' && (
+                                <Button variant="outline" size="sm" className="bg-red-500 text-white hover:bg-red-600 hover:text-white">
+                                    已確認客戶放行
+                                </Button>
+                            )}
                         </>
                       ) : (
                         <DropdownMenu>
@@ -201,6 +206,11 @@ export default function ShippingDetailsPage() {
                                 <Eye className="mr-2 h-4 w-4" />
                                 預覽檢貨單
                             </DropdownMenuItem>
+                            {item.status === '待放行' && (
+                                <DropdownMenuItem className="text-red-600">
+                                    已確認客戶放行
+                                </DropdownMenuItem>
+                            )}
                           </DropdownMenuContent>
                         </DropdownMenu>
                       )}
@@ -231,3 +241,4 @@ export default function ShippingDetailsPage() {
     </div>
   );
 }
+
