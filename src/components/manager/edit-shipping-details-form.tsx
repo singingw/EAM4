@@ -187,6 +187,19 @@ export function EditShippingDetailsForm() {
                     </FormItem>
                   )}
                 />
+                 <FormField
+                  control={form.control}
+                  name="materialRequestNo"
+                  render={({ field }) => (
+                    <FormItem>
+                      <Label>物料需求單號</Label>
+                      <FormControl>
+                        <Input {...field} disabled={isPending} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="status"
@@ -225,19 +238,6 @@ export function EditShippingDetailsForm() {
                            <SelectItem value="user3">人員C</SelectItem>
                         </SelectContent>
                       </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 <FormField
-                  control={form.control}
-                  name="materialRequestNo"
-                  render={({ field }) => (
-                    <FormItem>
-                      <Label>物料需求單號</Label>
-                      <FormControl>
-                        <Input {...field} disabled={isPending} />
-                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
