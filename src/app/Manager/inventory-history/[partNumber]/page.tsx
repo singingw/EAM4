@@ -122,6 +122,7 @@ export default function DeviceHistoryPage() {
                   <TableHead>異動日期</TableHead>
                   <TableHead>報價單號</TableHead>
                   <TableHead>移轉說明</TableHead>
+                  <TableHead>序號</TableHead>
                   <TableHead>異動數量</TableHead>
                   <TableHead>備註</TableHead>
                 </TableRow>
@@ -140,12 +141,8 @@ export default function DeviceHistoryPage() {
                     </TableCell>
                     <TableCell>
                       {item.action}
-                      {item.serialNumber && (
-                        <div className="text-xs text-muted-foreground">
-                          (序號: {item.serialNumber})
-                        </div>
-                      )}
                     </TableCell>
+                    <TableCell>{item.serialNumber}</TableCell>
                     <TableCell className={item.quantity > 0 ? "text-green-600" : "text-red-600"}>
                       {item.quantity > 0 ? `+${item.quantity}`: item.quantity}
                     </TableCell>
@@ -176,3 +173,5 @@ export default function DeviceHistoryPage() {
     </div>
   );
 }
+
+    
