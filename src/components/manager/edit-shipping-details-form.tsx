@@ -92,7 +92,7 @@ const statusMap: { [key: string]: { label: string; className: string } } = {
   已出貨: { label: "已出貨", className: "bg-green-100 text-green-800" },
 };
 
-const mainStatusOptions = ["已轉檔", "待放行", "待檢貨", "撿貨處理中", "已完成"];
+const mainStatusOptions = ["已轉檔", "待放行", "待撿貨", "撿貨處理中", "已完成"];
 
 export function EditShippingDetailsForm() {
   const [isPending, setIsPending] = useState(false);
@@ -274,7 +274,7 @@ export function EditShippingDetailsForm() {
                     name="siteCategory"
                     render={({ field }) => (
                         <FormItem>
-                        <Label>案場分類</Label>
+                        <Label>場站分類</Label>
                         <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
