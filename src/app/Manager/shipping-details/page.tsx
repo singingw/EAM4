@@ -171,11 +171,13 @@ export default function ShippingDetailsPage() {
                        <Dialog>
                       {showFunctions ? (
                         <>
-                          <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
-                            <Link href="/Manager/shipping-details/edit">
-                              編輯
-                            </Link>
-                          </Button>
+                          {item.status !== '已完成' && (
+                            <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
+                              <Link href="/Manager/shipping-details/edit">
+                                編輯
+                              </Link>
+                            </Button>
+                          )}
                           <Button asChild variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
                             <Link href="/Manager/shipping-details/view">
                               檢視
@@ -201,9 +203,11 @@ export default function ShippingDetailsPage() {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            <DropdownMenuItem asChild>
-                                <Link href="/Manager/shipping-details/edit" className="text-green-600">編輯</Link>
-                            </DropdownMenuItem>
+                            {item.status !== '已完成' && (
+                              <DropdownMenuItem asChild>
+                                  <Link href="/Manager/shipping-details/edit" className="text-green-600">編輯</Link>
+                              </DropdownMenuItem>
+                            )}
                             <DropdownMenuItem asChild>
                                 <Link href="/Manager/shipping-details/view" className="text-blue-600">檢視</Link>
                             </DropdownMenuItem>
@@ -250,3 +254,5 @@ export default function ShippingDetailsPage() {
     </div>
   );
 }
+
+    
