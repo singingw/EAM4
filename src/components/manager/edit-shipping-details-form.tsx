@@ -67,7 +67,7 @@ const mockData: EditShippingDetailValues = {
   siteAddress: '台北市中山區中山北路二段48巷7號',
   siteCategory: 'outdoor',
   classificationName: 'flagship',
-  equipmentType: 'typeX',
+  equipmentType: '',
   surveyorName: '王小明',
   maintenanceStation: 'station1',
   panelStandardForm: 'formA',
@@ -322,15 +322,20 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>維運設備類型</Label>
-                        <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+                        <Select onValueChange={field.onChange} value={field.value} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
                             </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                <SelectItem value="typeX">類型X</SelectItem>
-                                <SelectItem value="typeY">類型Y</SelectItem>
+                                <SelectItem value="TSP-flagship">TSP旗艦型</SelectItem>
+                                <SelectItem value="TSP-advanced">TSP高階型</SelectItem>
+                                <SelectItem value="flagship-site">旗艦場</SelectItem>
+                                <SelectItem value="advanced">高階型</SelectItem>
+                                <SelectItem value="intermediate">進階型</SelectItem>
+                                <SelectItem value="entry">入門場</SelectItem>
+                                <SelectItem value="list-based">名單型</SelectItem>
                             </SelectContent>
                         </Select>
                         <FormMessage />
@@ -560,3 +565,5 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
