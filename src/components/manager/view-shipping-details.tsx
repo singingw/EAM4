@@ -51,10 +51,10 @@ const mockData = {
   materialRequestDate: new Date(),
   shippingDate: new Date(),
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", quantity: 1, serialNumber: "SN001", note: "備註A", location: "A-01", inventoryStatus: "存貨" as const, deviceSerialNumberS: "SN001", deviceSerialNumberSpare: "", status: "已撿貨" as const },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", quantity: 2, serialNumber: "SN002", note: "", location: "A-02", inventoryStatus: "存貨" as const, deviceSerialNumberS: "SN002", deviceSerialNumberSpare: "", status: "已撿貨" as const },
-    { id: "3", partNumber: 'PN003', name: "Monitor C", quantity: 1, serialNumber: "SPARE001", note: "備品優先", location: "B-01", inventoryStatus: "備品" as const, deviceSerialNumberS: "", deviceSerialNumberSpare: "SPARE001", status: "已撿貨" as const },
-    { id: "4", partNumber: 'PN004', name: "Laptop D", quantity: 3, serialNumber: "", note: "", location: "C-05", inventoryStatus: "缺貨" as const, deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" as const },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, serialNumber: "SN001", note: "備註A", location: "A-01", inventoryStatus: "存貨" as const, deviceSerialNumberS: "SN001", deviceSerialNumberSpare: "", status: "已撿貨" as const },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, serialNumber: "SN002", note: "", location: "A-02", inventoryStatus: "存貨" as const, deviceSerialNumberS: "SN002", deviceSerialNumberSpare: "", status: "已撿貨" as const },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, serialNumber: "SPARE001", note: "備品優先", location: "B-01", inventoryStatus: "備品" as const, deviceSerialNumberS: "", deviceSerialNumberSpare: "SPARE001", status: "已撿貨" as const },
+    { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, serialNumber: "", note: "", location: "C-05", inventoryStatus: "缺貨" as const, deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" as const },
   ],
 };
 
@@ -154,6 +154,7 @@ export function ViewShippingDetails() {
                             <TableHead className="w-[50px]">項次</TableHead>
                             <TableHead className="w-[120px]">料號</TableHead>
                             <TableHead className="min-w-[150px]">名稱</TableHead>
+                            <TableHead className="min-w-[120px]">倉庫</TableHead>
                             <TableHead className="w-[80px]">数量</TableHead>
                             <TableHead className="w-[120px]">序號</TableHead>
                             <TableHead className="min-w-[150px]">備註</TableHead>
@@ -170,6 +171,7 @@ export function ViewShippingDetails() {
                             <TableCell>{index + 1}</TableCell>
                             <TableCell>{device.partNumber}</TableCell>
                             <TableCell>{device.name}</TableCell>
+                            <TableCell>{device.warehouse}</TableCell>
                             <TableCell>{device.quantity}</TableCell>
                             <TableCell>{[device.deviceSerialNumberS, device.deviceSerialNumberSpare].filter(Boolean).join(', ')}</TableCell>
                             <TableCell>{device.note}</TableCell>
@@ -195,5 +197,7 @@ export function ViewShippingDetails() {
     </>
   );
 }
+
+    
 
     
