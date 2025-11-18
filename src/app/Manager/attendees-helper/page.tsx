@@ -109,27 +109,6 @@ export default function AttendeesHelperPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">參加者名單 (小幫手)</h1>
-        <div className="flex items-center gap-2">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="bg-teal-500 text-white hover:bg-teal-600">
-                    全部寄送通知
-                </Button>
-              </DialogTrigger>
-              <PreEventNotificationDialog />
-            </Dialog>
-            <Button variant="outline" className="bg-orange-400 text-white hover:bg-orange-500">
-                全部匯出 QRCode
-            </Button>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="ghost" size="icon" className="hover:bg-transparent">
-                  <Settings className="h-4 w-4" />
-                </Button>
-              </DialogTrigger>
-              <FieldSettingsDialog />
-            </Dialog>
-        </div>
       </div>
 
       <Card>
