@@ -130,7 +130,7 @@ export default function ShippingDetailsPage() {
                   <TableHead>狀態</TableHead>
                   <TableHead>目前處理人員</TableHead>
                   <TableHead>最後更新時間</TableHead>
-                  <TableHead>編輯</TableHead>
+                  <TableHead>功能</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
