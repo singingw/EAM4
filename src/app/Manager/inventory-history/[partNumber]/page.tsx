@@ -43,7 +43,20 @@ export default function DeviceHistoryPage() {
 
   const device = historyData.length > 0 ? historyData[0] : null;
 
-  const totalQuantity = historyData.reduce((sum, item) => sum + item.quantity, 0);
+  const totalQuantity = historyData.reduce((sum, item) => {
+    if (item.action === '盤點調整') {
+        // Find the most recent inventory before this adjustment
+        const previousInventory = allHistoryData
+            .filter(d => d.partNumber === item.partNumber && new Date(d.date) < new Date(item.date))
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        
+        const previousTotal = previousInventory.reduce((s, i) => s + i.quantity, 0);
+
+        return previousTotal + item.quantity;
+    }
+    return sum + item.quantity;
+  }, 0);
+
 
   return (
     <div className="space-y-6">
@@ -83,7 +96,7 @@ export default function DeviceHistoryPage() {
                   <TableHead>異動日期</TableHead>
                   <TableHead>序號</TableHead>
                   <TableHead>報價單號</TableHead>
-                  <TableHead>異動內容</TableHead>
+                  <TableHead>移轉說明</TableHead>
                   <TableHead>異動數量</TableHead>
                   <TableHead>處理人員</TableHead>
                   <TableHead>備註</TableHead>
