@@ -41,7 +41,7 @@ const deviceSchema = z.object({
   inventoryStatus: z.enum(["存貨", "備品", "缺貨", ""]),
   deviceSerialNumberS: z.string(),
   deviceSerialNumberSpare: z.string(),
-  status: z.enum(["尚未撿貨", "已撿貨", "已出貨"]),
+  status: z.enum(["尚未撿貨", "已撿貨", "存貨缺貨", "備品缺貨", "已出貨"]),
 });
 
 const EditShippingDetailSchema = z.object({
@@ -109,6 +109,8 @@ const mockData: EditShippingDetailValues = {
 const statusMap: { [key: string]: { label: string; className: string } } = {
   尚未撿貨: { label: "尚未撿貨", className: "bg-gray-200 text-gray-800" },
   已撿貨: { label: "已撿貨", className: "bg-yellow-100 text-yellow-800" },
+  存貨缺貨: { label: "存貨缺貨", className: "bg-red-100 text-red-800" },
+  備品缺貨: { label: "備品缺貨", className: "bg-orange-100 text-orange-800" },
   已出貨: { label: "已出貨", className: "bg-green-100 text-green-800" },
 };
 
@@ -207,7 +209,7 @@ export function EditShippingDetailsForm() {
                     <FormItem>
                       <Label>報價單號</Label>
                       <FormControl>
-                        <Input {...field} disabled={isPending || true} />
+                        <Input {...field} disabled={true} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -586,6 +588,7 @@ export function EditShippingDetailsForm() {
                                 "w-full pl-3 text-left font-normal",
                                 !field.value && "text-muted-foreground"
                               )}
+                              disabled={isPending}
                             >
                               {field.value ? (
                                 format(field.value, "yyyy/MM/dd")
@@ -627,6 +630,7 @@ export function EditShippingDetailsForm() {
                                 "w-full pl-3 text-left font-normal",
                                 !field.value && "text-muted-foreground"
                               )}
+                              disabled={isPending}
                             >
                               {field.value ? (
                                 format(field.value, "yyyy/MM/dd")
@@ -730,7 +734,7 @@ export function EditShippingDetailsForm() {
                                 <Select
                                     defaultValue={field.status}
                                     onValueChange={(value) => {
-                                        const newStatus = value as "尚未撿貨" | "已撿貨" | "已出貨";
+                                        const newStatus = value as "尚未撿貨" | "已撿貨" | "存貨缺貨" | "備品缺貨" | "已出貨";
                                         update(index, { ...field, status: newStatus });
                                     }}
                                     disabled={isPending}
@@ -741,6 +745,8 @@ export function EditShippingDetailsForm() {
                                     <SelectContent>
                                         <SelectItem value="尚未撿貨">尚未撿貨</SelectItem>
                                         <SelectItem value="已撿貨">已撿貨</SelectItem>
+                                        <SelectItem value="存貨缺貨">存貨缺貨</SelectItem>
+                                        <SelectItem value="備品缺貨">備品缺貨</SelectItem>
                                         <SelectItem value="已出貨">已出貨</SelectItem>
                                     </SelectContent>
                                 </Select>
@@ -757,11 +763,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
-    
-
-    
-
-    
-
-    
