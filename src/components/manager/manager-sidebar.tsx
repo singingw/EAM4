@@ -58,6 +58,7 @@ const menuItems = [
       label: "名單管理",
       icon: MessageSquare,
       subItems: [
+        { label: "參加者名單", href: "/Manager/attendees" },
         { label: "QR Code 下載紀錄", href: "/Manager/qrcode" },
       ],
     },
