@@ -33,40 +33,30 @@ import {
 const shippingData = [
   {
     orderId: "ORD001",
-    customer: "陳曉明",
-    product: "日本宇治抹茶粉",
     quantity: 2,
     status: "shipped",
     shippingDate: "2024/08/20",
   },
   {
     orderId: "ORD002",
-    customer: "林美麗",
-    product: "手工茶具組",
     quantity: 1,
     status: "processing",
     shippingDate: "-",
   },
   {
     orderId: "ORD003",
-    customer: "John Doe",
-    product: "茶道體驗券",
     quantity: 4,
     status: "delivered",
     shippingDate: "2024/08/18",
   },
   {
     orderId: "ORD004",
-    customer: "張偉",
-    product: "日式和菓子禮盒",
     quantity: 1,
     status: "shipped",
     shippingDate: "2024/08/21",
   },
    {
     orderId: "ORD005",
-    customer: "Emily White",
-    product: "日本宇治抹茶粉",
     quantity: 3,
     status: "delivered",
     shippingDate: "2024/08/19",
@@ -89,18 +79,10 @@ export default function ShippingDetailsPage() {
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
               <div className="space-y-2">
                 <label htmlFor="orderId" className="text-sm font-medium">訂單號碼</label>
                 <Input id="orderId" placeholder="輸入訂單號碼" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="customer" className="text-sm font-medium">客戶名稱</label>
-                <Input id="customer" placeholder="輸入客戶名稱" />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="product" className="text-sm font-medium">商品名稱</label>
-                <Input id="product" placeholder="輸入商品名稱" />
               </div>
               <div className="space-y-2">
                 <label htmlFor="status" className="text-sm font-medium">出貨狀態</label>
@@ -138,8 +120,6 @@ export default function ShippingDetailsPage() {
               <TableHeader>
                 <TableRow className="bg-muted/50">
                   <TableHead>訂單號碼</TableHead>
-                  <TableHead>客戶</TableHead>
-                  <TableHead>商品</TableHead>
                   <TableHead>數量</TableHead>
                   <TableHead>狀態</TableHead>
                   <TableHead>出貨日期</TableHead>
@@ -149,8 +129,6 @@ export default function ShippingDetailsPage() {
                 {shippingData.map((item) => (
                   <TableRow key={item.orderId}>
                     <TableCell className="font-medium">{item.orderId}</TableCell>
-                    <TableCell>{item.customer}</TableCell>
-                    <TableCell>{item.product}</TableCell>
                     <TableCell>{item.quantity}</TableCell>
                     <TableCell>
                       <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap].className}>
