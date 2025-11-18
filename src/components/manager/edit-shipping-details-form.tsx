@@ -582,26 +582,23 @@ export function EditShippingDetailsForm() {
                                 />
                             </TableCell>
                             <TableCell>
-                                {field.status === '已撿貨' ? (
-                                    <Select 
-                                        defaultValue={field.status} 
-                                        onValueChange={(value) => {
-                                            const newStatus = value as "尚未撿貨" | "已撿貨" | "已出貨";
-                                            update(index, { ...field, status: newStatus });
-                                        }}
-                                        disabled={isPending || !canStartPicking}
-                                    >
-                                        <SelectTrigger className="w-32">
-                                            <SelectValue />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="已撿貨">已撿貨</SelectItem>
-                                            <SelectItem value="已出貨">已出貨</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                ) : (
-                                    <Badge variant="outline" className={statusMap[field.status].className}>{statusMap[field.status].label}</Badge>
-                                )}
+                                <Select
+                                    defaultValue={field.status}
+                                    onValueChange={(value) => {
+                                        const newStatus = value as "尚未撿貨" | "已撿貨" | "已出貨";
+                                        update(index, { ...field, status: newStatus });
+                                    }}
+                                    disabled={isPending || !canStartPicking || field.status === '尚未撿貨'}
+                                >
+                                    <SelectTrigger className="w-32">
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="尚未撿貨">尚未撿貨</SelectItem>
+                                        <SelectItem value="已撿貨">已撿貨</SelectItem>
+                                        <SelectItem value="已出貨">已出貨</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </TableCell>
                             </TableRow>
                         ))}
@@ -615,3 +612,4 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
