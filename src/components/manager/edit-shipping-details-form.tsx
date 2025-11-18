@@ -300,7 +300,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>案場分類</Label>
-                        <Select onValueChange={field.onChange} value={field.value} disabled={isPending}>
+                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
@@ -322,7 +322,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>分級名稱</Label>
-                        <Select onValueChange={field.onChange} value={field.value} disabled={isPending}>
+                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
@@ -347,7 +347,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>維運設備類型</Label>
-                        <Select onValueChange={field.onChange} value={field.value} disabled={isPending}>
+                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
@@ -532,7 +532,10 @@ export function EditShippingDetailsForm() {
           </Card>
 
           <Card>
-            <CardContent className="pt-6 space-y-4">
+            <CardHeader>
+                <CardTitle>存貨領用</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-0 space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 <FormField
                     control={form.control}
@@ -745,3 +748,5 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
