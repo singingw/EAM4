@@ -1,3 +1,4 @@
+
 "use client";
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -54,7 +55,7 @@ export function ManagerHeader() {
       <div className="flex items-center gap-4">
         <SidebarTrigger />
         <Link href="/Manager">
-          <h2 className="text-xl font-semibold text-primary">[會展活動智聯服務]-管理系統</h2>
+          <h2 className="text-xl font-semibold text-primary">EAM-後台系統</h2>
         </Link>
       </div>
       <div className="flex items-center gap-2">
