@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, Save, RefreshCw, AlertTriangle } from "lucide-react";
+import { Loader2, Save, RefreshCw, AlertTriangle, CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -24,6 +24,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "../ui/checkbox";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 const deviceSchema = z.object({
   id: z.string(),
@@ -59,6 +63,11 @@ const EditShippingDetailSchema = z.object({
   psopMaterialRequestNote: z.string().optional(),
   psopQuoteNote: z.string().optional(),
   note: z.string().optional(),
+  deviceSupplyType: z.string().optional(),
+  salesTypeChinese: z.string().optional(),
+  siteCode: z.string().optional(),
+  materialRequestDate: z.date().optional(),
+  shippingDate: z.date().optional(),
   devices: z.array(deviceSchema),
 });
 
@@ -85,6 +94,9 @@ const mockData: EditShippingDetailValues = {
   psopMaterialRequestNote: 'PSOP 物料需求單備註內容',
   psopQuoteNote: 'PSOP 報價單備註內容',
   note: '一般備註',
+  deviceSupplyType: '',
+  salesTypeChinese: '',
+  siteCode: '',
   devices: [
     { id: "1", partNumber: 'PN001', name: "Laptop A", quantity: 1, serialNumber: "", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
     { id: "2", partNumber: 'PN002', name: "Laptop B", quantity: 2, serialNumber: "", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
@@ -515,7 +527,128 @@ export function EditShippingDetailsForm() {
                         )}
                     />
                 </div>
+              </div>
+            </CardContent>
+          </Card>
 
+          <Card>
+            <CardContent className="pt-6 space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <FormField
+                    control={form.control}
+                    name="deviceSupplyType"
+                    render={({ field }) => (
+                        <FormItem>
+                        <Label>設備供應(銷售型態)</Label>
+                        <FormControl><Input {...field} disabled={isPending} /></FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="salesTypeChinese"
+                    render={({ field }) => (
+                        <FormItem>
+                        <Label>銷售類型(中文)</Label>
+                        <FormControl><Input {...field} disabled={isPending} /></FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="siteCode"
+                    render={({ field }) => (
+                        <FormItem>
+                        <Label>場站代碼</Label>
+                        <FormControl><Input {...field} disabled={isPending} /></FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                  control={form.control}
+                  name="materialRequestDate"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <Label>物料單日期</Label>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-full pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>選擇日期</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="shippingDate"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <Label>出貨日期</Label>
+                       <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-full pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>選擇日期</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </CardContent>
           </Card>
@@ -612,4 +745,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
