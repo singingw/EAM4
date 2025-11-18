@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { RefreshCw, Boxes } from "lucide-react";
+import { RefreshCw, Boxes, Search } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -22,17 +22,18 @@ import {
 } from "@/components/ui/pagination";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 const allHistoryData = [
-    { id: 1, date: "2024/08/23 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", quoteId: "ORD001", action: "出貨", quantity: -1, handler: "人員A", note: "報價單 ORD001" },
-    { id: 2, date: "2024/08/23 09:30", partNumber: "PN002", productName: "Laptop B", serialNumber: "SN-B001, SN-B002", quoteId: "ORD001", action: "出貨", quantity: -2, handler: "人員A", note: "報價單 ORD001" },
-    { id: 3, date: "2024/08/22 14:00", partNumber: "PN005", productName: "Keyboard", serialNumber: "", quoteId: "", action: "入庫", quantity: 10, handler: "倉管B", note: "新品採購" },
-    { id: 4, date: "2024/08/22 11:00", partNumber: "PN003", productName: "Monitor C", serialNumber: "SN-M001", quoteId: "", action: "領用", quantity: -1, handler: "工程師C", note: "內部測試用" },
-    { id: 5, date: "2024/08/21 16:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A002", quoteId: "", action: "入庫", quantity: 5, handler: "倉管B", note: "新品採購" },
-    { id: 6, date: "2024/08/24 11:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A002, SN-A004", quoteId: "ORD002", action: "出貨", quantity: -2, handler: "人員A", note: "報價單 ORD002" },
-    { id: 7, date: "2024/08/25 09:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "", quoteId: "", action: "入庫", quantity: 10, handler: "倉管B", note: "新品採購" },
-    { id: 8, date: "2024/08/26 14:30", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", quoteId: "", action: "盤點調整", quantity: 1, handler: "系統", note: "庫存修正" },
-    { id: 9, date: "2024/08/27 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A003, SN-A005, SN-A006, SN-A007, SN-A008", quoteId: "ORD003", action: "出貨", quantity: -5, handler: "人員C", note: "報價單 ORD003" },
+    { id: 1, date: "2024/08/23 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", quoteId: "ORD001", action: "出貨", quantity: -1, note: "報價單 ORD001" },
+    { id: 2, date: "2024/08/23 09:30", partNumber: "PN002", productName: "Laptop B", serialNumber: "SN-B001, SN-B002", quoteId: "ORD001", action: "出貨", quantity: -2, note: "報價單 ORD001" },
+    { id: 3, date: "2024/08/22 14:00", partNumber: "PN005", productName: "Keyboard", serialNumber: "", action: "入庫", quantity: 10, note: "新品採購" },
+    { id: 4, date: "2024/08/22 11:00", partNumber: "PN003", productName: "Monitor C", serialNumber: "SN-M001", action: "領用", quantity: -1, note: "內部測試用" },
+    { id: 5, date: "2024/08/21 16:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A002", action: "入庫", quantity: 5, note: "新品採購" },
+    { id: 6, date: "2024/08/24 11:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A002, SN-A004", quoteId: "ORD002", action: "出貨", quantity: -2, note: "報價單 ORD002" },
+    { id: 7, date: "2024/08/25 09:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "", action: "入庫", quantity: 10, note: "新品採購" },
+    { id: 8, date: "2024/08/26 14:30", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", action: "盤點調整", quantity: 1, note: "庫存修正" },
+    { id: 9, date: "2024/08/27 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A003, SN-A005, SN-A006, SN-A007, SN-A008", quoteId: "ORD003", action: "出貨", quantity: -5, note: "報價單 ORD003" },
 ];
 
 export default function DeviceHistoryPage() {
@@ -82,6 +83,34 @@ export default function DeviceHistoryPage() {
           </p>
         </CardContent>
       </Card>
+
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+              <div className="space-y-2">
+                <label htmlFor="quoteId" className="text-sm font-medium">報價單號</label>
+                <Input id="quoteId" placeholder="輸入報價單號" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="note" className="text-sm font-medium">備註</label>
+                <Input id="note" placeholder="輸入備註" />
+              </div>
+               <div className="space-y-2">
+                <label htmlFor="serialNumber" className="text-sm font-medium">序號</label>
+                <Input id="serialNumber" placeholder="輸入序號" />
+              </div>
+            </div>
+            <div className="flex justify-center">
+                <Button>
+                    <Search className="mr-2 h-4 w-4" />
+                    查詢
+                </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
 
       <Card>
         <CardContent className="pt-6">
