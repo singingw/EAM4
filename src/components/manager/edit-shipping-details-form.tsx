@@ -252,7 +252,7 @@ export function EditShippingDetailsForm() {
                   render={({ field }) => (
                     <FormItem>
                       <Label>目前處理人員</Label>
-                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending || form.watch('status') !== '待檢貨'}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="-- 請選擇 --" />
@@ -751,9 +751,5 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
-    
-
-    
 
     
