@@ -65,7 +65,7 @@ const mockData: EditShippingDetailValues = {
   materialRequestNo: 'MRN001',
   siteName: '中山機房',
   siteAddress: '台北市中山區中山北路二段48巷7號',
-  siteCategory: 'category1',
+  siteCategory: 'outdoor',
   classificationName: 'classA',
   equipmentType: 'typeX',
   surveyorName: '王小明',
@@ -282,8 +282,9 @@ export function EditShippingDetailsForm() {
                             </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                <SelectItem value="category1">分類一</SelectItem>
-                                <SelectItem value="category2">分類二</SelectItem>
+                                <SelectItem value="outdoor">室外場</SelectItem>
+                                <SelectItem value="indoor">室內場</SelectItem>
+                                <SelectItem value="parking-tower">停車塔</SelectItem>
                             </SelectContent>
                         </Select>
                         <FormMessage />
