@@ -693,14 +693,14 @@ export function EditShippingDetailsForm() {
                                 <FormField
                                     control={form.control}
                                     name={`devices.${index}.note`}
-                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || !canStartPicking} /> )}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending} /> )}
                                 />
                             </TableCell>
                             <TableCell>
                                 <FormField
                                     control={form.control}
                                     name={`devices.${index}.location`}
-                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || !canStartPicking} /> )}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending} /> )}
                                 />
                             </TableCell>
                             <TableCell>
@@ -713,8 +713,8 @@ export function EditShippingDetailsForm() {
                                     render={({ field: f }) => (
                                         <Input 
                                             {...f} 
-                                            disabled={isPending || !canStartPicking || field.status !== '尚未撿貨'}
-                                            placeholder={field.status === '尚未撿貨' && canStartPicking ? '請輸入或掃描序號' : ''}
+                                            disabled={isPending}
+                                            placeholder={field.status === '尚未撿貨' ? '請輸入或掃描序號' : ''}
                                         />
                                     )}
                                 />
@@ -723,7 +723,7 @@ export function EditShippingDetailsForm() {
                                 <FormField
                                     control={form.control}
                                     name={`devices.${index}.deviceSerialNumberSpare`}
-                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || !canStartPicking} /> )}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending} /> )}
                                 />
                             </TableCell>
                             <TableCell>
@@ -733,7 +733,7 @@ export function EditShippingDetailsForm() {
                                         const newStatus = value as "尚未撿貨" | "已撿貨" | "已出貨";
                                         update(index, { ...field, status: newStatus });
                                     }}
-                                    disabled={isPending || !canStartPicking || field.status === '尚未撿貨'}
+                                    disabled={isPending}
                                 >
                                     <SelectTrigger className="w-32">
                                         <SelectValue />
@@ -757,6 +757,8 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
 
     
 
