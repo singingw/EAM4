@@ -44,8 +44,15 @@ export default function DeviceHistoryPage() {
   const device = historyData.length > 0 ? historyData[0] : null;
 
   const totalQuantity = historyData.reduce((sum, item) => {
-    return sum + item.quantity;
-  }, 0);
+    // This is a simplified calculation. A real app might start with an initial quantity.
+    if (item.action === '入庫' || item.action === '盤點調整') {
+        return sum + item.quantity;
+    }
+     if (item.action === '出貨' || item.action === '領用') {
+        return sum + item.quantity;
+    }
+    return sum;
+  }, 20); // Starting with a mock initial quantity
 
 
   return (
@@ -96,12 +103,18 @@ export default function DeviceHistoryPage() {
                   <TableRow key={item.id}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{item.date}</TableCell>
-                    <TableCell>{item.quoteId}</TableCell>
+                    <TableCell>
+                      {item.quoteId ? (
+                         <Link href={`/Manager/shipping-details/view?quoteId=${item.quoteId}`} className="text-blue-600 hover:underline">
+                            {item.quoteId}
+                         </Link>
+                      ) : '-'}
+                    </TableCell>
                     <TableCell>
                       {item.action}
                       {item.serialNumber && (
                         <div className="text-xs text-muted-foreground">
-                          ({item.serialNumber})
+                          (序號: {item.serialNumber})
                         </div>
                       )}
                     </TableCell>
