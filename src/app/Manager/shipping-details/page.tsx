@@ -81,8 +81,8 @@ export default function ShippingDetailsPage() {
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
               <div className="space-y-2">
-                <label htmlFor="orderId" className="text-sm font-medium">訂單號碼</label>
-                <Input id="orderId" placeholder="輸入訂單號碼" />
+                <label htmlFor="orderId" className="text-sm font-medium">報價單號</label>
+                <Input id="orderId" placeholder="輸入報價單號" />
               </div>
               <div className="space-y-2">
                 <label htmlFor="status" className="text-sm font-medium">出貨狀態</label>
@@ -119,7 +119,7 @@ export default function ShippingDetailsPage() {
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50">
-                  <TableHead>訂單號碼</TableHead>
+                  <TableHead>報價單號</TableHead>
                   <TableHead>數量</TableHead>
                   <TableHead>狀態</TableHead>
                   <TableHead>出貨日期</TableHead>
