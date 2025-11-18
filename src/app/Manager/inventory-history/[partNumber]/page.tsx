@@ -27,11 +27,11 @@ import { Input } from "@/components/ui/input";
 const allHistoryData = [
     { id: 1, date: "2024/08/23 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", quoteId: "ORD001", action: "出貨", quantity: -1, note: "報價單 ORD001" },
     { id: 2, date: "2024/08/23 09:30", partNumber: "PN002", productName: "Laptop B", serialNumber: "SN-B001, SN-B002", quoteId: "ORD001", action: "出貨", quantity: -2, note: "報價單 ORD001" },
-    { id: 3, date: "2024/08/22 14:00", partNumber: "PN005", productName: "Keyboard", serialNumber: "", action: "入庫", quantity: 10, note: "新品採購" },
+    { id: 3, date: "2024/08/22 14:00", partNumber: "PN005", productName: "Keyboard", serialNumber: "SN-K001, SN-K002, SN-K003, SN-K004, SN-K005, SN-K006, SN-K007, SN-K008, SN-K009, SN-K010", action: "入庫", quantity: 10, note: "新品採購" },
     { id: 4, date: "2024/08/22 11:00", partNumber: "PN003", productName: "Monitor C", serialNumber: "SN-M001", action: "領用", quantity: -1, note: "內部測試用" },
-    { id: 5, date: "2024/08/21 16:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A002", action: "入庫", quantity: 5, note: "新品採購" },
+    { id: 5, date: "2024/08/21 16:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A002", action: "盤點調整", quantity: 1, note: "庫存修正" },
     { id: 6, date: "2024/08/24 11:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A002, SN-A004", quoteId: "ORD002", action: "出貨", quantity: -2, note: "報價單 ORD002" },
-    { id: 7, date: "2024/08/25 09:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "", action: "入庫", quantity: 10, note: "新品採購" },
+    { id: 7, date: "2024/08/25 09:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A009, SN-A010, SN-A011, SN-A012, SN-A013, SN-A014, SN-A015, SN-A016, SN-A017, SN-A018", action: "入庫", quantity: 10, note: "新品採購" },
     { id: 8, date: "2024/08/26 14:30", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", action: "盤點調整", quantity: 1, note: "庫存修正" },
     { id: 9, date: "2024/08/27 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A003, SN-A005, SN-A006, SN-A007, SN-A008", quoteId: "ORD003", action: "出貨", quantity: -5, note: "報價單 ORD003" },
 ];
@@ -50,10 +50,10 @@ export default function DeviceHistoryPage() {
         return sum + item.quantity;
     }
      if (item.action === '出貨' || item.action === '領用') {
-        return sum + item.quantity;
+        return sum + Math.abs(item.quantity);
     }
     return sum;
-  }, 20); // Starting with a mock initial quantity
+  }, 0); // Starting with a mock initial quantity
 
 
   return (
@@ -173,5 +173,3 @@ export default function DeviceHistoryPage() {
     </div>
   );
 }
-
-    
