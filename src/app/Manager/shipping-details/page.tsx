@@ -38,6 +38,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { ConfirmReleaseDialog } from "@/components/manager/confirm-release-dialog";
 
 const shippingData = [
   {
@@ -166,6 +168,7 @@ export default function ShippingDetailsPage() {
                     <TableCell>{item.handler}</TableCell>
                     <TableCell>{item.lastModified}</TableCell>
                     <TableCell className="space-x-1">
+                       <Dialog>
                       {showFunctions ? (
                         <>
                           <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
@@ -183,9 +186,11 @@ export default function ShippingDetailsPage() {
                             {item.status === '已轉檔' || item.status === '待放行' ? '預覽檢貨單' : '匯出檢貨單'}
                           </Button>
                           {item.status === '待放行' && (
-                              <Button variant="outline" size="sm" className="bg-red-500 text-white hover:bg-red-600 hover:text-white">
-                                  已確認客戶放行
-                              </Button>
+                               <DialogTrigger asChild>
+                                <Button variant="outline" size="sm" className="bg-red-500 text-white hover:bg-red-600 hover:text-white">
+                                    已確認客戶放行
+                                </Button>
+                               </DialogTrigger>
                           )}
                         </>
                       ) : (
@@ -207,13 +212,17 @@ export default function ShippingDetailsPage() {
                                 {item.status === '已轉檔' || item.status === '待放行' ? '預覽檢貨單' : '匯出檢貨單'}
                             </DropdownMenuItem>
                             {item.status === '待放行' && (
-                                <DropdownMenuItem className="text-red-600">
-                                    已確認客戶放行
-                                </DropdownMenuItem>
+                                <DialogTrigger asChild>
+                                    <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-red-600">
+                                        已確認客戶放行
+                                    </DropdownMenuItem>
+                                </DialogTrigger>
                             )}
                           </DropdownMenuContent>
                         </DropdownMenu>
                       )}
+                      <ConfirmReleaseDialog />
+                      </Dialog>
                     </TableCell>
                   </TableRow>
                 ))}
