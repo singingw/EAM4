@@ -24,11 +24,11 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 
 const allHistoryData = [
-  { id: 1, date: "2024/08/23 10:00", partNumber: "PN001", productName: "Laptop A", action: "出貨", quantity: -1, handler: "人員A", note: "報價單 ORD001" },
-  { id: 2, date: "2024/08/23 09:30", partNumber: "PN002", productName: "Laptop B", action: "出貨", quantity: -2, handler: "人員A", note: "報價單 ORD001" },
-  { id: 3, date: "2024/08/22 14:00", partNumber: "PN005", productName: "Keyboard", action: "入庫", quantity: 10, handler: "倉管B", note: "新品採購" },
-  { id: 4, date: "2024/08/22 11:00", partNumber: "PN003", productName: "Monitor C", action: "領用", quantity: -1, handler: "工程師C", note: "內部測試用" },
-  { id: 5, date: "2024/08/21 16:00", partNumber: "PN001", productName: "Laptop A", action: "盤點調整", quantity: 1, handler: "系統", note: "庫存修正" },
+    { id: 1, date: "2024/08/23 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", quoteId: "ORD001", action: "出貨", quantity: -1, handler: "人員A", note: "報價單 ORD001" },
+    { id: 5, date: "2024/08/21 16:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A002", quoteId: "", action: "盤點調整", quantity: 1, handler: "系統", note: "庫存修正" },
+    { id: 2, date: "2024/08/23 09:30", partNumber: "PN002", productName: "Laptop B", serialNumber: "SN-B001", quoteId: "ORD001", action: "出貨", quantity: -2, handler: "人員A", note: "報價單 ORD001" },
+    { id: 3, date: "2024/08/22 14:00", partNumber: "PN005", productName: "Keyboard", serialNumber: "SN-K001", quoteId: "", action: "入庫", quantity: 10, handler: "倉管B", note: "新品採購" },
+    { id: 4, date: "2024/08/22 11:00", partNumber: "PN003", productName: "Monitor C", serialNumber: "SN-M001", quoteId: "", action: "領用", quantity: -1, handler: "工程師C", note: "內部測試用" },
 ];
 
 export default function DeviceHistoryPage() {
@@ -60,6 +60,8 @@ export default function DeviceHistoryPage() {
                 <TableRow className="bg-muted/50">
                   <TableHead>項次</TableHead>
                   <TableHead>異動日期</TableHead>
+                  <TableHead>序號</TableHead>
+                  <TableHead>報價單號</TableHead>
                   <TableHead>異動內容</TableHead>
                   <TableHead>異動數量</TableHead>
                   <TableHead>處理人員</TableHead>
@@ -71,6 +73,8 @@ export default function DeviceHistoryPage() {
                   <TableRow key={item.id}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{item.date}</TableCell>
+                    <TableCell>{item.serialNumber}</TableCell>
+                    <TableCell>{item.quoteId}</TableCell>
                     <TableCell>{item.action}</TableCell>
                     <TableCell className={item.quantity > 0 ? "text-green-600" : "text-red-600"}>
                       {item.quantity}
