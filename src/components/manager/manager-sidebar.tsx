@@ -20,7 +20,8 @@ import {
   CreditCard,
   HelpCircle,
   Headset,
-  Users
+  Users,
+  Truck
 } from "lucide-react";
 import {
   Collapsible,
@@ -46,15 +47,6 @@ const menuItems = [
         { label: "角色管理", href: "/Manager/roles" },
       ],
     },
-     {
-      label: "識別證",
-      icon: CreditCard,
-      subItems: [
-        { label: "識別證模板", href: "/Manager/badge-templates" },
-        { label: "識別證設計(第二階段)", href: "/Manager/badge-design" },
-        { label: "識別證模板(第三階段)", href: "/Manager/badge-templates-phase3" },
-      ],
-    },
     {
       label: "名單管理",
       icon: MessageSquare,
@@ -64,6 +56,13 @@ const menuItems = [
         { label: "QR Code 下載紀錄", href: "/Manager/qrcode" },
       ],
     },
+    {
+      label: "出貨管理",
+      icon: Truck,
+      subItems: [
+        { label: "出貨明細表", href: "/Manager/shipping-details" }
+      ]
+    }
 ];
 
 const singleMenuItems = [

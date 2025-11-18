@@ -325,5 +325,3 @@ export default function AttendeesHelperPage() {
     </div>
   );
 }
-
-    
