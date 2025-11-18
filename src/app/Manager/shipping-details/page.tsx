@@ -42,30 +42,35 @@ import {
 const shippingData = [
   {
     quoteId: "ORD001",
+    usageCaseIds: ["UC001", "UC002"],
     status: "待放行",
     lastModified: "2024/08/22 10:00",
     handler: "人員A",
   },
   {
     quoteId: "ORD002",
+    usageCaseIds: ["UC003"],
     status: "已轉檔",
     lastModified: "2024/08/21 15:30",
     handler: "系統",
   },
   {
     quoteId: "ORD003",
+    usageCaseIds: ["UC004"],
     status: "待檢貨",
     lastModified: "2024/08/20 11:00",
     handler: "人員B",
   },
   {
     quoteId: "ORD004",
+    usageCaseIds: [],
     status: "撿貨處理中",
     lastModified: "2024/08/19 18:00",
     handler: "人員C",
   },
   {
     quoteId: "ORD005",
+    usageCaseIds: ["UC005", "UC006", "UC007"],
     status: "已完成",
     lastModified: "2024/08/18 14:00",
     handler: "系統",
@@ -136,6 +141,7 @@ export default function ShippingDetailsPage() {
               <TableHeader>
                 <TableRow className="bg-muted/50">
                   <TableHead>報價單號</TableHead>
+                  <TableHead>使用情形(單號)</TableHead>
                   <TableHead>狀態</TableHead>
                   <TableHead>目前處理人員</TableHead>
                   <TableHead>最後更新時間</TableHead>
@@ -151,6 +157,7 @@ export default function ShippingDetailsPage() {
                 {shippingData.map((item) => (
                   <TableRow key={item.quoteId}>
                     <TableCell className="font-medium">{item.quoteId}</TableCell>
+                    <TableCell>{item.usageCaseIds.join(', ')}</TableCell>
                     <TableCell>
                       <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap]?.className || ""}>
                         {statusMap[item.status as keyof typeof statusMap]?.label || item.status}
