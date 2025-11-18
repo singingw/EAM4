@@ -252,7 +252,7 @@ export function EditShippingDetailsForm() {
                   render={({ field }) => (
                     <FormItem>
                       <Label>目前處理人員</Label>
-                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+                      <Select onValueChange={field.onChange} value={field.value} disabled={isPending}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="-- 請選擇 --" />
@@ -696,7 +696,13 @@ export function EditShippingDetailsForm() {
                                     render={({ field: f }) => ( <Input {...f} disabled={isPending || !canStartPicking} /> )}
                                 />
                             </TableCell>
-                            <TableCell>{field.location}</TableCell>
+                            <TableCell>
+                                <FormField
+                                    control={form.control}
+                                    name={`devices.${index}.location`}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || !canStartPicking} /> )}
+                                />
+                            </TableCell>
                             <TableCell>
                                  <Badge variant="outline" className={field.inventoryStatus ? inventoryStatusMap[field.inventoryStatus]?.className : ""}>{field.inventoryStatus ? inventoryStatusMap[field.inventoryStatus]?.label : ""}</Badge>
                             </TableCell>
@@ -751,6 +757,8 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
 
     
 
