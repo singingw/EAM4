@@ -95,7 +95,7 @@ export default function QrCodePage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">QR Code 下載紀錄(不做)</h1>
+        <h1 className="text-2xl font-bold">QR Code 下載紀錄(先不做)</h1>
       </div>
 
       <Card>
