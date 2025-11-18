@@ -66,7 +66,7 @@ const mockData: EditShippingDetailValues = {
   siteName: '中山機房',
   siteAddress: '台北市中山區中山北路二段48巷7號',
   siteCategory: 'outdoor',
-  classificationName: 'flagship',
+  classificationName: '',
   equipmentType: '',
   surveyorName: '王小明',
   maintenanceStation: 'station1',
@@ -565,5 +565,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
-    
