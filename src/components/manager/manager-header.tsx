@@ -51,7 +51,7 @@ export function ManagerHeader() {
   };
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between bg-sidebar-background px-4 lg:px-6 z-30 fixed top-0 w-full">
+    <header className="flex h-16 shrink-0 items-center justify-between bg-sidebar-background px-4 lg:px-6 z-20 fixed top-0 w-full">
       <div className="flex items-center gap-4">
         <SidebarTrigger />
         <Link href="/Manager">
