@@ -33,6 +33,8 @@ const historyData = [
     quantity: -1,
     handler: "人員A",
     note: "報價單 ORD001",
+    serialNumber: "SN-A-00123",
+    quoteId: "ORD001",
   },
   {
     id: 2,
@@ -43,6 +45,8 @@ const historyData = [
     quantity: -2,
     handler: "人員A",
     note: "報價單 ORD001",
+    serialNumber: "SN-B-00456",
+    quoteId: "ORD001",
   },
   {
     id: 3,
@@ -53,6 +57,8 @@ const historyData = [
     quantity: 10,
     handler: "倉管B",
     note: "新品採購",
+    serialNumber: "SN-K-00789",
+    quoteId: "",
   },
   {
     id: 4,
@@ -63,6 +69,8 @@ const historyData = [
     quantity: -1,
     handler: "工程師C",
     note: "內部測試用",
+    serialNumber: "SN-M-00111",
+    quoteId: "",
   },
   {
     id: 5,
@@ -73,6 +81,8 @@ const historyData = [
     quantity: 1,
     handler: "系統",
     note: "庫存修正",
+    serialNumber: "SN-A-00123",
+    quoteId: "",
   },
 ];
 
@@ -131,6 +141,8 @@ export default function InventoryHistoryPage() {
                   <TableHead>異動日期</TableHead>
                   <TableHead>料號</TableHead>
                   <TableHead>品名</TableHead>
+                  <TableHead>序號</TableHead>
+                  <TableHead>報價單號</TableHead>
                   <TableHead>異動內容</TableHead>
                   <TableHead>異動數量</TableHead>
                   <TableHead>處理人員</TableHead>
@@ -148,6 +160,8 @@ export default function InventoryHistoryPage() {
                       </Link>
                     </TableCell>
                     <TableCell>{item.productName}</TableCell>
+                    <TableCell>{item.serialNumber}</TableCell>
+                    <TableCell>{item.quoteId}</TableCell>
                     <TableCell>{item.action}</TableCell>
                     <TableCell className={item.quantity > 0 ? "text-green-600" : "text-red-600"}>
                       {item.quantity}
