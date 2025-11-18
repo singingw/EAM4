@@ -587,7 +587,7 @@ export function EditShippingDetailsForm() {
                               )}
                             >
                               {field.value ? (
-                                format(field.value, "PPP")
+                                format(field.value, "yyyy/MM/dd")
                               ) : (
                                 <span>選擇日期</span>
                               )}
@@ -628,7 +628,7 @@ export function EditShippingDetailsForm() {
                               )}
                             >
                               {field.value ? (
-                                format(field.value, "PPP")
+                                format(field.value, "yyyy/MM/dd")
                               ) : (
                                 <span>選擇日期</span>
                               )}
@@ -749,4 +749,3 @@ export function EditShippingDetailsForm() {
   );
 }
 
-    

@@ -136,8 +136,8 @@ export function ViewShippingDetails() {
                 <div className="space-y-1"><Label>設備供應(銷售型態)</Label><p className="text-foreground">{data.deviceSupplyType}</p></div>
                 <div className="space-y-1"><Label>銷售類型(中文)</Label><p className="text-foreground">{data.salesTypeChinese}</p></div>
                 <div className="space-y-1"><Label>場站代碼</Label><p className="text-foreground">{data.siteCode}</p></div>
-                <div className="space-y-1"><Label>物料單日期</Label><p className="text-foreground">{data.materialRequestDate ? format(data.materialRequestDate, "PPP") : '-'}</p></div>
-                <div className="space-y-1"><Label>出貨日期</Label><p className="text-foreground">{data.shippingDate ? format(data.shippingDate, "PPP") : '-'}</p></div>
+                <div className="space-y-1"><Label>物料單日期</Label><p className="text-foreground">{data.materialRequestDate ? format(data.materialRequestDate, "yyyy/MM/dd") : '-'}</p></div>
+                <div className="space-y-1"><Label>出貨日期</Label><p className="text-foreground">{data.shippingDate ? format(data.shippingDate, "yyyy/MM/dd") : '-'}</p></div>
               </div>
             </CardContent>
         </Card>
