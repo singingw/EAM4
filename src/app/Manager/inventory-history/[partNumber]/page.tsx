@@ -39,13 +39,20 @@ export default function DeviceHistoryPage() {
   const params = useParams();
   const partNumber = params.partNumber as string;
   
-  const historyData = allHistoryData
-    .filter(item => item.partNumber === partNumber)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const partNumberHistory = allHistoryData.filter(item => item.partNumber === partNumber);
+
+  const latestHistoryBySerial: { [key: string]: typeof allHistoryData[0] } = {};
+  partNumberHistory.forEach(item => {
+    if (!latestHistoryBySerial[item.serialNumber] || new Date(item.date) > new Date(latestHistoryBySerial[item.serialNumber].date)) {
+      latestHistoryBySerial[item.serialNumber] = item;
+    }
+  });
+
+  const historyData = Object.values(latestHistoryBySerial).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const device = historyData.length > 0 ? historyData[0] : null;
 
-  const totalQuantity = historyData.reduce((sum, item) => sum + item.quantity, 0);
+  const totalQuantity = partNumberHistory.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="space-y-6">
