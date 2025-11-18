@@ -178,15 +178,15 @@ export default function ShippingDetailsPage() {
                               檢視
                             </Link>
                           </Button>
-                           <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
-                              <Eye className="mr-2 h-4 w-4" />
-                              預覽檢貨單
-                            </Button>
-                            {item.status === '待放行' && (
-                                <Button variant="outline" size="sm" className="bg-red-500 text-white hover:bg-red-600 hover:text-white">
-                                    已確認客戶放行
-                                </Button>
-                            )}
+                          <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
+                            <Eye className="mr-2 h-4 w-4" />
+                            {item.status === '已轉檔' || item.status === '待放行' ? '預覽檢貨單' : '匯出檢貨單'}
+                          </Button>
+                          {item.status === '待放行' && (
+                              <Button variant="outline" size="sm" className="bg-red-500 text-white hover:bg-red-600 hover:text-white">
+                                  已確認客戶放行
+                              </Button>
+                          )}
                         </>
                       ) : (
                         <DropdownMenu>
@@ -202,9 +202,9 @@ export default function ShippingDetailsPage() {
                             <DropdownMenuItem asChild>
                                 <Link href="/Manager/shipping-details/view" className="text-blue-600">檢視</Link>
                             </DropdownMenuItem>
-                             <DropdownMenuItem className="text-orange-600">
+                            <DropdownMenuItem className="text-orange-600">
                                 <Eye className="mr-2 h-4 w-4" />
-                                預覽檢貨單
+                                {item.status === '已轉檔' || item.status === '待放行' ? '預覽檢貨單' : '匯出檢貨單'}
                             </DropdownMenuItem>
                             {item.status === '待放行' && (
                                 <DropdownMenuItem className="text-red-600">
@@ -241,4 +241,3 @@ export default function ShippingDetailsPage() {
     </div>
   );
 }
-
