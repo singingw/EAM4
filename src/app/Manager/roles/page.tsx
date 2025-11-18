@@ -130,7 +130,9 @@ export default function RolesPage() {
                     <TableCell className="space-x-1">
                       {showFunctions ? (
                         <>
-                          <Button variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">編輯</Button>
+                          <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
+                            <Link href="/Manager/roles/edit">編輯</Link>
+                          </Button>
                           <Button variant="destructive" size="sm">刪除</Button>
                           <Button variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">檢視</Button>
                           <Button variant="secondary" size="sm">複製</Button>
@@ -146,7 +148,9 @@ export default function RolesPage() {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            <DropdownMenuItem className="text-green-600">編輯</DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                              <Link href="/Manager/roles/edit" className="text-green-600">編輯</Link>
+                            </DropdownMenuItem>
                             <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
                             <DropdownMenuItem className="text-blue-600">檢視</DropdownMenuItem>
                             <DropdownMenuItem>複製</DropdownMenuItem>
@@ -183,5 +187,3 @@ export default function RolesPage() {
     </div>
   );
 }
-
-    
