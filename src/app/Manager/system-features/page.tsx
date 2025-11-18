@@ -44,7 +44,7 @@ const features = [
     { id: "2", name: "後台選單管理", status: true },
     { id: "3", name: "後台帳號管理", status: true },
     { id: "4-role", name: "角色管理", status: true },
-    { id: "5-badge-design", name: "識別證設計", status: true },
+    { id: "5-badge-design", name: "識別證設計(第二階段)", status: true },
     { id: "6-badge-template", name: "識別證模板", status: true },
     { id: "7-attendees", name: "參加者名單", status: true },
     { id: "8-qrcode", name: "QR Code 下載紀錄", status: true },

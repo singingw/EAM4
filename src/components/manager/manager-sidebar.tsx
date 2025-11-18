@@ -49,7 +49,7 @@ const menuItems = [
       label: "識別證",
       icon: CreditCard,
       subItems: [
-        { label: "識別證設計", href: "/Manager/badge-design" },
+        { label: "識別證設計(第二階段)", href: "/Manager/badge-design" },
         { label: "識別證模板", href: "/Manager/badge-templates" },
       ],
     },

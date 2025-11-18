@@ -468,7 +468,7 @@ export default function BadgeDesignPage() {
                 <div className="flex items-center space-x-2 pt-5">
                     <Switch id="center-line" checked={showCenterLine} onCheckedChange={setShowCenterLine} />
                     <Label htmlFor="center-line" className="text-sm font-semibold flex items-center gap-1">
-                        開啟中心線 <Info className="h-3 w-3 text-muted-foreground" />
+                    輔助線 <Info className="h-3 w-3 text-muted-foreground" />
                     </Label>
                 </div>
             </div>

@@ -61,15 +61,15 @@ const permissionStructure = {
   badge: {
     label: "識別證",
     subItems: {
-      badgeDesign: { label: "識別證設計", actions: ["儲存", "預覽"] },
+      badgeDesign: { label: "識別證設計(第二階段)", actions: ["儲存", "預覽"] },
       badgeTemplates: { label: "識別證模板", actions: ["新增模板", "列印", "編輯", "複製", "刪除"] },
     }
   },
   attendeeList: {
     label: "名單管理",
     subItems: {
-      attendees: { label: "參加者名單", actions: ["寄發行前通知", "匯出全部的 QRCode", "匯入", "匯出", "欄位設定", "批次寄送行前通知", "匯出 QR Code", "新增參加者", "編輯", "刪除", "行前通知", "QR Code", "檢視", "異動紀錄"] },
-      qrcode: { label: "QR Code 下載紀錄", actions: ["查詢", "匯出"] },
+      attendees: { label: "參加者名單", actions: ["全部寄送通知", "全部匯出 QRCode", "匯入", "匯出", "欄位設定", "批次寄送通知", "批次匯出 QRCode", "新增參加者", "編輯", "刪除", "行前通知", "QR Code", "檢視", "異動紀錄"] },
+      qrcode: { label: "QRCode 下載紀錄", actions: ["查詢", "匯出"] },
     }
   }
 };

@@ -20,22 +20,22 @@ import { PrintBadgeDialog } from "@/components/manager/print-badge-dialog";
 const templates = [
   {
     id: "1",
-    name: "標準模板",
+    name: "QRCode 名片",
     imageUrl: "https://placehold.co/227x302/png?text=Template+1",
   },
   {
     id: "2",
-    name: "VIP 模板",
+    name: "無 QRCode 名片",
     imageUrl: "https://placehold.co/227x302/png?text=Template+2",
   },
   {
     id: "3",
-    name: "工作人員模板",
+    name: "QRCode 桌牌",
     imageUrl: "https://placehold.co/227x302/png?text=Template+3",
   },
   {
     id: "4",
-    name: "講者模板",
+    name: "無 QRCode 桌牌",
     imageUrl: "https://placehold.co/227x302/png?text=Template+4",
   },
 ];
@@ -44,7 +44,7 @@ export default function BadgeTemplatesPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">識別證模板</h1>
+        <h1 className="text-2xl font-bold">識別證模板(第一階段)</h1>
         <div className="flex items-center gap-2">
             <Dialog>
               <DialogTrigger asChild>

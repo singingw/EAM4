@@ -113,13 +113,13 @@ export default function AttendeesPage() {
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline" className="bg-teal-500 text-white hover:bg-teal-600">
-                    寄發行前通知
+                    全部寄送通知
                 </Button>
               </DialogTrigger>
               <PreEventNotificationDialog />
             </Dialog>
             <Button variant="outline" className="bg-orange-400 text-white hover:bg-orange-500">
-                匯出全部的 QRCode
+                全部匯出 QRCode
             </Button>
             <Dialog>
                 <DialogTrigger asChild>
@@ -211,11 +211,11 @@ export default function AttendeesPage() {
                 <div className="flex items-center gap-2">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" className="bg-teal-500 text-white hover:bg-teal-600 hover:text-white">批次寄送行前通知</Button>
+                      <Button variant="outline" className="bg-teal-500 text-white hover:bg-teal-600 hover:text-white">批次寄送通知</Button>
                     </DialogTrigger>
                     <PreEventNotificationDialog />
                   </Dialog>
-                  <Button variant="outline" className="bg-orange-400 text-white hover:bg-orange-500 hover:text-white">匯出 QR Code</Button>
+                  <Button variant="outline" className="bg-orange-400 text-white hover:bg-orange-500 hover:text-white">批次匯出 QRCode</Button>
                   <Button asChild className="bg-blue-500 text-white hover:bg-blue-600">
                     <Link href="/Manager/attendees/add">
                       <Plus className="mr-2 h-4 w-4" />
