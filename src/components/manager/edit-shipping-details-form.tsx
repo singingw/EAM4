@@ -66,7 +66,7 @@ const mockData: EditShippingDetailValues = {
   siteName: '中山機房',
   siteAddress: '台北市中山區中山北路二段48巷7號',
   siteCategory: 'outdoor',
-  classificationName: 'classA',
+  classificationName: 'flagship',
   equipmentType: 'typeX',
   surveyorName: '王小明',
   maintenanceStation: 'station1',
@@ -304,8 +304,12 @@ export function EditShippingDetailsForm() {
                             </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                                <SelectItem value="classA">A級</SelectItem>
-                                <SelectItem value="classB">B級</SelectItem>
+                                <SelectItem value="flagship">旗艦廠</SelectItem>
+                                <SelectItem value="vehicle">車辦場</SelectItem>
+                                <SelectItem value="etag">eTag場</SelectItem>
+                                <SelectItem value="hybrid">混合場</SelectItem>
+                                <SelectItem value="roaming">漫遊場</SelectItem>
+                                <SelectItem value="monthly">月租場</SelectItem>
                             </SelectContent>
                         </Select>
                         <FormMessage />
