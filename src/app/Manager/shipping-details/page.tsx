@@ -82,7 +82,7 @@ export default function ShippingDetailsPage() {
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
               <div className="space-y-2">
                 <label htmlFor="quoteId" className="text-sm font-medium">報價單號</label>
                 <Input id="quoteId" placeholder="輸入報價單號" />
@@ -100,6 +100,10 @@ export default function ShippingDetailsPage() {
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+               <div className="space-y-2">
+                <label htmlFor="handler" className="text-sm font-medium">目前處理人員</label>
+                <Input id="handler" placeholder="輸入人員名稱" />
               </div>
             </div>
             <div className="flex justify-center gap-2">
