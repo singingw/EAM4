@@ -116,7 +116,6 @@ export default function InventoryHistoryPage() {
                   <TableHead>料號</TableHead>
                   <TableHead>品名</TableHead>
                   <TableHead>總數量</TableHead>
-                  <TableHead>最後處理人員</TableHead>
                   <TableHead>最後備註</TableHead>
                 </TableRow>
               </TableHeader>
@@ -134,7 +133,6 @@ export default function InventoryHistoryPage() {
                     <TableCell className={item.totalQuantity > 0 ? "text-green-600" : (item.totalQuantity < 0 ? "text-red-600" : "")}>
                       {item.totalQuantity}
                     </TableCell>
-                    <TableCell>{item.handler}</TableCell>
                     <TableCell>{item.note}</TableCell>
                   </TableRow>
                 ))}
