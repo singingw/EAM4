@@ -274,7 +274,7 @@ export function EditShippingDetailsForm() {
                     name="siteCategory"
                     render={({ field }) => (
                         <FormItem>
-                        <Label>場站分類</Label>
+                        <Label>案場分類</Label>
                         <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
