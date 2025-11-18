@@ -21,6 +21,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import Link from "next/link";
 
 const historyData = [
   {
@@ -141,7 +142,11 @@ export default function InventoryHistoryPage() {
                   <TableRow key={item.id}>
                     <TableCell>{item.id}</TableCell>
                     <TableCell>{item.date}</TableCell>
-                    <TableCell>{item.partNumber}</TableCell>
+                    <TableCell>
+                      <Link href={`/Manager/inventory-history/${item.partNumber}`} className="text-blue-600 hover:underline">
+                        {item.partNumber}
+                      </Link>
+                    </TableCell>
                     <TableCell>{item.productName}</TableCell>
                     <TableCell>{item.action}</TableCell>
                     <TableCell className={item.quantity > 0 ? "text-green-600" : "text-red-600"}>
