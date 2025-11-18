@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Search, Download, MoreVertical, Eye } from "lucide-react";
+import { Search, Download, MoreVertical, Eye, FileOutput } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -179,7 +179,7 @@ export default function ShippingDetailsPage() {
                             </Link>
                           </Button>
                           <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
-                            {item.status === '已轉檔' || item.status === '待放行' ? <Eye className="mr-2 h-4 w-4" /> : <Download className="mr-2 h-4 w-4" />}
+                            {item.status === '已轉檔' || item.status === '待放行' ? <Eye className="mr-2 h-4 w-4" /> : <FileOutput className="mr-2 h-4 w-4" />}
                             {item.status === '已轉檔' || item.status === '待放行' ? '預覽檢貨單' : '匯出檢貨單'}
                           </Button>
                           {item.status === '待放行' && (
@@ -203,7 +203,7 @@ export default function ShippingDetailsPage() {
                                 <Link href="/Manager/shipping-details/view" className="text-blue-600">檢視</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-orange-600">
-                                {item.status === '已轉檔' || item.status === '待放行' ? <Eye className="mr-2 h-4 w-4" /> : <Download className="mr-2 h-4 w-4" />}
+                                {item.status === '已轉檔' || item.status === '待放行' ? <Eye className="mr-2 h-4 w-4" /> : <FileOutput className="mr-2 h-4 w-4" />}
                                 {item.status === '已轉檔' || item.status === '待放行' ? '預覽檢貨單' : '匯出檢貨單'}
                             </DropdownMenuItem>
                             {item.status === '待放行' && (
