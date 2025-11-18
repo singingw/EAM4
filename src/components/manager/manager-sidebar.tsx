@@ -70,7 +70,8 @@ const menuItems = [
       label: "進銷存管理",
       icon: Truck,
       subItems: [
-        { label: "出貨明細表", href: "/Manager/shipping-details" }
+        { label: "出貨明細表", href: "/Manager/shipping-details" },
+        { label: "庫存歷程", href: "/Manager/inventory-history" },
       ]
     }
 ];
