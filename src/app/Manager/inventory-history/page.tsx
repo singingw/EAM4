@@ -86,8 +86,6 @@ export default function InventoryHistoryPage() {
                   <TableHead>異動日期</TableHead>
                   <TableHead>料號</TableHead>
                   <TableHead>品名</TableHead>
-                  <TableHead>序號</TableHead>
-                  <TableHead>報價單號</TableHead>
                   <TableHead>異動內容</TableHead>
                   <TableHead>異動數量</TableHead>
                   <TableHead>處理人員</TableHead>
@@ -105,8 +103,6 @@ export default function InventoryHistoryPage() {
                       </Link>
                     </TableCell>
                     <TableCell>{item.productName}</TableCell>
-                    <TableCell>{item.serialNumber}</TableCell>
-                    <TableCell>{item.quoteId}</TableCell>
                     <TableCell>{item.action}</TableCell>
                     <TableCell className={item.quantity > 0 ? "text-green-600" : "text-red-600"}>
                       {item.quantity}
