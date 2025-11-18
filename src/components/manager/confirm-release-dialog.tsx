@@ -55,7 +55,7 @@ export function ConfirmReleaseDialog() {
             </div>
         )}
         <div className="space-y-2">
-            <Label>上傳簽收單</Label>
+            <Label>上傳客戶Email簽回證明</Label>
             <div className="flex">
                 <Button variant="outline" type="button" onClick={handleSelectFileClick} className="rounded-r-none">
                     選擇檔案
