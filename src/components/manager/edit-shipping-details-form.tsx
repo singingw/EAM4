@@ -33,7 +33,7 @@ const deviceSchema = z.object({
   serialNumber: z.string(),
   note: z.string(),
   location: z.string(),
-  inventoryStatus: z.enum(["存貨", "備品", "缺貨"]),
+  inventoryStatus: z.enum(["存貨", "備品", "缺貨", ""]),
   deviceSerialNumberS: z.string(),
   deviceSerialNumberSpare: z.string(),
   status: z.enum(["尚未撿貨", "已撿貨", "已出貨"]),
@@ -559,7 +559,7 @@ export function EditShippingDetailsForm() {
                             </TableCell>
                             <TableCell>{field.location}</TableCell>
                             <TableCell>
-                                 <Badge variant="outline" className={inventoryStatusMap[field.inventoryStatus].className}>{inventoryStatusMap[field.inventoryStatus].label}</Badge>
+                                 <Badge variant="outline" className={field.inventoryStatus ? inventoryStatusMap[field.inventoryStatus]?.className : ""}>{field.inventoryStatus ? inventoryStatusMap[field.inventoryStatus]?.label : ""}</Badge>
                             </TableCell>
                             <TableCell>
                                 <FormField
