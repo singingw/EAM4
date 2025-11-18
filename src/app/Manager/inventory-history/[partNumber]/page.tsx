@@ -94,7 +94,6 @@ export default function DeviceHistoryPage() {
                   <TableHead>報價單號</TableHead>
                   <TableHead>移轉說明</TableHead>
                   <TableHead>異動數量</TableHead>
-                  <TableHead>處理人員</TableHead>
                   <TableHead>備註</TableHead>
                 </TableRow>
               </TableHeader>
@@ -121,7 +120,6 @@ export default function DeviceHistoryPage() {
                     <TableCell className={item.quantity > 0 ? "text-green-600" : "text-red-600"}>
                       {item.quantity > 0 ? `+${item.quantity}`: item.quantity}
                     </TableCell>
-                    <TableCell>{item.handler}</TableCell>
                     <TableCell>{item.note}</TableCell>
                   </TableRow>
                 ))}
