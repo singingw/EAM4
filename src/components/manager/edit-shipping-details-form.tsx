@@ -99,10 +99,10 @@ const mockData: EditShippingDetailValues = {
   salesTypeChinese: '',
   siteCode: '',
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, serialNumber: "", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, serialNumber: "", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
-    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, serialNumber: "", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
-    { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, serialNumber: "", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "尚未撿貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, serialNumber: "SN-A001", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", deviceSerialNumberSpare: "", status: "尚未撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, serialNumber: "SN-B001, SN-B002", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", deviceSerialNumberSpare: "", status: "尚未撿貨" },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, serialNumber: "SN-M001", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "SN-M001", deviceSerialNumberSpare: "", status: "尚未撿貨" },
+    { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, serialNumber: "SN-D001, SN-D002, SN-D003", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "SN-D001, SN-D002, SN-D003", deviceSerialNumberSpare: "", status: "尚未撿貨" },
   ],
 };
 
@@ -669,7 +669,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="w-[50px]">項次</TableHead>
                             <TableHead className="w-[120px]">料號</TableHead>
                             <TableHead className="min-w-[150px]">名稱</TableHead>
-                            <TableHead className="min-w-[120px]">倉庫</TableHead>
+                            <TableHead className="w-[120px]">倉庫</TableHead>
                             <TableHead className="w-[80px]">数量</TableHead>
                             <TableHead className="w-[120px]">序號</TableHead>
                             <TableHead className="min-w-[150px]">備註</TableHead>
@@ -688,7 +688,7 @@ export function EditShippingDetailsForm() {
                             <TableCell>{field.name}</TableCell>
                             <TableCell>{field.warehouse}</TableCell>
                             <TableCell>{field.quantity}</TableCell>
-                            <TableCell>{[field.deviceSerialNumberS, field.deviceSerialNumberSpare].filter(Boolean).join(', ')}</TableCell>
+                            <TableCell>{field.serialNumber}</TableCell>
                              <TableCell>
                                 <FormField
                                     control={form.control}
@@ -751,6 +751,8 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
 
     
 
