@@ -94,7 +94,6 @@ export default function DeviceHistoryPage() {
                 <TableRow className="bg-muted/50">
                   <TableHead>項次</TableHead>
                   <TableHead>異動日期</TableHead>
-                  <TableHead>序號</TableHead>
                   <TableHead>報價單號</TableHead>
                   <TableHead>移轉說明</TableHead>
                   <TableHead>異動數量</TableHead>
@@ -107,7 +106,6 @@ export default function DeviceHistoryPage() {
                   <TableRow key={item.id}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{item.date}</TableCell>
-                    <TableCell>{item.serialNumber}</TableCell>
                     <TableCell>{item.quoteId}</TableCell>
                     <TableCell>{item.action}</TableCell>
                     <TableCell className={item.quantity > 0 ? "text-green-600" : "text-red-600"}>
