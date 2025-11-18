@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, Download } from "lucide-react";
+import { Search, Download, MoreVertical } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -30,6 +31,13 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import Link from "next/link";
+import { Switch } from "@/components/ui/switch";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const shippingData = [
   {
@@ -73,6 +81,7 @@ const statusMap: { [key: string]: { label: string; className: string } } = {
 };
 
 export default function ShippingDetailsPage() {
+  const [showFunctions, setShowFunctions] = useState(true);
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -130,7 +139,12 @@ export default function ShippingDetailsPage() {
                   <TableHead>狀態</TableHead>
                   <TableHead>目前處理人員</TableHead>
                   <TableHead>最後更新時間</TableHead>
-                  <TableHead>功能</TableHead>
+                  <TableHead>
+                    <div className="flex items-center gap-2">
+                      <span>功能</span>
+                      <Switch checked={showFunctions} onCheckedChange={setShowFunctions} />
+                    </div>
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -145,11 +159,26 @@ export default function ShippingDetailsPage() {
                     <TableCell>{item.handler}</TableCell>
                     <TableCell>{item.lastModified}</TableCell>
                     <TableCell>
-                      <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
-                         <Link href="/Manager/shipping-details/edit">
-                           編輯
-                         </Link>
-                      </Button>
+                      {showFunctions ? (
+                        <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
+                           <Link href="/Manager/shipping-details/edit">
+                             編輯
+                           </Link>
+                        </Button>
+                      ) : (
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/shipping-details/edit" className="text-green-600">編輯</Link>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
