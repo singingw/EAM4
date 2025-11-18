@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, Download } from "lucide-react";
+import { Search, Download, Edit } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -29,45 +29,37 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import Link from "next/link";
 
 const shippingData = [
   {
-    orderId: "ORD001",
-    quantity: 2,
-    status: "shipped",
-    shippingDate: "2024/08/20",
+    quoteId: "ORD001",
+    status: "待放行",
+    lastModified: "2024/08/22 10:00",
   },
   {
-    orderId: "ORD002",
-    quantity: 1,
-    status: "processing",
-    shippingDate: "-",
+    quoteId: "ORD002",
+    status: "已轉檔",
+    lastModified: "2024/08/21 15:30",
   },
   {
-    orderId: "ORD003",
-    quantity: 4,
-    status: "delivered",
-    shippingDate: "2024/08/18",
+    quoteId: "ORD003",
+    status: "待檢貨",
+    lastModified: "2024/08/20 11:00",
   },
   {
-    orderId: "ORD004",
-    quantity: 1,
-    status: "shipped",
-    shippingDate: "2024/08/21",
-  },
-   {
-    orderId: "ORD005",
-    quantity: 3,
-    status: "delivered",
-    shippingDate: "2024/08/19",
+    quoteId: "ORD004",
+    status: "已出貨",
+    lastModified: "2024/08/19 18:00",
   },
 ];
 
-const statusMap = {
-    shipped: { label: "已出貨", className: "bg-blue-100 text-blue-800" },
-    processing: { label: "處理中", className: "bg-yellow-100 text-yellow-800" },
-    delivered: { label: "已送達", className: "bg-green-100 text-green-800" }
-}
+const statusMap: { [key: string]: { label: string; className: string } } = {
+  已轉檔: { label: "已轉檔", className: "bg-blue-100 text-blue-800" },
+  待放行: { label: "待放行", className: "bg-yellow-100 text-yellow-800" },
+  待檢貨: { label: "待檢貨", className: "bg-orange-100 text-orange-800" },
+  已出貨: { label: "已出貨", className: "bg-green-100 text-green-800" },
+};
 
 export default function ShippingDetailsPage() {
   return (
@@ -81,21 +73,21 @@ export default function ShippingDetailsPage() {
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
               <div className="space-y-2">
-                <label htmlFor="orderId" className="text-sm font-medium">報價單號</label>
-                <Input id="orderId" placeholder="輸入報價單號" />
+                <label htmlFor="quoteId" className="text-sm font-medium">報價單號</label>
+                <Input id="quoteId" placeholder="輸入報價單號" />
               </div>
               <div className="space-y-2">
                 <label htmlFor="status" className="text-sm font-medium">出貨狀態</label>
                 <Select>
-                    <SelectTrigger id="status">
+                  <SelectTrigger id="status">
                     <SelectValue placeholder="全部" />
-                    </SelectTrigger>
-                    <SelectContent>
+                  </SelectTrigger>
+                  <SelectContent>
                     <SelectItem value="all">全部</SelectItem>
-                    <SelectItem value="shipped">已出貨</SelectItem>
-                    <SelectItem value="processing">處理中</SelectItem>
-                    <SelectItem value="delivered">已送達</SelectItem>
-                    </SelectContent>
+                    {Object.keys(statusMap).map(status => (
+                      <SelectItem key={status} value={status}>{statusMap[status].label}</SelectItem>
+                    ))}
+                  </SelectContent>
                 </Select>
               </div>
             </div>
@@ -120,22 +112,28 @@ export default function ShippingDetailsPage() {
               <TableHeader>
                 <TableRow className="bg-muted/50">
                   <TableHead>報價單號</TableHead>
-                  <TableHead>數量</TableHead>
                   <TableHead>狀態</TableHead>
-                  <TableHead>出貨日期</TableHead>
+                  <TableHead>最後更新時間</TableHead>
+                  <TableHead>編輯</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {shippingData.map((item) => (
-                  <TableRow key={item.orderId}>
-                    <TableCell className="font-medium">{item.orderId}</TableCell>
-                    <TableCell>{item.quantity}</TableCell>
+                  <TableRow key={item.quoteId}>
+                    <TableCell className="font-medium">{item.quoteId}</TableCell>
                     <TableCell>
-                      <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap].className}>
-                        {statusMap[item.status as keyof typeof statusMap].label}
+                      <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap]?.className || ""}>
+                        {statusMap[item.status as keyof typeof statusMap]?.label || item.status}
                       </Badge>
                     </TableCell>
-                    <TableCell>{item.shippingDate}</TableCell>
+                    <TableCell>{item.lastModified}</TableCell>
+                    <TableCell>
+                      <Button asChild variant="outline" size="icon" className="h-8 w-8">
+                         <Link href="/Manager/shipping-details/edit">
+                           <Edit className="h-4 w-4" />
+                         </Link>
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -143,7 +141,7 @@ export default function ShippingDetailsPage() {
           </div>
         </CardContent>
          <div className="p-4 border-t flex justify-between items-center">
-            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 5 項結果，共 5 項</p>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">顯示第 1 至 4 項結果，共 4 項</p>
             <Pagination>
                 <PaginationContent>
                 <PaginationItem>
@@ -162,3 +160,4 @@ export default function ShippingDetailsPage() {
     </div>
   );
 }
+

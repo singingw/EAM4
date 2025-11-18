@@ -21,7 +21,8 @@ import {
   HelpCircle,
   Headset,
   Users,
-  Truck
+  Truck,
+  IdCard,
 } from "lucide-react";
 import {
   Collapsible,
@@ -48,6 +49,15 @@ const menuItems = [
       ],
     },
     {
+      label: "識別證",
+      icon: IdCard,
+      subItems: [
+        { label: "識別證模板", href: "/Manager/badge-templates" },
+        { label: "識別證設計(第二階段)", href: "/Manager/badge-design" },
+        { label: "識別證模板(第三階段)", href: "/Manager/badge-templates-phase3" },
+      ]
+    },
+    {
       label: "名單管理",
       icon: MessageSquare,
       subItems: [
@@ -57,7 +67,7 @@ const menuItems = [
       ],
     },
     {
-      label: "出貨管理",
+      label: "進銷存管理",
       icon: Truck,
       subItems: [
         { label: "出貨明細表", href: "/Manager/shipping-details" }
