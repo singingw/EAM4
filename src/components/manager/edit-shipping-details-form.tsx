@@ -549,7 +549,7 @@ export function EditShippingDetailsForm() {
                             <TableCell>{field.partNumber}</TableCell>
                             <TableCell>{field.name}</TableCell>
                             <TableCell>{field.quantity}</TableCell>
-                            <TableCell>{field.serialNumber}</TableCell>
+                            <TableCell>{[field.deviceSerialNumberS, field.deviceSerialNumberSpare].filter(Boolean).join(', ')}</TableCell>
                              <TableCell>
                                 <FormField
                                     control={form.control}
