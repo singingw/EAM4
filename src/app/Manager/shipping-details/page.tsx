@@ -11,8 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Search, Download, MoreVertical } from "lucide-react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Search, Download, MoreVertical, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
@@ -158,13 +158,20 @@ export default function ShippingDetailsPage() {
                     </TableCell>
                     <TableCell>{item.handler}</TableCell>
                     <TableCell>{item.lastModified}</TableCell>
-                    <TableCell>
+                    <TableCell className="space-x-1">
                       {showFunctions ? (
-                        <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
-                           <Link href="/Manager/shipping-details/edit">
-                             編輯
-                           </Link>
-                        </Button>
+                        <>
+                          <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
+                            <Link href="/Manager/shipping-details/edit">
+                              編輯
+                            </Link>
+                          </Button>
+                          <Button asChild variant="outline" size="sm" className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white">
+                            <Link href="/Manager/shipping-details/view">
+                              檢視
+                            </Link>
+                          </Button>
+                        </>
                       ) : (
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -175,6 +182,9 @@ export default function ShippingDetailsPage() {
                           <DropdownMenuContent>
                             <DropdownMenuItem asChild>
                                 <Link href="/Manager/shipping-details/edit" className="text-green-600">編輯</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild>
+                                <Link href="/Manager/shipping-details/view" className="text-blue-600">檢視</Link>
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
