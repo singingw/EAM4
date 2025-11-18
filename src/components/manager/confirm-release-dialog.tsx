@@ -75,11 +75,9 @@ export function ConfirmReleaseDialog() {
       </div>
       <DialogFooter>
         <Button type="submit" className="w-full" disabled={!fileName}>
-          <Upload className="mr-2 h-4 w-4" />
           {fileName ? "上傳並確認" : "已確認客戶放行"}
         </Button>
       </DialogFooter>
     </DialogContent>
   );
 }
-
