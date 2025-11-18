@@ -179,8 +179,8 @@ export default function ShippingDetailsPage() {
                             </Link>
                           </Button>
                            <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
-                              <Download className="mr-2 h-4 w-4" />
-                              匯出出貨明細
+                              <Eye className="mr-2 h-4 w-4" />
+                              預覽檢貨單
                             </Button>
                         </>
                       ) : (
@@ -198,8 +198,8 @@ export default function ShippingDetailsPage() {
                                 <Link href="/Manager/shipping-details/view" className="text-blue-600">檢視</Link>
                             </DropdownMenuItem>
                              <DropdownMenuItem className="text-orange-600">
-                                <Download className="mr-2 h-4 w-4" />
-                                匯出出貨明細
+                                <Eye className="mr-2 h-4 w-4" />
+                                預覽檢貨單
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
