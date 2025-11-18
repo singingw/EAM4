@@ -75,6 +75,11 @@ export default function BadgeTemplatesPhase3Page() {
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <Button asChild variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white">
+                  <Link href="/Manager/badge-design">
+                    <Pencil className="h-5 w-5" />
+                  </Link>
+                </Button>
                 <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 hover:text-white">
                   <Copy className="h-5 w-5" />
                 </Button>
