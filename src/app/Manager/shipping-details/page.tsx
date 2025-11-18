@@ -63,7 +63,7 @@ const shippingData = [
   },
   {
     quoteId: "ORD004",
-    usageCaseIds: [],
+    usageCaseIds: ["UC008"],
     status: "撿貨處理中",
     lastModified: "2024/08/19 18:00",
     handler: "人員C",
