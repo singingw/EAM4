@@ -244,7 +244,6 @@ export default function AttendeesHelperPage() {
                           <Button asChild variant="outline" size="sm" className="bg-green-500 text-white hover:bg-green-600 hover:text-white">
                             <Link href="/Manager/attendees/edit">編輯</Link>
                           </Button>
-                          <Button variant="destructive" size="sm">刪除</Button>
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button variant="outline" size="sm" className="bg-teal-500 text-white hover:bg-teal-600 hover:text-white">行前通知</Button>
@@ -283,7 +282,6 @@ export default function AttendeesHelperPage() {
                               <DropdownMenuItem asChild>
                                 <Link href="/Manager/attendees/edit" className="text-green-600">編輯</Link>
                               </DropdownMenuItem>
-                              <DropdownMenuItem className="text-red-600">刪除</DropdownMenuItem>
                               <DialogTrigger asChild>
                                 <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-teal-600">行前通知</DropdownMenuItem>
                               </DialogTrigger>
@@ -327,3 +325,5 @@ export default function AttendeesHelperPage() {
     </div>
   );
 }
+
+    
