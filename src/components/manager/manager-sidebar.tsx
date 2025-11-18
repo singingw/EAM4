@@ -19,7 +19,8 @@ import {
   ChevronUp,
   CreditCard,
   HelpCircle,
-  Headset
+  Headset,
+  Users
 } from "lucide-react";
 import {
   Collapsible,
@@ -57,11 +58,18 @@ const menuItems = [
       label: "名單管理",
       icon: MessageSquare,
       subItems: [
-        { label: "參加者名單", href: "/Manager/attendees" },
         { label: "QR Code 下載紀錄", href: "/Manager/qrcode" },
       ],
     },
 ];
+
+const singleMenuItems = [
+    {
+        label: "參加者名單",
+        icon: Users,
+        href: "/Manager/attendees",
+    }
+]
 
 const bottomMenuItems = [
     {
@@ -118,6 +126,23 @@ export function ManagerSidebar() {
               </SidebarMenuItem>
             </Collapsible>
           ))}
+           {singleMenuItems.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                    <Link href={item.href} passHref legacyBehavior>
+                        <SidebarMenuButton
+                            asChild
+                            isActive={pathname === item.href}
+                            className="flex items-center gap-2 w-full justify-start text-base font-semibold text-sidebar-foreground/80 hover:text-sidebar-accent-foreground group"
+                            tooltip={item.label}
+                        >
+                            <a>
+                                <item.icon className="h-5 w-5" />
+                                <span>{item.label}</span>
+                            </a>
+                        </SidebarMenuButton>
+                    </Link>
+                </SidebarMenuItem>
+             ))}
         </SidebarMenu>
       </SidebarContent>
        <div className="mt-auto p-4">
