@@ -106,6 +106,26 @@ const mockData: EditShippingDetailValues = {
   ],
 };
 
+const shippingHistory = [
+    {
+      shipmentId: "SHIP-001",
+      time: "2024/08/26 10:00",
+      handler: "人員A",
+      devices: [
+        { id: "1", partNumber: 'PN001', name: "Laptop A", quantity: 1, serialNumber: "SN-A001" },
+        { id: "2", partNumber: 'PN002', name: "Laptop B", quantity: 1, serialNumber: "SN-B001" },
+      ]
+    },
+    {
+      shipmentId: "SHIP-002",
+      time: "2024/08/25 14:30",
+      handler: "人員B",
+      devices: [
+        { id: "3", partNumber: 'PN002', name: "Laptop B", quantity: 1, serialNumber: "SN-B002" },
+      ]
+    }
+  ];
+
 const statusMap: { [key: string]: { label: string; className: string } } = {
   尚未撿貨: { label: "尚未撿貨", className: "bg-gray-200 text-gray-800" },
   已撿貨: { label: "已撿貨", className: "bg-yellow-100 text-yellow-800" },
@@ -760,11 +780,55 @@ export function EditShippingDetailsForm() {
             </CardContent>
           </Card>
 
+          <Card>
+            <CardHeader>
+                <CardTitle>出貨歷史紀錄</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="overflow-x-auto">
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>出貨時間</TableHead>
+                                <TableHead>處理人員</TableHead>
+                                <TableHead>料號</TableHead>
+                                <TableHead>品名</TableHead>
+                                <TableHead>數量</TableHead>
+                                <TableHead>序號</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {shippingHistory.map((shipment) => 
+                                shipment.devices.map((device, deviceIndex) => (
+                                    <TableRow key={`${shipment.shipmentId}-${device.id}`}>
+                                        {deviceIndex === 0 && (
+                                            <>
+                                                <TableCell rowSpan={shipment.devices.length} className="align-top">{shipment.time}</TableCell>
+                                                <TableCell rowSpan={shipment.devices.length} className="align-top">{shipment.handler}</TableCell>
+                                            </>
+                                        )}
+                                        <TableCell>{device.partNumber}</TableCell>
+                                        <TableCell>{device.name}</TableCell>
+                                        <TableCell>{device.quantity}</TableCell>
+                                        <TableCell>{device.serialNumber}</TableCell>
+                                    </TableRow>
+                                ))
+                            )}
+                            {shippingHistory.length === 0 && (
+                                <TableRow>
+                                    <TableCell colSpan={6} className="text-center">
+                                        尚無出貨紀錄
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </div>
+            </CardContent>
+          </Card>
         </form>
       </Form>
     </>
   );
 }
 
-    
-    
