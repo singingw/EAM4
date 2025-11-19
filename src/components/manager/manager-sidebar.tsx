@@ -100,14 +100,14 @@ export function ManagerSidebar() {
                   <SidebarMenuSub>
                     {item.subItems.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.label}>
-                        <SidebarMenuSubButton 
-                          isActive={pathname === subItem.href}
-                          className="text-sidebar-foreground/80 hover:text-sidebar-accent-foreground"
-                        >
-                          <Link href={subItem.href} passHref>
+                        <Link href={subItem.href} passHref legacyBehavior>
+                           <SidebarMenuSubButton 
+                              isActive={pathname.startsWith(subItem.href)}
+                              className="text-sidebar-foreground/80 hover:text-sidebar-accent-foreground"
+                            >
                               {subItem.label}
-                          </Link>
-                        </SidebarMenuSubButton>
+                            </SidebarMenuSubButton>
+                        </Link>
                       </SidebarMenuSubItem>
                     ))}
                   </SidebarMenuSub>
