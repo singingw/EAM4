@@ -100,13 +100,12 @@ export function ManagerSidebar() {
                   <SidebarMenuSub>
                     {item.subItems.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.label}>
-                        <Link href={subItem.href} passHref legacyBehavior>
+                        <Link href={subItem.href} passHref>
                           <SidebarMenuSubButton 
-                            asChild
                             isActive={pathname === subItem.href}
                             className="text-sidebar-foreground/80 hover:text-sidebar-accent-foreground"
                           >
-                            <a>{subItem.label}</a>
+                            {subItem.label}
                           </SidebarMenuSubButton>
                         </Link>
                       </SidebarMenuSubItem>
