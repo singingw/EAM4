@@ -274,7 +274,7 @@ export function EditShippingDetailsForm() {
                   render={({ field }) => (
                     <FormItem>
                       <Label>目前處理人員</Label>
-                      <Select onValueChange={field.onChange} value={field.value || ""} disabled={false}>
+                      <Select onValueChange={field.onChange} value={field.value || ""} disabled={isPending}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="-- 請選擇 --" />
@@ -297,7 +297,7 @@ export function EditShippingDetailsForm() {
                     <FormItem>
                       <Label>場站名稱</Label>
                       <FormControl>
-                        <Input {...field} disabled={false} />
+                        <Input {...field} disabled={isPending} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -310,7 +310,7 @@ export function EditShippingDetailsForm() {
                     <FormItem>
                       <Label>場站地址</Label>
                       <FormControl>
-                        <Input {...field} disabled={false} />
+                        <Input {...field} disabled={isPending} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -323,7 +323,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>案場分類</Label>
-                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={false}>
+                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
@@ -345,7 +345,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>分級名稱</Label>
-                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={false}>
+                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
@@ -370,7 +370,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>維運設備類型</Label>
-                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={false}>
+                        <Select onValueChange={field.onChange} value={field.value || ""} disabled={isPending}>
                             <FormControl>
                             <SelectTrigger>
                                 <SelectValue placeholder="請選擇" />
@@ -399,7 +399,7 @@ export function EditShippingDetailsForm() {
                             <FormItem>
                             <Label>案場會勘人員 - 姓名</Label>
                             <FormControl>
-                                <Input {...field} disabled={false} />
+                                <Input {...field} disabled={isPending} />
                             </FormControl>
                             <FormMessage />
                             </FormItem>
@@ -411,7 +411,7 @@ export function EditShippingDetailsForm() {
                         render={({ field }) => (
                             <FormItem>
                             <Label>案場會勘人員 - 維運站</Label>
-                             <Select onValueChange={field.onChange} defaultValue={field.value} disabled={false}>
+                             <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                                 <FormControl>
                                 <SelectTrigger>
                                     <SelectValue placeholder="請選擇" />
@@ -438,7 +438,7 @@ export function EditShippingDetailsForm() {
                   render={({ field }) => (
                     <FormItem>
                       <Label>盤體標準形式</Label>
-                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={false}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                         <FormControl><SelectTrigger><SelectValue placeholder="請選擇" /></SelectTrigger></FormControl>
                         <SelectContent>
                           <SelectItem value="formA">形式A</SelectItem>
@@ -455,7 +455,7 @@ export function EditShippingDetailsForm() {
                   render={({ field }) => (
                     <FormItem>
                       <Label>盤體追加項目</Label>
-                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={false}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                         <FormControl><SelectTrigger><SelectValue placeholder="請選擇" /></SelectTrigger></FormControl>
                         <SelectContent>
                           <SelectItem value="itemA">項目A</SelectItem>
@@ -472,7 +472,7 @@ export function EditShippingDetailsForm() {
                   render={({ field }) => (
                     <FormItem>
                       <Label>派工組盤商</Label>
-                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={false}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                         <FormControl><SelectTrigger><SelectValue placeholder="請選擇" /></SelectTrigger></FormControl>
                         <SelectContent>
                           <SelectItem value="百訊">百訊</SelectItem>
@@ -491,7 +491,7 @@ export function EditShippingDetailsForm() {
                   render={({ field }) => (
                     <FormItem>
                       <Label>組盤派工人員</Label>
-                      <FormControl><Input {...field} disabled={false} /></FormControl>
+                      <FormControl><Input {...field} disabled={isPending} /></FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -506,7 +506,7 @@ export function EditShippingDetailsForm() {
                                 <Checkbox
                                 checked={field.value}
                                 onCheckedChange={field.onChange}
-                                disabled={false}
+                                disabled={isPending}
                                 />
                             </FormControl>
                             <div className="space-y-1 leading-none">
@@ -523,7 +523,7 @@ export function EditShippingDetailsForm() {
                         render={({ field }) => (
                             <FormItem>
                             <Label>PSOP物料需求單備註</Label>
-                            <FormControl><Input {...field} disabled={false} /></FormControl>
+                            <FormControl><Input {...field} disabled={isPending} /></FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
@@ -534,7 +534,7 @@ export function EditShippingDetailsForm() {
                         render={({ field }) => (
                             <FormItem>
                             <Label>PSOP報價單備註</Label>
-                            <FormControl><Input {...field} disabled={false} /></FormControl>
+                            <FormControl><Input {...field} disabled={isPending} /></FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
@@ -545,7 +545,7 @@ export function EditShippingDetailsForm() {
                         render={({ field }) => (
                             <FormItem>
                             <Label>備註</Label>
-                            <FormControl><Input {...field} disabled={false} /></FormControl>
+                            <FormControl><Input {...field} disabled={isPending} /></FormControl>
                             <FormMessage />
                             </FormItem>
                         )}
@@ -567,7 +567,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>設備供應(銷售型態)</Label>
-                        <FormControl><Input {...field} disabled={false} /></FormControl>
+                        <FormControl><Input {...field} disabled={isPending} /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )}
@@ -578,7 +578,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>銷售類型(中文)</Label>
-                        <FormControl><Input {...field} disabled={false} /></FormControl>
+                        <FormControl><Input {...field} disabled={isPending} /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )}
@@ -589,7 +589,7 @@ export function EditShippingDetailsForm() {
                     render={({ field }) => (
                         <FormItem>
                         <Label>場站代碼</Label>
-                        <FormControl><Input {...field} disabled={false} /></FormControl>
+                        <FormControl><Input {...field} disabled={isPending} /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )}
@@ -609,7 +609,7 @@ export function EditShippingDetailsForm() {
                                 "w-full pl-3 text-left font-normal",
                                 !field.value && "text-muted-foreground"
                               )}
-                              disabled={false}
+                              disabled={isPending}
                             >
                               {field.value ? (
                                 format(field.value, "yyyy/MM/dd")
@@ -651,7 +651,7 @@ export function EditShippingDetailsForm() {
                                 "w-full pl-3 text-left font-normal",
                                 !field.value && "text-muted-foreground"
                               )}
-                              disabled={false}
+                              disabled={isPending}
                             >
                               {field.value ? (
                                 format(field.value, "yyyy/MM/dd")
@@ -718,14 +718,14 @@ export function EditShippingDetailsForm() {
                                 <FormField
                                     control={form.control}
                                     name={`devices.${index}.note`}
-                                    render={({ field: f }) => ( <Input {...f} disabled={false} /> )}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || field.status === '已出貨'} /> )}
                                 />
                             </TableCell>
                             <TableCell>
                                 <FormField
                                     control={form.control}
                                     name={`devices.${index}.location`}
-                                    render={({ field: f }) => ( <Input {...f} disabled={false} /> )}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || field.status === '已出貨'} /> )}
                                 />
                             </TableCell>
                             <TableCell>
@@ -738,7 +738,7 @@ export function EditShippingDetailsForm() {
                                     render={({ field: f }) => (
                                         <Input 
                                             {...f} 
-                                            disabled={false}
+                                            disabled={isPending || field.status === '已出貨'}
                                             placeholder={field.status === '尚未撿貨' ? '請輸入或掃描序號' : ''}
                                         />
                                     )}
@@ -748,7 +748,7 @@ export function EditShippingDetailsForm() {
                                 <FormField
                                     control={form.control}
                                     name={`devices.${index}.deviceSerialNumberSpare`}
-                                    render={({ field: f }) => ( <Input {...f} disabled={false} /> )}
+                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || field.status === '已出貨'} /> )}
                                 />
                             </TableCell>
                             <TableCell>
@@ -758,7 +758,7 @@ export function EditShippingDetailsForm() {
                                         const newStatus = value as "尚未撿貨" | "已撿貨" | "存貨缺貨" | "備品缺貨" | "已出貨";
                                         update(index, { ...field, status: newStatus });
                                     }}
-                                    disabled={false}
+                                    disabled={isPending || field.status === '已出貨'}
                                 >
                                     <SelectTrigger className="w-32">
                                         <SelectValue />
@@ -798,23 +798,24 @@ export function EditShippingDetailsForm() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {shippingHistory.map((shipment) => 
-                                shipment.devices.map((device, deviceIndex) => (
-                                    <TableRow key={`${shipment.shipmentId}-${device.id}`}>
-                                        {deviceIndex === 0 && (
-                                            <>
-                                                <TableCell rowSpan={shipment.devices.length} className="align-top">{shipment.time}</TableCell>
-                                                <TableCell rowSpan={shipment.devices.length} className="align-top">{shipment.handler}</TableCell>
-                                            </>
-                                        )}
-                                        <TableCell>{device.partNumber}</TableCell>
-                                        <TableCell>{device.name}</TableCell>
-                                        <TableCell>{device.quantity}</TableCell>
-                                        <TableCell>{device.serialNumber}</TableCell>
-                                    </TableRow>
-                                ))
-                            )}
-                            {shippingHistory.length === 0 && (
+                            {shippingHistory.length > 0 ? (
+                                shippingHistory.map((shipment) => 
+                                    shipment.devices.map((device, deviceIndex) => (
+                                        <TableRow key={`${shipment.shipmentId}-${device.id}`}>
+                                            {deviceIndex === 0 && (
+                                                <>
+                                                    <TableCell rowSpan={shipment.devices.length} className="align-top">{shipment.time}</TableCell>
+                                                    <TableCell rowSpan={shipment.devices.length} className="align-top">{shipment.handler}</TableCell>
+                                                </>
+                                            )}
+                                            <TableCell>{device.partNumber}</TableCell>
+                                            <TableCell>{device.name}</TableCell>
+                                            <TableCell>{device.quantity}</TableCell>
+                                            <TableCell>{device.serialNumber}</TableCell>
+                                        </TableRow>
+                                    ))
+                                )
+                            ) : (
                                 <TableRow>
                                     <TableCell colSpan={6} className="text-center">
                                         尚無出貨紀錄
@@ -831,4 +832,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
