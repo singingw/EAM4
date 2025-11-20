@@ -705,7 +705,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
                             <TableHead className="min-w-[200px]">設備序號(S)</TableHead>
-                            <TableHead className="w-[150px]">設備狀態</TableHead>
+                            <TableHead className="w-[150px]">管理</TableHead>
                         </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -828,11 +828,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
-    
-
-    
-
-    
-
-    
