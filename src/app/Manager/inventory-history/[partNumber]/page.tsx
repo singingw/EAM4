@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { RefreshCw, Search } from "lucide-react";
+import { RefreshCw, Search, CalendarIcon } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -33,6 +33,12 @@ import {
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { useState } from "react";
+
 
 const allHistoryData = [
     { id: 1, date: "2024/08/23 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", quoteId: "ORD001", action: "出貨", quantity: -1, note: "報價單 ORD001" },
@@ -49,22 +55,11 @@ const allHistoryData = [
 export default function DeviceHistoryPage() {
   const params = useParams();
   const partNumber = params.partNumber as string;
+  const [shippingDate, setShippingDate] = useState<Date | undefined>();
   
   const historyData = allHistoryData.filter(item => item.partNumber === partNumber).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const device = historyData.length > 0 ? historyData[0] : null;
-
-  const totalQuantity = historyData.reduce((sum, item) => {
-    // This is a simplified calculation. A real app might start with an initial quantity.
-    if (item.action === '入庫' || item.action === '盤點調整') {
-        return sum + item.quantity;
-    }
-     if (item.action === '出貨' || item.action === '領用') {
-        return sum + Math.abs(item.quantity);
-    }
-    return sum;
-  }, 0); // Starting with a mock initial quantity
-
 
   return (
     <div className="space-y-6">
@@ -90,6 +85,31 @@ export default function DeviceHistoryPage() {
                 <Input id="quoteId" placeholder="輸入報價單號" />
               </div>
               <div className="space-y-2">
+                <Label htmlFor="shippingDate" className="text-sm font-medium">出貨日</Label>
+                <Popover>
+                    <PopoverTrigger asChild>
+                        <Button
+                        variant={"outline"}
+                        className={cn(
+                            "w-full justify-start text-left font-normal",
+                            !shippingDate && "text-muted-foreground"
+                        )}
+                        >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {shippingDate ? format(shippingDate, "yyyy/MM/dd") : <span>選擇日期</span>}
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                        <Calendar
+                        mode="single"
+                        selected={shippingDate}
+                        onSelect={setShippingDate}
+                        initialFocus
+                        />
+                    </PopoverContent>
+                </Popover>
+              </div>
+               <div className="space-y-2">
                 <label htmlFor="note" className="text-sm font-medium">備註</label>
                 <Input id="note" placeholder="輸入備註" />
               </div>
