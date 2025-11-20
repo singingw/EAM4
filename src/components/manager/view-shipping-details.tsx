@@ -160,7 +160,7 @@ export function ViewShippingDetails() {
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
-                            <TableHead className="min-w-[200px]">設備序號(S)</TableHead>
+                            <TableHead className="min-w-[200px]">設備序號</TableHead>
                             <TableHead className="w-[150px]">管理</TableHead>
                         </TableRow>
                         </TableHeader>

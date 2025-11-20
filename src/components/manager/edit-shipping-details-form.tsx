@@ -670,7 +670,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
-                            <TableHead className="w-[150px]">設備序號(S)</TableHead>
+                            <TableHead className="w-[150px]">設備序號</TableHead>
                             <TableHead className="w-[120px]">狀態</TableHead>
                             <TableHead className="w-[280px]">管理</TableHead>
                         </TableRow>
@@ -762,14 +762,14 @@ export function EditShippingDetailsForm() {
 
                                             {!form.watch(`devices.${index}.deviceSerialNumberS`) && (
                                                 <>
-                                                    <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => update(index, { ...field, status: '備品缺貨' })}>替代品</Button>
-                                                    {field.inventoryStatus !== '缺貨' && <Button size="sm" variant="destructive" onClick={() => update(index, { ...field, status: '存貨缺貨' })}>缺貨</Button>}
+                                                    <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => { const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`); update(index, { ...field, status: '備品缺貨', deviceSerialNumberS: currentSN })}}>替代品</Button>
+                                                    {field.inventoryStatus !== '缺貨' && <Button size="sm" variant="destructive" onClick={() => { const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`); update(index, { ...field, status: '存貨缺貨', deviceSerialNumberS: currentSN })}}>缺貨</Button>}
                                                 </>
                                             )}
                                         </>
                                     )}
                                     {field.status === '已撿貨' && (
-                                       <Button size="sm" className="bg-green-500 text-white hover:bg-green-600" onClick={() => update(index, { ...field, status: '已出貨' })}>出貨</Button>
+                                       <Button size="sm" className="bg-green-500 text-white hover:bg-green-600" onClick={() => { const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`); update(index, { ...field, status: '已出貨', deviceSerialNumberS: currentSN })}}>出貨</Button>
                                     )}
                                 </div>
                             </TableCell>
