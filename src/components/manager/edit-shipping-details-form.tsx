@@ -735,7 +735,7 @@ export function EditShippingDetailsForm() {
                                     control={form.control}
                                     name={`devices.${index}.inventoryStatus`}
                                     render={({ field: f }) => (
-                                        <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨'}>
+                                        <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨' || field.inventoryStatus === '缺貨'}>
                                             <SelectTrigger>
                                                 <SelectValue placeholder="請選擇" />
                                             </SelectTrigger>
