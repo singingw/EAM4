@@ -139,7 +139,7 @@ const inventoryStatusMap: { [key: string]: { label: string; className: string } 
   缺貨: { label: "缺貨", className: "bg-red-100 text-red-800" },
 };
 
-const mainStatusOptions = ["已轉檔1", "已轉檔2", "已轉檔3", "待放行", "待撿貨", "撿貨處理中", "已完成"];
+const mainStatusOptions = ["已轉檔1", "已轉檔2", "已轉檔3"];
 
 export function EditShippingDetailsForm() {
   const [isPending, setIsPending] = useState(false);
@@ -828,6 +828,8 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
 
     
 
