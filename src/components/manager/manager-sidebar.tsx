@@ -49,7 +49,7 @@ const menuItems = [
       ],
     },
     {
-      label: "進銷存管理",
+      label: "管理",
       icon: Truck,
       subItems: [
         { label: "出貨明細表", href: "/Manager/shipping-details" },
