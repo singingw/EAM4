@@ -158,10 +158,16 @@ export function EditShippingDetailsForm() {
     }, 1000);
   };
   
-  const handlePickItem = (index: number, field: any) => {
+  const handlePickItem = (index: number) => {
+    const field = form.getValues(`devices.${index}`);
     if (field.quantity === 1) {
       update(index, { ...field, status: '已撿貨' });
     }
+  };
+
+  const handleUpdateStatus = (index: number, newStatus: '備品缺貨' | '存貨缺貨') => {
+    const field = form.getValues(`devices.${index}`);
+    update(index, { ...field, status: newStatus });
   };
 
   return (
@@ -670,7 +676,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
-                            <TableHead className="w-[150px]">設備序號</TableHead>
+                            <TableHead className="min-w-[150px]">設備序號</TableHead>
                             <TableHead className="w-[120px]">狀態</TableHead>
                             <TableHead className="w-[280px]">管理</TableHead>
                         </TableRow>
@@ -757,13 +763,13 @@ export function EditShippingDetailsForm() {
                                                     />
                                                  </Dialog>
                                             ) : (
-                                                <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600" onClick={() => handlePickItem(index, field)}>檢貨</Button>
+                                                <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600" onClick={() => handlePickItem(index)}>檢貨</Button>
                                             )}
 
                                             {!form.watch(`devices.${index}.deviceSerialNumberS`) && (
                                                 <>
-                                                    <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => { const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`); update(index, { ...field, status: '備品缺貨', deviceSerialNumberS: currentSN })}}>替代品</Button>
-                                                    {field.inventoryStatus !== '缺貨' && <Button size="sm" variant="destructive" onClick={() => { const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`); update(index, { ...field, status: '存貨缺貨', deviceSerialNumberS: currentSN })}}>缺貨</Button>}
+                                                    <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => handleUpdateStatus(index, '備品缺貨')}>替代品</Button>
+                                                    {field.inventoryStatus !== '缺貨' && <Button size="sm" variant="destructive" onClick={() => handleUpdateStatus(index, '存貨缺貨')}>缺貨</Button>}
                                                 </>
                                             )}
                                         </>
