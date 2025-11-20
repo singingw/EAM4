@@ -115,7 +115,7 @@ const deviceSchema = z.object({
   note: z.string(),
   location: z.string(),
   inventoryStatus: z.enum(['存貨', '備品', '缺貨', '']),
-  deviceSerialNumberS: z.string(),
+  deviceSerialNumber: z.string(),
   status: z.enum(['尚未撿貨', '已撿貨', '存貨缺貨', '備品缺貨', '已出貨']),
 });
 

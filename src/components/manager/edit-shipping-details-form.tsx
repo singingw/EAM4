@@ -60,10 +60,10 @@ const mockData: EditShippingDetailValues = {
   salesTypeChinese: '',
   siteCode: '',
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", quantity: 1, warehouse: "TPE-A", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "", status: "尚未撿貨" },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", quantity: 2, warehouse: "TPE-A", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "", status: "尚未撿貨" },
-    { id: "3", partNumber: 'PN003', name: "Monitor C", quantity: 1, warehouse: "TPE-B", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "尚未撿貨" },
-    { id: "4", partNumber: 'PN004', name: "Laptop D", quantity: 3, warehouse: "KHH-A", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", status: "尚未撿貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", quantity: 1, warehouse: "TPE-A", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumber: "", status: "尚未撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", quantity: 2, warehouse: "TPE-A", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumber: "", status: "尚未撿貨" },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", quantity: 1, warehouse: "TPE-B", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumber: "", status: "尚未撿貨" },
+    { id: "4", partNumber: 'PN004', name: "Laptop D", quantity: 3, warehouse: "KHH-A", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumber: "", status: "尚未撿貨" },
   ],
 };
 
@@ -132,7 +132,7 @@ export function EditShippingDetailsForm() {
     // Auto-update device status if serial number is added
     updatedValues.devices.forEach((device, index) => {
         const originalDevice = mockData.devices[index];
-        if (device.deviceSerialNumberS && originalDevice.status === "尚未撿貨") {
+        if (device.deviceSerialNumber && originalDevice.status === "尚未撿貨") {
             device.status = "已撿貨";
         }
     });
@@ -161,15 +161,15 @@ export function EditShippingDetailsForm() {
   const handlePickItem = (index: number) => {
     const field = form.getValues(`devices.${index}`);
     if (field.quantity === 1) {
-      const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`);
-      update(index, { ...field, status: '已撿貨', deviceSerialNumberS: currentSN });
+      const currentSN = form.getValues(`devices.${index}.deviceSerialNumber`);
+      update(index, { ...field, status: '已撿貨', deviceSerialNumber: currentSN });
     }
   };
 
   const handleUpdateStatus = (index: number, newStatus: '備品缺貨' | '存貨缺貨') => {
     const field = form.getValues(`devices.${index}`);
-    const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`);
-    update(index, { ...field, status: newStatus, deviceSerialNumberS: currentSN });
+    const currentSN = form.getValues(`devices.${index}.deviceSerialNumber`);
+    update(index, { ...field, status: newStatus, deviceSerialNumber: currentSN });
   };
 
   return (
@@ -691,7 +691,7 @@ export function EditShippingDetailsForm() {
                             <TableCell>{field.name}</TableCell>
                             <TableCell>{field.quantity}</TableCell>
                             <TableCell>{field.warehouse}</TableCell>
-                            <TableCell>{[form.watch(`devices.${index}.deviceSerialNumberS`)].filter(Boolean).join(', ')}</TableCell>
+                            <TableCell>{[form.watch(`devices.${index}.deviceSerialNumber`)].filter(Boolean).join(', ')}</TableCell>
                              <TableCell>
                                 <FormField
                                     control={form.control}
@@ -730,7 +730,7 @@ export function EditShippingDetailsForm() {
                             <TableCell>
                                 <Controller
                                     control={form.control}
-                                    name={`devices.${index}.deviceSerialNumberS`}
+                                    name={`devices.${index}.deviceSerialNumber`}
                                     render={({ field: f }) => (
                                         <Input
                                             {...f}
@@ -748,37 +748,54 @@ export function EditShippingDetailsForm() {
                             <TableCell>
                                <div className="flex flex-wrap gap-1">
                                     {field.status === '尚未撿貨' && (
-                                      <>
-                                        {form.watch(`devices.${index}.deviceSerialNumberS`) ? (
-                                          <>
-                                            {field.quantity > 1 ? (
-                                              <Dialog>
-                                                <DialogTrigger asChild>
-                                                  <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600">檢貨</Button>
-                                                </DialogTrigger>
-                                                <PickItemDialog
-                                                  item={field}
-                                                  onConfirm={(picked, substitute, outOfStock) => {
-                                                    console.log({ picked, substitute, outOfStock });
-                                                    const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`);
-                                                    update(index, { ...field, status: '已撿貨', deviceSerialNumberS: currentSN });
-                                                  }}
-                                                />
-                                              </Dialog>
+                                        <>
+                                            {form.watch(`devices.${index}.deviceSerialNumber`) ? (
+                                                <Dialog>
+                                                    <DialogTrigger asChild>
+                                                        <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600">檢貨</Button>
+                                                    </DialogTrigger>
+                                                    <PickItemDialog
+                                                        item={field}
+                                                        mode="pick"
+                                                        onConfirm={(picked) => {
+                                                            console.log({ picked });
+                                                            const currentSN = form.getValues(`devices.${index}.deviceSerialNumber`);
+                                                            update(index, { ...field, status: '已撿貨', deviceSerialNumber: currentSN });
+                                                        }}
+                                                    />
+                                                </Dialog>
                                             ) : (
-                                              <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600" onClick={() => handlePickItem(index)}>檢貨</Button>
+                                                <>
+                                                    <Dialog>
+                                                        <DialogTrigger asChild>
+                                                            <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500">替代品</Button>
+                                                        </DialogTrigger>
+                                                        <PickItemDialog
+                                                            item={field}
+                                                            mode="substitute"
+                                                            onConfirm={(quantity) => {
+                                                                handleUpdateStatus(index, '備品缺貨');
+                                                            }}
+                                                        />
+                                                    </Dialog>
+                                                    <Dialog>
+                                                        <DialogTrigger asChild>
+                                                          {field.status !== '存貨缺貨' && <Button size="sm" variant="destructive">缺貨</Button>}
+                                                        </DialogTrigger>
+                                                        <PickItemDialog
+                                                          item={field}
+                                                          mode="outOfStock"
+                                                          onConfirm={(quantity) => {
+                                                              handleUpdateStatus(index, '存貨缺貨');
+                                                          }}
+                                                        />
+                                                    </Dialog>
+                                                </>
                                             )}
-                                          </>
-                                        ) : (
-                                          <>
-                                            <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => handleUpdateStatus(index, '備品缺貨')}>替代品</Button>
-                                            {field.status !== '存貨缺貨' && <Button size="sm" variant="destructive" onClick={() => handleUpdateStatus(index, '存貨缺貨')}>缺貨</Button>}
-                                          </>
-                                        )}
-                                      </>
+                                        </>
                                     )}
                                     {field.status === '已撿貨' && (
-                                       <Button size="sm" className="bg-green-500 text-white hover:bg-green-600" onClick={() => { const currentSN = form.getValues(`devices.${index}.deviceSerialNumberS`); update(index, { ...field, status: '已出貨', deviceSerialNumberS: currentSN })}}>出貨</Button>
+                                       <Button size="sm" className="bg-green-500 text-white hover:bg-green-600" onClick={() => { const currentSN = form.getValues(`devices.${index}.deviceSerialNumber`); update(index, { ...field, status: '已出貨', deviceSerialNumber: currentSN })}}>出貨</Button>
                                     )}
                                 </div>
                             </TableCell>

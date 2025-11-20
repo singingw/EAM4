@@ -20,21 +20,31 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+type DialogMode = 'pick' | 'substitute' | 'outOfStock';
+
+const modeConfig = {
+    pick: { title: "撿貨", label: "撿貨數量" },
+    substitute: { title: "替代品", label: "替代品數量" },
+    outOfStock: { title: "缺貨", label: "缺貨數量" },
+}
+
 type PickItemDialogProps = {
   item: {
     id: string;
     name: string;
     quantity: number;
   };
-  onConfirm: (picked: number, substitute: number, outOfStock: number) => void;
+  mode: DialogMode;
+  onConfirm: (quantity: number) => void;
 };
 
-export function PickItemDialog({ item, onConfirm }: PickItemDialogProps) {
+export function PickItemDialog({ item, mode, onConfirm }: PickItemDialogProps) {
   const [picked, setPicked] = useState(item.quantity);
   const { toast } = useToast();
+  const config = modeConfig[mode];
 
   const handleConfirm = () => {
-    onConfirm(picked, 0, item.quantity - picked);
+    onConfirm(picked);
   };
 
   const handleNumberChange = (value: string) => {
@@ -47,14 +57,14 @@ export function PickItemDialog({ item, onConfirm }: PickItemDialogProps) {
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>撿貨: {item.name}</DialogTitle>
+        <DialogTitle>{config.title}: {item.name}</DialogTitle>
       </DialogHeader>
       <div className="space-y-4 py-4">
         <p className="text-sm text-muted-foreground">
           總數量: {item.quantity}
         </p>
         <div className="space-y-2">
-            <Label htmlFor="picked-qty">撿貨數量</Label>
+            <Label htmlFor="picked-qty">{config.label}</Label>
              <Select onValueChange={handleNumberChange} defaultValue={String(picked)}>
                 <SelectTrigger id="picked-qty">
                     <SelectValue />
@@ -73,9 +83,11 @@ export function PickItemDialog({ item, onConfirm }: PickItemDialogProps) {
             取消
           </Button>
         </DialogClose>
-        <Button type="button" onClick={handleConfirm}>
-          確認
-        </Button>
+        <DialogClose asChild>
+            <Button type="button" onClick={handleConfirm}>
+            確認
+            </Button>
+        </DialogClose>
       </DialogFooter>
     </DialogContent>
   );
