@@ -149,6 +149,7 @@ export default function ShippingDetailsPage() {
                   <TableHead>報價單號</TableHead>
                   <TableHead>使用情形(單號)</TableHead>
                   <TableHead>處理狀態</TableHead>
+                  <TableHead>執行狀態</TableHead>
                   <TableHead>目前處理人員</TableHead>
                   <TableHead>最後更新時間</TableHead>
                   <TableHead>
@@ -164,6 +165,11 @@ export default function ShippingDetailsPage() {
                   <TableRow key={item.quoteId}>
                     <TableCell className="font-medium">{item.quoteId}</TableCell>
                     <TableCell>{item.usageCaseIds.join(', ')}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap]?.className || ""}>
+                        {statusMap[item.status as keyof typeof statusMap]?.label || item.status}
+                      </Badge>
+                    </TableCell>
                     <TableCell>
                       <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap]?.className || ""}>
                         {statusMap[item.status as keyof typeof statusMap]?.label || item.status}
