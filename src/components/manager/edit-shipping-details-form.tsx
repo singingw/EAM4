@@ -60,10 +60,10 @@ const mockData: EditShippingDetailValues = {
   salesTypeChinese: '',
   siteCode: '',
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "", status: "尚未撿貨" },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "", status: "尚未撿貨" },
-    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "尚未撿貨" },
-    { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", status: "尚未撿貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", quantity: 1, warehouse: "TPE-A", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "", status: "尚未撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", quantity: 2, warehouse: "TPE-A", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "", status: "尚未撿貨" },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", quantity: 1, warehouse: "TPE-B", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "尚未撿貨" },
+    { id: "4", partNumber: 'PN004', name: "Laptop D", quantity: 3, warehouse: "KHH-A", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", status: "尚未撿貨" },
   ],
 };
 
@@ -670,7 +670,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
-                            <TableHead className="w-[180px]">設備序號(S)</TableHead>
+                            <TableHead className="w-[150px]">設備序號(S)</TableHead>
                             <TableHead className="w-[120px]">狀態</TableHead>
                             <TableHead className="w-[280px]">管理</TableHead>
                         </TableRow>
@@ -763,7 +763,7 @@ export function EditShippingDetailsForm() {
                                             {!form.watch(`devices.${index}.deviceSerialNumberS`) && (
                                                 <>
                                                     <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => update(index, { ...field, status: '備品缺貨' })}>替代品</Button>
-                                                    {field.status !== '存貨缺貨' && <Button size="sm" variant="destructive" onClick={() => update(index, { ...field, status: '存貨缺貨' })}>缺貨</Button>}
+                                                    {field.inventoryStatus !== '缺貨' && <Button size="sm" variant="destructive" onClick={() => update(index, { ...field, status: '存貨缺貨' })}>缺貨</Button>}
                                                 </>
                                             )}
                                         </>
