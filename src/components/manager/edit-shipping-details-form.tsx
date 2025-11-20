@@ -40,7 +40,6 @@ const deviceSchema = z.object({
   location: z.string(),
   inventoryStatus: z.enum(["存貨", "備品", "缺貨", ""]),
   deviceSerialNumberS: z.string(),
-  deviceSerialNumberSpare: z.string(),
   status: z.enum(["尚未撿貨", "已撿貨", "存貨缺貨", "備品缺貨", "已出貨"]),
 });
 
@@ -99,10 +98,10 @@ const mockData: EditShippingDetailValues = {
   salesTypeChinese: '',
   siteCode: '',
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, serialNumber: "", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", deviceSerialNumberSpare: "", status: "已撿貨" },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, serialNumber: "", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", deviceSerialNumberSpare: "", status: "已撿貨" },
-    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, serialNumber: "", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", deviceSerialNumberSpare: "SN-M001", status: "已撿貨" },
-    { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, serialNumber: "", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "存貨缺貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, serialNumber: "", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", status: "已撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, serialNumber: "", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", status: "已撿貨" },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, serialNumber: "", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "已撿貨" },
+    { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, serialNumber: "", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", status: "存貨缺貨" },
   ],
 };
 
@@ -706,7 +705,6 @@ export function EditShippingDetailsForm() {
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
                             <TableHead className="min-w-[200px]">設備序號(S)</TableHead>
-                            <TableHead className="min-w-[200px]">設備序號(備品)</TableHead>
                             <TableHead className="w-[150px]">設備狀態</TableHead>
                         </TableRow>
                         </TableHeader>
@@ -718,7 +716,7 @@ export function EditShippingDetailsForm() {
                             <TableCell>{field.name}</TableCell>
                             <TableCell>{field.warehouse}</TableCell>
                             <TableCell>{field.quantity}</TableCell>
-                            <TableCell>{[form.watch(`devices.${index}.deviceSerialNumberS`), form.watch(`devices.${index}.deviceSerialNumberSpare`)].filter(Boolean).join(', ')}</TableCell>
+                            <TableCell>{[form.watch(`devices.${index}.deviceSerialNumberS`)].filter(Boolean).join(', ')}</TableCell>
                              <TableCell>
                                 <FormField
                                     control={form.control}
@@ -747,13 +745,6 @@ export function EditShippingDetailsForm() {
                                             placeholder={field.status === '尚未撿貨' ? '請輸入或掃描序號' : ''}
                                         />
                                     )}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <FormField
-                                    control={form.control}
-                                    name={`devices.${index}.deviceSerialNumberSpare`}
-                                    render={({ field: f }) => ( <Input {...f} disabled={isPending || field.status === '已出貨'} /> )}
                                 />
                             </TableCell>
                             <TableCell>
@@ -837,5 +828,7 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
 
     
