@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Loader2, Save, RefreshCw, AlertTriangle, CalendarIcon } from "lucide-react";
+import { Loader2, Save, RefreshCw, AlertTriangle, CalendarIcon, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -99,9 +99,9 @@ const mockData: EditShippingDetailValues = {
   salesTypeChinese: '',
   siteCode: '',
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, serialNumber: "SN-A001", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", deviceSerialNumberSpare: "", status: "已撿貨" },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, serialNumber: "SN-B001, SN-B002", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", deviceSerialNumberSpare: "", status: "已撿貨" },
-    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, serialNumber: "SN-M001", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", deviceSerialNumberSpare: "SN-M001", status: "已撿貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, serialNumber: "", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", deviceSerialNumberSpare: "", status: "已撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, serialNumber: "", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", deviceSerialNumberSpare: "", status: "已撿貨" },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, serialNumber: "", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", deviceSerialNumberSpare: "SN-M001", status: "已撿貨" },
     { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, serialNumber: "", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", deviceSerialNumberSpare: "", status: "存貨缺貨" },
   ],
 };
@@ -210,10 +210,15 @@ export function EditShippingDetailsForm() {
               返回列表
             </Link>
           </Button>
-          <Button onClick={form.handleSubmit(onSubmit)} disabled={isPending} className="bg-green-500 text-white hover:bg-green-600">
+          <Button onClick={form.handleSubmit(onSubmit)} disabled={isPending} variant="outline" className="bg-blue-500 text-white hover:bg-blue-600">
             {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             <Save className="mr-2 h-4 w-4" />
-            儲存
+            暫存
+          </Button>
+          <Button onClick={form.handleSubmit(onSubmit)} disabled={isPending} className="bg-green-500 text-white hover:bg-green-600">
+            {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            <Send className="mr-2 h-4 w-4" />
+            送出
           </Button>
         </div>
       </div>
