@@ -172,7 +172,7 @@ export default function ShippingDetailsPage() {
                     </TableCell>
                     <TableCell>
                       <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap]?.className || ""}>
-                        {statusMap[item.status as keyof typeof statusMap]?.label || item.status}
+                        {(statusMap[item.status as keyof typeof statusMap]?.label || item.status) + "-1"}
                       </Badge>
                     </TableCell>
                     <TableCell>{item.handler}</TableCell>
