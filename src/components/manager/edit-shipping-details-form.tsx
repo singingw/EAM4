@@ -701,7 +701,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="min-w-[150px]">名稱</TableHead>
                             <TableHead className="w-[120px]">倉庫</TableHead>
                             <TableHead className="w-[80px]">数量</TableHead>
-                            <TableHead className="w-[120px]">序號</TableHead>
+                            <TableHead className="w-[120px]">資產編號</TableHead>
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
@@ -837,3 +837,5 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
