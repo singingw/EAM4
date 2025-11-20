@@ -23,6 +23,15 @@ import {
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Image from "next/image";
+import { Label } from "@/components/ui/label";
 
 const allHistoryData = [
     { id: 1, date: "2024/08/23 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", quoteId: "ORD001", action: "出貨", quantity: -1, note: "報價單 ORD001" },
@@ -142,7 +151,40 @@ export default function DeviceHistoryPage() {
                     <TableCell>
                       {item.action}
                     </TableCell>
-                    <TableCell>{item.serialNumber}</TableCell>
+                    <TableCell className="flex flex-wrap gap-1">
+                      {item.serialNumber.split(/, */).map(sn => (
+                        <Dialog key={sn}>
+                          <DialogTrigger asChild>
+                            <Button variant="link" className="p-0 h-auto text-blue-600">
+                              {sn}
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>序號: {sn}</DialogTitle>
+                            </DialogHeader>
+                            <div className="space-y-4 py-4">
+                                <div className="flex items-center justify-center">
+                                    <Image
+                                        src={`https://placehold.co/200x200/png?text=${sn}`}
+                                        alt={`QR Code for ${sn}`}
+                                        width={200}
+                                        height={200}
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>QRcode 訊息</Label>
+                                    <p className="text-sm text-muted-foreground p-2 border rounded-md bg-muted/50">{`Message for ${sn}`}</p>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label>序號備註</Label>
+                                    <p className="text-sm text-muted-foreground p-2 border rounded-md bg-muted/50">{`Note for ${sn}`}</p>
+                                </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      ))}
+                    </TableCell>
                     <TableCell className={item.quantity > 0 ? "text-green-600" : "text-red-600"}>
                       {item.quantity > 0 ? `+${item.quantity}`: item.quantity}
                     </TableCell>
@@ -173,3 +215,5 @@ export default function DeviceHistoryPage() {
     </div>
   );
 }
+
+    
