@@ -35,7 +35,6 @@ const deviceSchema = z.object({
   name: z.string(),
   warehouse: z.string(),
   quantity: z.number(),
-  serialNumber: z.string(),
   note: z.string(),
   location: z.string(),
   inventoryStatus: z.enum(["存貨", "備品", "缺貨", ""]),
@@ -98,10 +97,10 @@ const mockData: EditShippingDetailValues = {
   salesTypeChinese: '',
   siteCode: '',
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, serialNumber: "", note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", status: "已撿貨" },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, serialNumber: "", note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", status: "已撿貨" },
-    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, serialNumber: "", note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "已撿貨" },
-    { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, serialNumber: "", note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", status: "存貨缺貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", status: "已撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", status: "已撿貨" },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "已撿貨" },
+    { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", status: "存貨缺貨" },
   ],
 };
 
@@ -748,25 +747,12 @@ export function EditShippingDetailsForm() {
                                 />
                             </TableCell>
                             <TableCell>
-                                <Select
-                                    defaultValue={field.status}
-                                    onValueChange={(value) => {
-                                        const newStatus = value as "尚未撿貨" | "已撿貨" | "存貨缺貨" | "備品缺貨" | "已出貨";
-                                        update(index, { ...field, status: newStatus });
-                                    }}
-                                    disabled={isPending || field.status === '已出貨'}
-                                >
-                                    <SelectTrigger className="w-32">
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="尚未撿貨">尚未撿貨</SelectItem>
-                                        <SelectItem value="已撿貨">已撿貨</SelectItem>
-                                        <SelectItem value="存貨缺貨">存貨缺貨</SelectItem>
-                                        <SelectItem value="備品缺貨">備品缺貨</SelectItem>
-                                        <SelectItem value="已出貨">已出貨</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                               <div className="flex flex-wrap gap-1">
+                                    <Button size="sm" variant="outline" onClick={() => update(index, { ...field, status: '已撿貨' })}>檢貨</Button>
+                                    <Button size="sm" variant="outline" onClick={() => update(index, { ...field, status: '已出貨' })}>出貨</Button>
+                                    <Button size="sm" variant="outline" onClick={() => update(index, { ...field, status: '備品缺貨' })}>替代品</Button>
+                                    <Button size="sm" variant="destructive" onClick={() => update(index, { ...field, status: '存貨缺貨' })}>缺貨</Button>
+                                </div>
                             </TableCell>
                             </TableRow>
                         ))}

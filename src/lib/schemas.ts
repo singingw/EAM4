@@ -104,3 +104,44 @@ export const AddSystemFeatureSchema = z.object({
     })
   ).min(1, { message: "至少需包含一個功能" }),
 });
+
+const deviceSchema = z.object({
+  id: z.string(),
+  partNumber: z.string(),
+  name: z.string(),
+  warehouse: z.string(),
+  quantity: z.number(),
+  note: z.string(),
+  location: z.string(),
+  inventoryStatus: z.enum(['存貨', '備品', '缺貨', '']),
+  deviceSerialNumberS: z.string(),
+  status: z.enum(['尚未撿貨', '已撿貨', '存貨缺貨', '備品缺貨', '已出貨']),
+});
+
+export const EditShippingDetailSchema = z.object({
+  quoteId: z.string().min(1, { message: '報價單號為必填' }),
+  status: z.string(),
+  picker: z.string().optional(),
+  materialRequestNo: z.string().optional(),
+  siteName: z.string().optional(),
+  siteAddress: z.string().optional(),
+  siteCategory: z.string().optional(),
+  classificationName: z.string().optional(),
+  equipmentType: z.string().optional(),
+  surveyorName: z.string().optional(),
+  maintenanceStation: z.string().optional(),
+  panelStandardForm: z.string().optional(),
+  panelAdditionalItems: z.string().optional(),
+  dispatchPanelVendor: z.string().optional(),
+  yuanChuangRequirement: z.boolean().optional(),
+  panelDispatchPersonnel: z.string().optional(),
+  psopMaterialRequestNote: z.string().optional(),
+  psopQuoteNote: z.string().optional(),
+  note: z.string().optional(),
+  deviceSupplyType: z.string().optional(),
+  salesTypeChinese: z.string().optional(),
+  siteCode: z.string().optional(),
+  materialRequestDate: z.date().optional(),
+  shippingDate: z.date().optional(),
+  devices: z.array(deviceSchema),
+});
