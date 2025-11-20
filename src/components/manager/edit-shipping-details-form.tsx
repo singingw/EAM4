@@ -29,6 +29,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { EditShippingDetailSchema } from "@/lib/schemas";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { PickItemDialog } from "./pick-item-dialog";
 
 
 type EditShippingDetailValues = z.infer<typeof EditShippingDetailSchema>;
@@ -58,8 +60,8 @@ const mockData: EditShippingDetailValues = {
   salesTypeChinese: '',
   siteCode: '',
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", status: "尚未撿貨" },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", status: "尚未撿貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "", status: "尚未撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "", status: "尚未撿貨" },
     { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "尚未撿貨" },
     { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", status: "尚未撿貨" },
   ],
@@ -158,10 +160,6 @@ export function EditShippingDetailsForm() {
   
   const handlePickItem = (index: number, field: any) => {
     if (field.quantity === 1) {
-      update(index, { ...field, status: '已撿貨' });
-    } else {
-      // For quantity > 1, you might need a dialog to specify how many are picked
-      // For now, we'll just update to "已撿貨" as a simple case
       update(index, { ...field, status: '已撿貨' });
     }
   };
@@ -672,7 +670,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
-                            <TableHead className="min-w-[150px]">設備序號(S)</TableHead>
+                            <TableHead className="w-[150px]">設備序號(S)</TableHead>
                             <TableHead className="w-[120px]">狀態</TableHead>
                             <TableHead className="w-[280px]">管理</TableHead>
                         </TableRow>
@@ -708,7 +706,7 @@ export function EditShippingDetailsForm() {
                                         control={form.control}
                                         name={`devices.${index}.inventoryStatus`}
                                         render={({ field: f }) => (
-                                            <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨' || field.inventoryStatus === '缺貨'}>
+                                            <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨'}>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="請選擇" />
                                                 </SelectTrigger>
@@ -743,7 +741,25 @@ export function EditShippingDetailsForm() {
                                <div className="flex flex-wrap gap-1">
                                     {field.status === '尚未撿貨' && (
                                         <>
-                                            <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600" onClick={() => handlePickItem(index, field)}>檢貨</Button>
+                                            {field.quantity > 1 ? (
+                                                 <Dialog>
+                                                    <DialogTrigger asChild>
+                                                         <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600">檢貨</Button>
+                                                    </DialogTrigger>
+                                                    <PickItemDialog 
+                                                        item={field} 
+                                                        onConfirm={(picked, substitute, outOfStock) => {
+                                                             console.log({picked, substitute, outOfStock})
+                                                             // Here you would update the main item or create new items based on the result
+                                                             // For simplicity, we just change status for now.
+                                                             update(index, { ...field, status: '已撿貨' });
+                                                        }} 
+                                                    />
+                                                 </Dialog>
+                                            ) : (
+                                                <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600" onClick={() => handlePickItem(index, field)}>檢貨</Button>
+                                            )}
+
                                             {!form.watch(`devices.${index}.deviceSerialNumberS`) && (
                                                 <>
                                                     <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => update(index, { ...field, status: '備品缺貨' })}>替代品</Button>
@@ -817,5 +833,3 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
-
-    
