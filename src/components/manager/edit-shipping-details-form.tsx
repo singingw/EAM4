@@ -76,7 +76,7 @@ type EditShippingDetailValues = z.infer<typeof EditShippingDetailSchema>;
 // Mock data
 const mockData: EditShippingDetailValues = {
   quoteId: "ORD001",
-  status: "已轉檔",
+  status: "已轉檔1",
   picker: "",
   materialRequestNo: 'MRN001',
   siteName: '中山機房',
@@ -139,7 +139,7 @@ const inventoryStatusMap: { [key: string]: { label: string; className: string } 
   缺貨: { label: "缺貨", className: "bg-red-100 text-red-800" },
 };
 
-const mainStatusOptions = ["已轉檔", "待放行", "待撿貨", "撿貨處理中", "已完成"];
+const mainStatusOptions = ["已轉檔1", "已轉檔2", "已轉檔3", "待放行", "待撿貨", "撿貨處理中", "已完成"];
 
 export function EditShippingDetailsForm() {
   const [isPending, setIsPending] = useState(false);
@@ -163,7 +163,7 @@ export function EditShippingDetailsForm() {
     let updatedValues = { ...values };
     
     // Logic for state transition
-    if (values.status === "已轉檔") {
+    if (values.status.startsWith("已轉檔")) {
         updatedValues.status = "待放行";
     }
 
@@ -828,6 +828,8 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
 
     
 
