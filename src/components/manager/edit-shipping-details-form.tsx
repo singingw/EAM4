@@ -748,9 +748,9 @@ export function EditShippingDetailsForm() {
                             </TableCell>
                             <TableCell>
                                <div className="flex flex-wrap gap-1">
-                                    <Button size="sm" variant="outline" onClick={() => update(index, { ...field, status: '已撿貨' })}>檢貨</Button>
-                                    <Button size="sm" variant="outline" onClick={() => update(index, { ...field, status: '已出貨' })}>出貨</Button>
-                                    <Button size="sm" variant="outline" onClick={() => update(index, { ...field, status: '備品缺貨' })}>替代品</Button>
+                                    <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600" onClick={() => update(index, { ...field, status: '已撿貨' })}>檢貨</Button>
+                                    <Button size="sm" className="bg-green-500 text-white hover:bg-green-600" onClick={() => update(index, { ...field, status: '已出貨' })}>出貨</Button>
+                                    <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => update(index, { ...field, status: '備品缺貨' })}>替代品</Button>
                                     <Button size="sm" variant="destructive" onClick={() => update(index, { ...field, status: '存貨缺貨' })}>缺貨</Button>
                                 </div>
                             </TableCell>
