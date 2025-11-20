@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Loader2, Save, RefreshCw, AlertTriangle, CalendarIcon, Send } from "lucide-react";
@@ -731,7 +731,22 @@ export function EditShippingDetailsForm() {
                                 />
                             </TableCell>
                             <TableCell>
-                                 <Badge variant="outline" className={field.inventoryStatus ? inventoryStatusMap[field.inventoryStatus]?.className : ""}>{field.inventoryStatus ? inventoryStatusMap[field.inventoryStatus]?.label : ""}</Badge>
+                                 <Controller
+                                    control={form.control}
+                                    name={`devices.${index}.inventoryStatus`}
+                                    render={({ field: f }) => (
+                                        <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨'}>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="請選擇" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="存貨">存貨</SelectItem>
+                                                <SelectItem value="備品">備品</SelectItem>
+                                                <SelectItem value="缺貨">缺貨</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    )}
+                                />
                             </TableCell>
                             <TableCell>
                                 <FormField
