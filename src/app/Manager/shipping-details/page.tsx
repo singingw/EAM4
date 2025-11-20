@@ -148,7 +148,7 @@ export default function ShippingDetailsPage() {
                 <TableRow className="bg-muted/50">
                   <TableHead>報價單號</TableHead>
                   <TableHead>使用情形(單號)</TableHead>
-                  <TableHead>狀態</TableHead>
+                  <TableHead>處理狀態</TableHead>
                   <TableHead>目前處理人員</TableHead>
                   <TableHead>最後更新時間</TableHead>
                   <TableHead>
