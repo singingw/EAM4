@@ -171,8 +171,8 @@ export default function ShippingDetailsPage() {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap]?.className || ""}>
-                        {(statusMap[item.status as keyof typeof statusMap]?.label || item.status) + "-1"}
+                       <Badge variant="outline" className={statusMap[item.status as keyof typeof statusMap]?.className || ""}>
+                        {item.status === '已完成' ? (statusMap[item.status]?.label || item.status) : `${statusMap[item.status as keyof typeof statusMap]?.label || item.status}-1`}
                       </Badge>
                     </TableCell>
                     <TableCell>{item.handler}</TableCell>
