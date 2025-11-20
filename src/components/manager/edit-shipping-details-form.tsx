@@ -658,14 +658,15 @@ export function EditShippingDetailsForm() {
                             <TableHead className="w-[50px]">項次</TableHead>
                             <TableHead className="w-[120px]">料號</TableHead>
                             <TableHead className="min-w-[150px]">名稱</TableHead>
-                            <TableHead className="w-[80px]">数量</TableHead>
+                            <TableHead className="w-[80px]">數量</TableHead>
                             <TableHead className="w-[120px]">倉庫</TableHead>
                             <TableHead className="w-[120px]">資產編號</TableHead>
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
                             <TableHead className="min-w-[150px]">設備序號(S)</TableHead>
-                            <TableHead className="w-[250px]">管理</TableHead>
+                            <TableHead className="w-[120px]">狀態</TableHead>
+                            <TableHead className="w-[280px]">管理</TableHead>
                         </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -724,6 +725,11 @@ export function EditShippingDetailsForm() {
                                         />
                                     )}
                                 />
+                            </TableCell>
+                            <TableCell>
+                               <Badge variant="outline" className={statusMap[field.status]?.className || ""}>
+                                 {statusMap[field.status]?.label || field.status}
+                               </Badge>
                             </TableCell>
                             <TableCell>
                                <div className="flex flex-wrap gap-1">
