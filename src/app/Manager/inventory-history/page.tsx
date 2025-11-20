@@ -72,7 +72,7 @@ export default function InventoryHistoryPage() {
             </Button>
             <Button variant="outline">
                 <Download className="mr-2 h-4 w-4" />
-                匯出
+                匯出案場出貨歷程
             </Button>
         </div>
       </div>
