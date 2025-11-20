@@ -663,7 +663,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="w-[120px]">資產編號</TableHead>
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
-                            <TableHead className="w-[120px]">存貨/備品</TableHead>
+                            <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
                             <TableHead className="min-w-[150px]">設備序號(S)</TableHead>
                             <TableHead className="w-[250px]">管理</TableHead>
                         </TableRow>
@@ -692,21 +692,25 @@ export function EditShippingDetailsForm() {
                                 />
                             </TableCell>
                             <TableCell>
-                                 <Controller
-                                    control={form.control}
-                                    name={`devices.${index}.inventoryStatus`}
-                                    render={({ field: f }) => (
-                                        <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨' || field.inventoryStatus === '缺貨'}>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="請選擇" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="存貨">存貨</SelectItem>
-                                                <SelectItem value="備品">備品</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    )}
-                                />
+                                 {field.inventoryStatus === '缺貨' ? (
+                                    <Input value="缺貨" disabled />
+                                 ) : (
+                                    <Controller
+                                        control={form.control}
+                                        name={`devices.${index}.inventoryStatus`}
+                                        render={({ field: f }) => (
+                                            <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨'}>
+                                                <SelectTrigger>
+                                                    <SelectValue placeholder="請選擇" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="存貨">存貨</SelectItem>
+                                                    <SelectItem value="備品">備品</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        )}
+                                    />
+                                 )}
                             </TableCell>
                             <TableCell>
                                 <FormField
