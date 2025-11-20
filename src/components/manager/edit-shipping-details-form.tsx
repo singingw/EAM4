@@ -699,7 +699,7 @@ export function EditShippingDetailsForm() {
                                         control={form.control}
                                         name={`devices.${index}.inventoryStatus`}
                                         render={({ field: f }) => (
-                                            <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨'}>
+                                            <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨' || field.inventoryStatus === '缺貨'}>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="請選擇" />
                                                 </SelectTrigger>
@@ -732,7 +732,7 @@ export function EditShippingDetailsForm() {
                                     {!form.watch(`devices.${index}.deviceSerialNumberS`) && (
                                         <>
                                             <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => update(index, { ...field, status: '備品缺貨' })}>替代品</Button>
-                                            <Button size="sm" variant="destructive" onClick={() => update(index, { ...field, status: '存貨缺貨' })}>缺貨</Button>
+                                            {field.status !== '存貨缺貨' && <Button size="sm" variant="destructive" onClick={() => update(index, { ...field, status: '存貨缺貨' })}>缺貨</Button>}
                                         </>
                                     )}
                                 </div>
