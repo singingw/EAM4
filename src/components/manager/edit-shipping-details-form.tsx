@@ -156,7 +156,15 @@ export function EditShippingDetailsForm() {
     }, 1000);
   };
   
-  const canStartPicking = form.watch('status') === '待檢貨' || form.watch('status') === '撿貨處理中';
+  const handlePickItem = (index: number, field: any) => {
+    if (field.quantity === 1) {
+      update(index, { ...field, status: '已撿貨' });
+    } else {
+      // For quantity > 1, you might need a dialog to specify how many are picked
+      // For now, we'll just update to "已撿貨" as a simple case
+      update(index, { ...field, status: '已撿貨' });
+    }
+  };
 
   return (
     <>
@@ -664,7 +672,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="min-w-[150px]">備註</TableHead>
                             <TableHead className="w-[120px]">放置地點</TableHead>
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
-                            <TableHead className="w-[150px]">設備序號(S)</TableHead>
+                            <TableHead className="min-w-[150px]">設備序號(S)</TableHead>
                             <TableHead className="w-[120px]">狀態</TableHead>
                             <TableHead className="w-[280px]">管理</TableHead>
                         </TableRow>
@@ -733,9 +741,9 @@ export function EditShippingDetailsForm() {
                             </TableCell>
                             <TableCell>
                                <div className="flex flex-wrap gap-1">
-                                    {field.status === '尚未撿貨' ? (
+                                    {field.status === '尚未撿貨' && (
                                         <>
-                                            <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600" onClick={() => update(index, { ...field, status: '已撿貨' })}>檢貨</Button>
+                                            <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600" onClick={() => handlePickItem(index, field)}>檢貨</Button>
                                             {!form.watch(`devices.${index}.deviceSerialNumberS`) && (
                                                 <>
                                                     <Button size="sm" className="bg-yellow-400 text-white hover:bg-yellow-500" onClick={() => update(index, { ...field, status: '備品缺貨' })}>替代品</Button>
@@ -743,7 +751,8 @@ export function EditShippingDetailsForm() {
                                                 </>
                                             )}
                                         </>
-                                    ) : (
+                                    )}
+                                    {field.status === '已撿貨' && (
                                        <Button size="sm" className="bg-green-500 text-white hover:bg-green-600" onClick={() => update(index, { ...field, status: '已出貨' })}>出貨</Button>
                                     )}
                                 </div>
@@ -808,3 +817,5 @@ export function EditShippingDetailsForm() {
     </>
   );
 }
+
+    
