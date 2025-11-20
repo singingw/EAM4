@@ -108,7 +108,7 @@ export default function ShippingDetailsPage() {
                 <Input id="siteCode" placeholder="輸入案場代碼" />
               </div>
               <div className="space-y-2">
-                <label htmlFor="status" className="text-sm font-medium">出貨狀態</label>
+                <label htmlFor="status" className="text-sm font-medium">處理狀態</label>
                 <Select>
                   <SelectTrigger id="status">
                     <SelectValue placeholder="全部" />
@@ -193,10 +193,18 @@ export default function ShippingDetailsPage() {
                               檢視
                             </Link>
                           </Button>
-                          <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
-                            {item.status === '已轉檔' || item.status === '待放行' ? <Eye className="mr-2 h-4 w-4" /> : <FileOutput className="mr-2 h-4 w-4" />}
-                            {item.status === '已轉檔' || item.status === '待放行' ? '預覽檢貨單' : '匯出檢貨單'}
-                          </Button>
+                          {item.status === '已轉檔' || item.status === '待放行' ? (
+                            <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
+                              <Eye className="mr-2 h-4 w-4" />
+                              預覽檢貨單
+                            </Button>
+                          ) : null}
+                           {item.status === '待放行' || item.status === '待檢貨' || item.status === '撿貨處理中' ? (
+                            <Button variant="outline" size="sm" className="bg-orange-500 text-white hover:bg-orange-600 hover:text-white">
+                                <FileOutput className="mr-2 h-4 w-4" />
+                                匯出檢貨單
+                            </Button>
+                           ) : null }
                           {item.status === '待放行' && (
                                <DialogTrigger asChild>
                                 <Button variant="outline" size="sm" className="bg-red-500 text-white hover:bg-red-600 hover:text-white">
