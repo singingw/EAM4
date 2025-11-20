@@ -58,9 +58,9 @@ const mockData: EditShippingDetailValues = {
   salesTypeChinese: '',
   siteCode: '',
   devices: [
-    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", status: "已撿貨" },
-    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", status: "已撿貨" },
-    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "已撿貨" },
+    { id: "1", partNumber: 'PN001', name: "Laptop A", warehouse: "TPE-A", quantity: 1, note: "", location: "A-01", inventoryStatus: "存貨", deviceSerialNumberS: "SN-A001", status: "尚未撿貨" },
+    { id: "2", partNumber: 'PN002', name: "Laptop B", warehouse: "TPE-A", quantity: 2, note: "", location: "A-02", inventoryStatus: "存貨", deviceSerialNumberS: "SN-B001, SN-B002", status: "尚未撿貨" },
+    { id: "3", partNumber: 'PN003', name: "Monitor C", warehouse: "TPE-B", quantity: 1, note: "", location: "B-01", inventoryStatus: "備品", deviceSerialNumberS: "", status: "尚未撿貨" },
     { id: "4", partNumber: 'PN004', name: "Laptop D", warehouse: "KHH-A", quantity: 3, note: "", location: "C-05", inventoryStatus: "缺貨", deviceSerialNumberS: "", status: "尚未撿貨" },
   ],
 };
@@ -700,7 +700,7 @@ export function EditShippingDetailsForm() {
                                         control={form.control}
                                         name={`devices.${index}.inventoryStatus`}
                                         render={({ field: f }) => (
-                                            <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨' || field.inventoryStatus === '缺貨'}>
+                                            <Select onValueChange={f.onChange} value={f.value || ""} disabled={isPending || field.status === '已出貨'}>
                                                 <SelectTrigger>
                                                     <SelectValue placeholder="請選擇" />
                                                 </SelectTrigger>
