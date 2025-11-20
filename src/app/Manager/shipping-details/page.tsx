@@ -98,10 +98,14 @@ export default function ShippingDetailsPage() {
       <Card>
         <CardContent className="pt-6">
           <div className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
               <div className="space-y-2">
                 <label htmlFor="quoteId" className="text-sm font-medium">報價單號</label>
                 <Input id="quoteId" placeholder="輸入報價單號" />
+              </div>
+               <div className="space-y-2">
+                <label htmlFor="siteCode" className="text-sm font-medium">案場代碼</label>
+                <Input id="siteCode" placeholder="輸入案場代碼" />
               </div>
               <div className="space-y-2">
                 <label htmlFor="status" className="text-sm font-medium">出貨狀態</label>
@@ -254,5 +258,3 @@ export default function ShippingDetailsPage() {
     </div>
   );
 }
-
-    
