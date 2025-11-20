@@ -672,7 +672,7 @@ export function EditShippingDetailsForm() {
                             <TableHead className="w-[120px]">存貨/備品/缺貨</TableHead>
                             <TableHead className="w-[150px]">設備序號(S)</TableHead>
                             <TableHead className="w-[120px]">狀態</TableHead>
-                            <TableHead className="w-[280px]">管理</TableHead>
+                            <TableHead className="w-[250px]">管理</TableHead>
                         </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -726,7 +726,7 @@ export function EditShippingDetailsForm() {
                                     render={({ field: f }) => (
                                         <Input 
                                             {...f} 
-                                            disabled={isPending || field.status === '已出貨'}
+                                            disabled={isPending || field.status === '已撿貨' || field.status === '已出貨'}
                                             placeholder={field.status === '尚未撿貨' ? '請輸入或掃描序號' : ''}
                                         />
                                     )}
