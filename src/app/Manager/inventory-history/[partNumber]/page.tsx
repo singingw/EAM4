@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 const allHistoryData = [
     { id: 1, date: "2024/08/23 10:00", partNumber: "PN001", productName: "Laptop A", serialNumber: "SN-A001", quoteId: "ORD001", action: "出貨", quantity: -1, note: "報價單 ORD001" },
@@ -177,8 +178,8 @@ export default function DeviceHistoryPage() {
                                     <p className="text-sm text-muted-foreground p-2 border rounded-md bg-muted/50">{`Message for ${sn}`}</p>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label>序號備註</Label>
-                                    <p className="text-sm text-muted-foreground p-2 border rounded-md bg-muted/50">{`Note for ${sn}`}</p>
+                                    <Label htmlFor={`note-${sn}`}>序號備註</Label>
+                                    <Textarea id={`note-${sn}`} defaultValue={`Note for ${sn}`} />
                                 </div>
                             </div>
                           </DialogContent>
@@ -215,5 +216,6 @@ export default function DeviceHistoryPage() {
     </div>
   );
 }
+    
 
     
